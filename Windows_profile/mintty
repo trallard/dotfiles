@@ -23,3 +23,7 @@ echo -ne '\e]4;12;#3498DB\a'  # bold blue    (Peter River)
 echo -ne '\e]4;13;#9B59B6\a'  # bold magenta (Amethyst)
 echo -ne '\e]4;14;#1ABC9C\a'  # bold cyan    (Turquoise)
 echo -ne '\e]4;15;#ECF0F1\a'  # bold white   (Clouds)
+
+# themes for Mintty
+# https://github.com/iamthad/base16-mintty
+# https://github.com/dracula/mintty
