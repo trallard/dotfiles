@@ -1,0 +1,19 @@
+[user]
+	email = t.allard@sheffield.ac.uk
+	name = trallard
+
+[color]
+	status = auto
+	branch = auto
+	ui = true
+
+	[alias]
+	    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	    tree = log --graph --pretty=oneline --abbrev-commit
+	    unstage = reset HEAD --
+	    last = log -1 HEAD
+	    co = checkout
+	    ci = commit
+	    fpa = fetch --prune --all --tags
+	    mffo = merge --ff-only
+	    new = log master..upstream/master
