@@ -1,13 +1,8 @@
 [user]
-	email = t.allard@sheffield.ac.uk
-	name = trallard
+	name = Tania Allard
+	email = tania.allard@hellosoda.com
 
-[color]
-	status = auto
-	branch = auto
-	ui = true
-
-	[alias]
+[alias]
 	    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	    tree = log --graph --pretty=oneline --abbrev-commit
 	    unstage = reset HEAD --
@@ -17,3 +12,25 @@
 	    fpa = fetch --prune --all --tags
 	    mffo = merge --ff-only
 	    new = log master..upstream/master
+[core]
+	editor = atom --wait
+
+[color]
+    status = auto
+    branch = auto
+    ui = true
+
+# note this are added by nbdime
+[diff "jupyternotebook"]
+	command = git-nbdiffdriver diff
+[merge "jupyternotebook"]
+	driver = git-nbmergedriver merge %O %A %B %L %P
+	name = jupyter notebook merge driver
+[difftool "nbdime"]
+	cmd = git-nbdifftool diff \"$LOCAL\" \"$REMOTE\" \"$BASE\"
+[difftool]
+	prompt = false
+[mergetool "nbdime"]
+	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[mergetool]
+	prompt = false
