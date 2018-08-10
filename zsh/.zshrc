@@ -127,3 +127,24 @@ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 export TERM="xterm-256color"
 
 BULLETTRAIN_PROMPT_CHAR="🦄 "
+
+# make sure the locale is set
+export LANG=en_GB.UTF-8
+export LC_ALL=en_GB.UTF-8
+
+# activate pienv venv
+pv_activate(){
+    activate_file=$(pipenv --venv)/bin/activate
+    if [ -e "$activate_file" ]; then
+        . $activate_file
+
+        # the pipenv shell normally enables these as well
+        export PYTHONDONTWRITEBYTECODE=1
+        export PIPENV_ACTIVE=1
+
+        if [ -f "${VIRTUAL_ENV}/.project" ]; then
+            cd $(cat "${VIRTUAL_ENV}/.project")
+        fi
+        return
+    fi
+}
