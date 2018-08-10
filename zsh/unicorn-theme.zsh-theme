@@ -4,9 +4,10 @@
 # [Powerline-patched font](https://github.com/Lokaltog/powerline-fonts).
 #
 # In addition, I recommend the
-# Blazer theme which is the one I used
-#
-# keen in mind this is for my personal consumption 
+# [Tomorrow Night theme](https://github.com/chriskempson/tomorrow-theme) and, if
+# you're using it on Mac OS X, [iTerm 2](http://www.iterm2.com/) over
+# Terminal.app - it has significantly better color fidelity.
+
 # ------------------------------------------------------------------------------
 # CONFIGURATION
 # The default configuration, that can be overwrite in your .zshrc file
@@ -25,9 +26,9 @@ BULLETTRAIN_TIME_BG=''
 BULLETTRAIN_TIME_FG=''
 
 BULLETTRAIN_VIRTUALENV_SHOW=true
-BULLETTRAIN_VIRTUALENV_BG=yellow
+BULLETTRAIN_VIRTUALENV_BG=211
 BULLETTRAIN_VIRTUALENV_FG=238
-BULLETTRAIN_VIRTUALENV_PREFIX=🔭
+BULLETTRAIN_VIRTUALENV_PREFIX=🌵
 
 BULLETTRAIN_NVM_SHOW=true
 BULLETTRAIN_NVM_BG=green
@@ -40,7 +41,7 @@ BULLETTRAIN_RVM_FG=white
 BULLETTRAIN_RVM_PREFIX=♦️
 
 BULLETTRAIN_DIR_SHOW=true
-BULLETTRAIN_DIR_BG=80
+BULLETTRAIN_DIR_BG=44
 BULLETTRAIN_DIR_FG=238
 BULLETTRAIN_DIR_EXTENDED=true
 
@@ -55,7 +56,7 @@ BULLETTRAIN_CONTEXT_FG=default
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" \ue0a0 "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_DIRTY=" ✘"
+ZSH_THEME_GIT_PROMPT_DIRTY=" ⚠️"
 ZSH_THEME_GIT_PROMPT_CLEAN=" ✔"
 ZSH_THEME_GIT_PROMPT_ADDED=" ⚡"
 ZSH_THEME_GIT_PROMPT_MODIFIED=" ✏️"
