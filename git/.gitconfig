@@ -4,18 +4,19 @@
 
 [alias]
 	    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	    hists = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --abbrev-comit
+			hists = log --pretty=format:\"%h %ad | %s%d [%an]\" --abbrev-commit --graph --date=short
 	    tree = log --graph --pretty=oneline --abbrev-commit
 	    unstage = reset HEAD --
 	    last = log -1 HEAD
 	    co = checkout
 	    ci = commit
+			cim = commit -m
 	    fpa = fetch --prune --all --tags
 	    mffo = merge --ff-only
 	    new = log master..upstream/master
-  	    s = status -s
-	    # List aliases
-	    aliases = config --get-regexp alias
+			s = status -s
+			# List aliases
+			aliases = config --get-regexp alias
 [core]
 	editor = atom --wait
 
@@ -38,3 +39,5 @@
 	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
 [mergetool]
 	prompt = false
+[credential]
+	helper = osxkeychain
