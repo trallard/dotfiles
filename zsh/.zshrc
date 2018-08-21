@@ -62,7 +62,7 @@ ZSH_THEME="cute-theme"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
+  git docker
 )
 
 ZSH_DISABLE_COMPFIX="true"
@@ -74,7 +74,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG=en_=GB.UTF-8
+export LANG=en_GB.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -97,6 +97,7 @@ export LANG=en_=GB.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias lab="jupyter lab"
 
 
 if [ -d "$HOME/opt/homebrew" ]; then
@@ -123,9 +124,10 @@ alias atom='sh /Users/tania.allard/Applications/Atom.app/Contents/Resources/app/
 # Tree view of current dir
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
-
+# ensure I use 256 colours
 export TERM="xterm-256color"
 
+# My own icon
 BULLETTRAIN_PROMPT_CHAR="🦄 "
 
 # make sure the locale is set
@@ -148,3 +150,6 @@ pv_activate(){
         return
     fi
 }
+
+# enable colours using the command ls, since using coreutils this is gls
+alias ls="gls --color=always"
