@@ -41,6 +41,25 @@
 
 			# Credit an author on the latest commit
 			credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+
+			# List contributors with number of commits
+			contributors = shortlog --summary --numbered
+
+			# Codereview aliases
+			change = codereview change
+			gofmt = codereview gofmt
+			mail = codereview mail
+			pending = codereview pending
+			submit = codereview submit
+			sync = codereview sync
+
+[apply]
+	# Detect change in case
+	ignorecase = false
+	# Detect whitespace errors when applying a patch
+	whitespace = fix
+
+
 [core]
 	editor = atom --wait
 
