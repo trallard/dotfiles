@@ -100,6 +100,8 @@ export LANG=en_GB.UTF-8
 alias lab="jupyter lab"
 
 
+# add homebrew to path
+
 if [ -d "$HOME/opt/homebrew" ]; then
     export PATH="$HOME/opt/homebrew/bin:$PATH"
     export MANPATH="$HOME/opt/homebrew/share/man:$MANPATH"
@@ -128,7 +130,7 @@ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 export TERM="xterm-256color"
 
 # My own icon
-BULLETTRAIN_PROMPT_CHAR="🦄 "
+BULLETTRAIN_PROMPT_CHAR="🦄"
 
 # make sure the locale is set
 export LANG=en_GB.UTF-8
@@ -169,3 +171,7 @@ export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
 export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+
+
+# bat https://github.com/sharkdp/bat
+BAT_THEME="TwoDark"
