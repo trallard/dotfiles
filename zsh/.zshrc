@@ -172,6 +172,13 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
-
 # bat https://github.com/sharkdp/bat
 BAT_THEME="TwoDark"
+
+# exa aliases
+alias exal='exa --long -h'      # long with header
+alias exat='exa --long --tree'  # long plus tree
+alias exaa='exa --all'          # show all hidden files
+alias exag='exa --git-ignore'   # ignore files in the gitignore
+alias exas='exa --long --git -h'   # show status
+alias exam='exa -m --long -h'  # long with modified
