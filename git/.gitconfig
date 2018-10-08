@@ -3,62 +3,65 @@
 	email = tania.allard@hellosoda.com
 
 [alias]
-	    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-			hists = log --pretty=format:\"%h %ad | %s%d [%an]\" --abbrev-commit --graph --date=short
-	    tree = log --graph --pretty=oneline --abbrev-commit
-	    unstage = reset HEAD --
-	    last = log -1 HEAD
-	    co = checkout
-	    ci = commit
-			cim = commit -m
-	    fpa = fetch --prune --all --tags
-	    mffo = merge --ff-only
-	    new = log master..upstream/master
-			s = status -s
-			# List aliases
-			aliases = config --get-regexp alias
-			# Show verbose output about tags, branches or remotes
-			tags = tag -l
-			branches = branch -a
-			remotes = remote -v
-			# Find branches containing commit
-			fb = "!f() { git branch -a --contains $1; }; f"
+	# history: logs in different formats
+	# hash, date, comment, author
+	hist = log --pretty=format:\"%C(bold blue)%h%C(reset) %C(magenta)%ad%C(reset) | %s%C(yellow)%d%C(reset) [%an]\" --graph --date=short --decorate
+	hists = log --pretty=format:\"%C(bold blue)%h%C(reset) %C(magenta)%ad%C(reset) | %s%C(yellow)%d%C(reset)[%an]\" --abbrev-commit --graph --date=short
+	histt = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold magenta)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	tree = log --graph --pretty=oneline --abbrev-commit
+	# reset head to a given commit
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	co = checkout
+	ci = commit
+	cim = commit -m
+	fpa = fetch --prune --all --tags
+	mffo = merge --ff-only
+	new = log master..upstream/master
+	s = status -s
+	# List aliases
+	aliases = config --get-regexp alias
+	# Show verbose output about tags, branches or remotes
+	tags = tag -l
+	branches = branch -a
+	remotes = remote -v
+	# Find branches containing commit
+	fb = "!f() { git branch -a --contains $1; }; f"
 
-			# Find tags containing commit
-			ft = "!f() { git describe --always --contains $1; }; f"
+	# Find tags containing commit
+	ft = "!f() { git describe --always --contains $1; }; f"
 
-			# Find commits by source code
-			fc = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+	# Find commits by source code
+	fc = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
 
-			# Find commits by commit message
-			fm = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+	# Find commits by commit message
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
-			# Remove branches that have already been merged with master
-			# a.k.a. ‘delete merged’
-			dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
+	# Remove branches that have already been merged with master
+	# a.k.a. ‘delete merged’
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
 
-			lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
+	lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
 
-			# Credit an author on the latest commit
-			credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+	# Credit an author on the latest commit
+	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 
-			# List contributors with number of commits
-			contributors = shortlog --summary --numbered
+	# List contributors with number of commits
+	contributors = shortlog --summary --numbered
 
-			# Codereview aliases
-			change = codereview change
-			gofmt = codereview gofmt
-			mail = codereview mail
-			pending = codereview pending
-			submit = codereview submit
-			sync = codereview sync
+	# Codereview aliases
+	change = codereview change
+	gofmt = codereview gofmt
+	mail = codereview mail
+	pending = codereview pending
+	submit = codereview submit
+	sync = codereview sync
 
 [apply]
 	# Detect change in case
 	ignorecase = false
 	# Detect whitespace errors when applying a patch
 	whitespace = fix
-
 
 [core]
 	editor = atom --wait
@@ -69,20 +72,17 @@
     ui = true
 
 [color "branch"]
-
 	current = magenta reverse
 	local = yellow
 	remote = green
 
 [color "diff"]
-
 	meta = yellow bold
 	frag = magenta bold # line info
 	old = red # deletions
 	new = green # additions
 
 [color "status"]
-
 	added = yellow
 	changed = green
 	untracked = cyan
