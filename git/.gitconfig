@@ -9,6 +9,8 @@
 	hists = log --pretty=format:\"%C(bold blue)%h%C(reset) %C(magenta)%ad%C(reset) | %s%C(yellow)%d%C(reset)[%an]\" --abbrev-commit --graph --date=short
 	histt = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold magenta)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	tree = log --graph --pretty=oneline --abbrev-commit
+	lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
+
 	# reset head to a given commit
 	unstage = reset HEAD --
 	last = log -1 HEAD
@@ -41,8 +43,6 @@
 	# a.k.a. ‘delete merged’
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
 
-	lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
-
 	# Credit an author on the latest commit
 	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 
@@ -65,6 +65,7 @@
 
 [core]
 	editor = atom --wait
+	ignorecase = false
 
 [color]
     status = auto

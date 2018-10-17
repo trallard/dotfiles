@@ -1,5 +1,10 @@
-# If you come from bash you might have to change your $PATH.
+#  If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+
+# ensure tmux is in path
+export PATH="$HOME/opt/homebrew/bin:$PATH"
+
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/tania.allard/.oh-my-zsh"
@@ -62,10 +67,12 @@ ZSH_THEME="cute-theme"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git docker
+  git docker tmux tmuxinator
 )
 
 ZSH_DISABLE_COMPFIX="true"
+
+# ZSH_TMUX_AUTOSTART='true'
 
 source $ZSH/oh-my-zsh.sh
 
@@ -154,7 +161,8 @@ pv_activate(){
 }
 
 # enable colours using the command ls, since using coreutils this is gls
-alias ls="gls --color=always"
+alias lss="gls --color=always"
+alias ls="exal"
 
 # Enable coloured output
 alias grep='grep --color=auto'
@@ -180,5 +188,13 @@ alias exal='exa --long -h'      # long with header
 alias exat='exa --long --tree'  # long plus tree
 alias exaa='exa --all'          # show all hidden files
 alias exag='exa --git-ignore'   # ignore files in the gitignore
-alias exas='exa --long --git -h'   # show status
-alias exam='exa -m --long -h'  # long with modified
+alias exas='exa --long --git -h'# show status
+alias exam='exa -m --long -h'   # long with modified
+alias examods='exa --long --sort modified -r' # sort by last modified
+alias exacrs='exa --long -U --sort created -r' # sort by last created
+alias exala='exa --long -h -a'  # show long and . files 
+
+# docker aliases
+alias dk='docker'           # default docker command
+alias dki='docker images'   # docker images
+alias dkr='docker rmi'      # docker rmi
