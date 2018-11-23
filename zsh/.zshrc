@@ -67,7 +67,7 @@ ZSH_THEME="cute-theme"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git docker tmux tmuxinator
+  git docker tmux tmuxinator kubectl
 )
 
 ZSH_DISABLE_COMPFIX="true"
@@ -198,3 +198,17 @@ alias exala='exa --long -h -a'  # show long and . files
 alias dk='docker'           # default docker command
 alias dki='docker images'   # docker images
 alias dkr='docker rmi'      # docker rmi
+alias dk-clean-u='docker system prune --all --force --volumes'
+alias dk-clean-all='docker stop $(docker container ls -a -q) && docker system prune -a -f --volumes'
+
+# npm
+alias npm-list='npm install -g npm'
+
+# ch 
+alias ch-data='cd Documents/gitlab/data'
+alias ch-eng='cd Documents/gitlab/eng'
+alias ch-in='cd Documents/gitlab/infra'
+alias ch-gh='cd Documents/github'
+
+# autocomplete kubectl
+source <(kubectl completion zsh)
