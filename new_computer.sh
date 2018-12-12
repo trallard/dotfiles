@@ -77,7 +77,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # Prerequisite: Install Brew #
 ##############################
 
-echo "🍻 Installing brew..."
+cecho "🍻 Installing brew..." $magenta
 
 if test ! $(which brew)
 then
@@ -86,15 +86,21 @@ then
 fi
 
 # Latest brew, install brew cask
+brew doctor
 brew upgrade
 brew update
 brew tap caskroom/cask
 
 
+###############################
+# Prerequisite: Install xcode #
+###############################
+xcode-select --install
+
 #############################################
 ### Select computer name
 #############################################
-echo "🧜🏼‍♀️ Setting the computer name... beware"
+cecho "🧜🏼‍♀️ Setting the computer name... beware" $magentac
 read -p "How are we calling this brand new babe?:" thisname
 scutil --set HostName "$thisname"
 scutil --set LocalHostName "$thisname"
@@ -106,10 +112,10 @@ dscacheutil -flushcache
 ### See: https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
 ####################################################################################################
 
-echo "🔑 Generating ssh keys, adding to ssh-agent..."
+cecho "🔑 Generating ssh keys, adding to ssh-agent..." $magenta
 read -p 'Input email for ssh key: ' useremail
 
-echo "Use default ssh file location, enter a passphrase: "
+cecho "Use default ssh file location, enter a passphrase: " $magenta
 ssh-keygen -t rsa -b 4096 -C "$useremail"  # will prompt for password
 eval "$(ssh-agent -s)"
 
@@ -137,10 +143,10 @@ fi
 ### Add ssh-key to GitHub via api
 #############################################
 
-echo "🔑 Adding ssh-key to GitHub (via api)..."
-echo "Important! For this step, use a github personal token with the admin:public_key permission."
-echo "If you don't have one, create it here: https://github.com/settings/tokens/new"
-echo "make sure to never store your PATs in Github"
+cecho "🔑 Adding ssh-key to GitHub (via api)..." $magenta
+cecho "Important! For this step, use a github personal token with the admin:public_key permission." $red
+cecho "If you don't have one, create it here: https://github.com/settings/tokens/new" $magenta
+cecho "make sure to never store your PATs in Github" $magenta
 
 retries=3
 SSH_KEY=`cat ~/.ssh/id_rsa.pub`
@@ -169,8 +175,8 @@ done
 # Install via Brew           #
 ##############################
 
-echo "🍺 Starting brew app install..."
-echo "this might take a while"
+cecho "🍺 Starting brew app install..." $magenta
+cecho "this might take a while" $cyan
 
 # Todo: Try Divvy, sizeup and spectacles in the future
 
@@ -309,3 +315,8 @@ defaults write com.apple.screencapture type -string "png"
 # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
+###############
+# Config git  #
+###############
+git config --global user.name "Tania Allard"
+git config --global user.email "taniar.allard@gmail.com"
