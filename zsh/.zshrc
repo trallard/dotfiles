@@ -13,6 +13,50 @@ export ZSH="/Users/tania.allard/.oh-my-zsh"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="cute-theme"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+
+# prompt elements
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_tania dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time virtualenv anaconda)
+
+# hide default username
+POWERLEVEL9K_CUSTOM_TANIA='echo 🦄'
+
+# multi line and empty lines
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+# virtual env details
+POWERLEVEL9K_ANACONDA_RIGHT_DELIMITER=''
+POWERLEVEL9K_ANACONDA_LEFT_DELIMITER=''
+POWERLEVEL9K_ANACONDA_BACKGROUND='211'
+POWERLEVEL9K_ANACONDA_FOREGROUND='black'
+POWERLEVEL9K_PYTHON_ICON='🐍'
+
+POWERLEVEL9K_VIRTUALENV_BACKGROUND='211'
+POWERLEVEL9K_VIRTUALENV_FOREGROUND='black'
+
+# change prompt
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%K{104}%F{black} $ %f%k%F{104}%f "
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+
+
+# vcs colours
+POWERLEVEL9K_STATUS_VERBOSE=false
+
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND='white'
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='97'
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='white'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='97'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='white'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='97'
+
+# dir colour
+POWERLEVEL9K_DIR_HOME_BACKGROUND="80"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="80"
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="80"
+
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -67,7 +111,7 @@ ZSH_THEME="cute-theme"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git docker tmux tmuxinator kubectl
+    git docker tmux tmuxinator kubectl
 )
 
 ZSH_DISABLE_COMPFIX="true"
@@ -148,11 +192,11 @@ pv_activate(){
     activate_file=$(pipenv --venv)/bin/activate
     if [ -e "$activate_file" ]; then
         . $activate_file
-
+        
         # the pipenv shell normally enables these as well
         export PYTHONDONTWRITEBYTECODE=1
         export PIPENV_ACTIVE=1
-
+        
         if [ -f "${VIRTUAL_ENV}/.project" ]; then
             cd $(cat "${VIRTUAL_ENV}/.project")
         fi
@@ -192,7 +236,7 @@ alias exas='exa --long --git -h'# show status
 alias exam='exa -m --long -h'   # long with modified
 alias examods='exa --long --sort modified -r' # sort by last modified
 alias exacrs='exa --long -U --sort created -r' # sort by last created
-alias exala='exa --long -h -a'  # show long and . files 
+alias exala='exa --long -h -a'  # show long and . files
 
 # docker aliases
 alias dk='docker'           # default docker command
@@ -204,11 +248,14 @@ alias dk-clean-all='docker stop $(docker container ls -a -q) && docker system pr
 # npm
 alias npm-list='npm install -g npm'
 
-# ch 
+# ch
 alias ch-data='cd Documents/gitlab/data'
 alias ch-eng='cd Documents/gitlab/eng'
 alias ch-in='cd Documents/gitlab/infra'
 alias ch-gh='cd Documents/github'
+
+# aws shizz
+export AWS_PROFILE=*******
 
 # autocomplete kubectl
 source <(kubectl completion zsh)
