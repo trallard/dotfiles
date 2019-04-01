@@ -1,10 +1,8 @@
 #  If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-
 # ensure tmux is in path
 export PATH="$HOME/opt/homebrew/bin:$PATH"
-
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/tania.allard/.oh-my-zsh"
@@ -165,7 +163,6 @@ if [ -d "$HOME/opt/homebrew/opt/coreutils" ]; then
 fi
 
 
-
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Users/tania.allard/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
@@ -249,8 +246,6 @@ alias ch-eng='cd Documents/gitlab/eng'
 alias ch-in='cd Documents/gitlab/infra'
 alias ch-gh='cd Documents/github'
 
-# aws shizz
-export AWS_PROFILE=*******
 
 # autocomplete kubectl
 source <(kubectl completion zsh)
