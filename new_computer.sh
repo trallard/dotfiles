@@ -186,7 +186,6 @@ brew cask install dash
 brew install ispell
 brew install httpie 
 brew install bat
-brew install fd
 
 ### Development
 brew cask install docker
@@ -211,6 +210,9 @@ brew install bat
 brew install fd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 brew install ctop
+
+# Python
+brew install python
 
 ### Dev Editors 
 brew cask install visual-studio-code
@@ -242,7 +244,7 @@ brew cask install flux    # red light
 
 ### Chat / Video Conference
 brew cask install slack
-# brew cask install microsoft-teams
+brew cask install microsoft-teams
 brew cask install zoomus
 
 

@@ -164,15 +164,10 @@ if [ -d "$HOME/opt/homebrew/opt/coreutils" ]; then
     export MANPATH="$HOME/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
 
-# added by Anaconda3 5.2.0 installer
-export PATH="/anaconda3/bin:$PATH"
 
 
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Users/tania.allard/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
-# Add Atom editor
-alias atom='sh /Users/tania.allard/Applications/Atom.app/Contents/Resources/app/atom.sh'
 
 # Tree view of current dir
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
