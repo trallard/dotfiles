@@ -322,3 +322,7 @@ defaults write com.apple.screencapture disable-shadow -bool true
 ###############
 git config --global user.name "Tania Allard"
 git config --global user.email "taniar.allard@gmail.com"
+
+# need to install lfs
+git lfs install
+git lfs install --system
