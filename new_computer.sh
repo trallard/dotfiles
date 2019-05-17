@@ -192,6 +192,7 @@ brew cask install docker
 brew install make autoconf automake 
 brew install kubernetes-cli
 brew install kubernetes-helm
+brew update && brew install azure-cli
 
 ### Command line tools - install new ones, update others to latest version
 brew install git  # upgrade to latest

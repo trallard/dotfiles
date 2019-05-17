@@ -1,17 +1,19 @@
-#  If you come from bash you might have to change your $PATH.
+# If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # ensure tmux is in path
 export PATH="$HOME/opt/homebrew/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/tania.allard/.oh-my-zsh"
+export ZSH="/Users/tania/.oh-my-zsh"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="cute-theme"
+ZSH_THEME="unicorn-theme"
 ZSH_THEME="powerlevel9k/powerlevel9k"
+
 
 # prompt elements
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
@@ -55,19 +57,17 @@ POWERLEVEL9K_DIR_HOME_BACKGROUND="80"
 POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="80"
 POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="80"
 
-
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
@@ -104,7 +104,8 @@ POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="80"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
@@ -114,9 +115,10 @@ plugins=(
 
 ZSH_DISABLE_COMPFIX="true"
 
-# ZSH_TMUX_AUTOSTART='true'
-
+# need to source zsh stuff
 source $ZSH/oh-my-zsh.sh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
@@ -146,7 +148,6 @@ export LANG=en_GB.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias lab="jupyter lab"
 
 
 # add homebrew to path
@@ -162,9 +163,8 @@ if [ -d "$HOME/opt/homebrew/opt/coreutils" ]; then
     export MANPATH="$HOME/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
 
-
-# Add Visual Studio Code (code)
-export PATH="$PATH:/Users/tania.allard/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+# Add Visual Studio Code (code) to path
+export PATH="$PATH:/Users/tania/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Tree view of current dir
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
@@ -219,6 +219,8 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 # bat https://github.com/sharkdp/bat
 BAT_THEME="TwoDark"
 
+alias lab="jupyter lab"
+
 # exa aliases
 alias exal='exa --long -h'      # long with header
 alias exat='exa --long --tree'  # long plus tree
@@ -240,12 +242,30 @@ alias dk-clean-all='docker stop $(docker container ls -a -q) && docker system pr
 # npm
 alias npm-list='npm install -g npm'
 
-# ch
-alias ch-data='cd Documents/gitlab/data'
-alias ch-eng='cd Documents/gitlab/eng'
-alias ch-in='cd Documents/gitlab/infra'
+# shortcuts to some folders
 alias ch-gh='cd Documents/github'
-
+alias ch-gh-tr' cd Documents/github/trallard'
 
 # autocomplete kubectl
 source <(kubectl completion zsh)
+
+# cat is bat
+alias cat='bat'
+
+# make sure to source bash (so that conda works)
+source ~/.bash_profile 
+
+# source subrepo
+source ~/Documents/github/sources/git-subrepo/.rc
+
+# add openssl to the path -> needed for SQL
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+
+# microsoft specific
+alias idweb='/usr/bin/kdestroy -A; /usr/bin/kinit --keychain taallard@EUROPE.CORP.MICROSOFT.COM; open http://idweb -a Safari.app'
+
+# needed for ruby
+source /Users/tania/.rbenv/shims
+source /Users/tania/.rbenv/shims
+
+
