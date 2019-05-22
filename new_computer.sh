@@ -211,6 +211,7 @@ brew install bat
 brew install fd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 brew install ctop
+brew install jq
 
 # Python
 brew install python
