@@ -18,7 +18,8 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # prompt elements
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_tania dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time virtualenv anaconda)
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time virtualenv anaconda)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv anaconda)
 
 # hide default username
 POWERLEVEL9K_CUSTOM_TANIA='echo 🦄'
@@ -265,7 +266,21 @@ export PATH="/usr/local/opt/openssl/bin:$PATH"
 alias idweb='/usr/bin/kdestroy -A; /usr/bin/kinit --keychain taallard@EUROPE.CORP.MICROSOFT.COM; open http://idweb -a Safari.app'
 
 # needed for ruby
-source /Users/tania/.rbenv/shims
-source /Users/tania/.rbenv/shims
+export PATH="/Users/tania/.rbenv/shims:${PATH}" 
+
+# terraform
+export PATH="$PATH:/Users/tania/Documents/github/sources"
 
 
+# gitkraken
+# 
+alias kraken='open -na "GitKraken" --args -p $(git rev-parse --show-toplevel)'
+
+# Rstudio
+alias rstudio='open -na "Rstudio"'
+
+
+# code lazy
+
+alias codeh='code .'
+alias coder='code ~/.'

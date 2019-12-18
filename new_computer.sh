@@ -227,7 +227,7 @@ brew cask install evernote
 ### Conferences, Blogging, Screencasts
 # brew cask install deckset
 brew cask install ImageOptim  # for optimizing images
-# brew cask install screenflow
+brew cask install screenflow
 
 ### Productivity
 brew cask install wavebox
