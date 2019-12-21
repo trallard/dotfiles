@@ -245,7 +245,8 @@ alias npm-list='npm install -g npm'
 
 # shortcuts to some folders
 alias ch-gh='cd Documents/github'
-alias ch-gh-tr' cd Documents/github/trallard'
+alias ch-gh-tr='cd Documents/github/trallard'
+alias ch-gh-az='cd Documents/github/azure'
 
 # autocomplete kubectl
 source <(kubectl completion zsh)
@@ -281,6 +282,8 @@ alias rstudio='open -na "Rstudio"'
 
 
 # code lazy
-
 alias codeh='code .'
 alias coder='code ~/.'
+
+# poetry add to path
+$HOME/.poetry/env

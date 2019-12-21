@@ -1,32 +1,24 @@
-# preferences for command line
-# white @ and $
-export PS1="\[\033[36m\]\u\[\033[m\] @ \[\033[38;5;135m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
-
-# Added by Anaconda3 4.4.0 installer
-export PATH="/Users/tania/anaconda3/bin:$PATH"
-
-# rbenv
-# echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.profile
-# source ~/.profile
-
-# Nikola env
-export DYLD_LIBRARY_PATH=${HOME}/anaconda/envs/nikola/lib/
-
-# Git-subrepo
-source ~/Documents/Git_Repos/git-subrepo/.rc
-
-# Tree view of current dir
-alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+# added by Anaconda3 2018.12 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/anaconda3/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda init <<<
 
 
-# Your previous /Users/tania/.bash_profile file was backed up as /Users/tania/.bash_profile.macports-saved_2017-11-23_at_12:47:37
-##
+# add Anaconda to path
+export PATH="/anaconda3/bin:$PATH"
+# Added by install_latest_perl_osx.pl
+[ -r /Users/tania/.bashrc ] && source /Users/tania/.bashrc
 
-# MacPorts Installer addition on 2017-11-23_at_12:47:37: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-
-# MacPorts Installer addition on 2017-11-23_at_12:47:37: adding an appropriate MANPATH variable for use with MacPorts.
-export MANPATH="/opt/local/share/man:$MANPATH"
-# Finished adapting your MANPATH environment variable for use with MacPorts.
+export PATH="$HOME/.poetry/bin:$PATH"
