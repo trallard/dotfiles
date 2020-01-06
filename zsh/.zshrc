@@ -14,7 +14,6 @@ export ZSH="/Users/tania/.oh-my-zsh"
 ZSH_THEME="unicorn-theme"
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
-
 # prompt elements
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_tania dir vcs)
@@ -41,7 +40,6 @@ POWERLEVEL9K_VIRTUALENV_FOREGROUND='black'
 # change prompt
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%K{104}%F{black} $ %f%k%F{104}%f "
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-
 
 # vcs colours
 POWERLEVEL9K_STATUS_VERBOSE=false
@@ -111,7 +109,7 @@ POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="80"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git docker tmux tmuxinator kubectl
+    git docker tmux tmuxinator kubectl poetry
 )
 
 ZSH_DISABLE_COMPFIX="true"
@@ -141,6 +139,10 @@ export LANG=en_GB.UTF-8
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+#  ------------------------------------------------------
+#  MULTIPLE EXPORTS
+#  ------------------------------------------------------
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -149,7 +151,6 @@ export LANG=en_GB.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
 
 # add homebrew to path
 
@@ -167,8 +168,17 @@ fi
 # Add Visual Studio Code (code) to path
 export PATH="$PATH:/Users/tania/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
-# Tree view of current dir
-alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+# add openssl to the path -> needed for SQL
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+
+# needed for ruby
+export PATH="/Users/tania/.rbenv/shims:${PATH}" 
+
+# terraform
+export PATH="$PATH:/Users/tania/Documents/github/sources"
+
+# poetry add to path
+export $HOME/.poetry/env
 
 # ensure I use 256 colours
 export TERM="xterm-256color"
@@ -179,30 +189,6 @@ BULLETTRAIN_PROMPT_CHAR="🦄"
 # make sure the locale is set
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
-
-# activate pienv venv
-pv_activate(){
-    activate_file=$(pipenv --venv)/bin/activate
-    if [ -e "$activate_file" ]; then
-        . $activate_file
-        
-        # the pipenv shell normally enables these as well
-        export PYTHONDONTWRITEBYTECODE=1
-        export PIPENV_ACTIVE=1
-        
-        if [ -f "${VIRTUAL_ENV}/.project" ]; then
-            cd $(cat "${VIRTUAL_ENV}/.project")
-        fi
-        return
-    fi
-}
-
-# enable colours using the command ls, since using coreutils this is gls
-alias lss="gls --color=always"
-alias ls="exal"
-
-# Enable coloured output
-alias grep='grep --color=auto'
 
 # Set preferred pager...
 export PAGER='less'
@@ -260,30 +246,45 @@ source ~/.bash_profile
 # source subrepo
 source ~/Documents/github/sources/git-subrepo/.rc
 
-# add openssl to the path -> needed for SQL
-export PATH="/usr/local/opt/openssl/bin:$PATH"
-
-# microsoft specific
-alias idweb='/usr/bin/kdestroy -A; /usr/bin/kinit --keychain taallard@EUROPE.CORP.MICROSOFT.COM; open http://idweb -a Safari.app'
-
-# needed for ruby
-export PATH="/Users/tania/.rbenv/shims:${PATH}" 
-
-# terraform
-export PATH="$PATH:/Users/tania/Documents/github/sources"
-
-
 # gitkraken
-# 
 alias kraken='open -na "GitKraken" --args -p $(git rev-parse --show-toplevel)'
 
 # Rstudio
 alias rstudio='open -na "Rstudio"'
 
-
 # code lazy
 alias codeh='code .'
 alias coder='code ~/.'
 
-# poetry add to path
-$HOME/.poetry/env
+# microsoft specific
+alias idweb='/usr/bin/kdestroy -A; /usr/bin/kinit --keychain <email>; open http://idweb -a Safari.app'
+
+# Tree view of current dir
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+
+# activate pienv venv
+pv_activate(){
+    activate_file=$(pipenv --venv)/bin/activate
+    if [ -e "$activate_file" ]; then
+        . $activate_file
+        
+        # the pipenv shell normally enables these as well
+        export PYTHONDONTWRITEBYTECODE=1
+        export PIPENV_ACTIVE=1
+        
+        if [ -f "${VIRTUAL_ENV}/.project" ]; then
+            cd $(cat "${VIRTUAL_ENV}/.project")
+        fi
+        return
+    fi
+}
+
+# enable colours using the command ls, since using coreutils this is gls
+alias lss="gls --color=always"
+alias ls="exal"
+
+# Enable coloured output
+alias grep='grep --color=auto'
+
+# poetry completion
+poetry completions zsh > $ZSH/plugins/poetry/_poetry
