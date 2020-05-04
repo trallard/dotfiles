@@ -185,11 +185,12 @@ brew cask install iterm2
 brew cask install dash
 brew install ispell
 brew install httpie 
-brew install bat
+brew install dive 
+brew install tokei
 
 ### Development
 brew cask install docker
-brew install make autoconf automake 
+brew install make autoconf automake
 brew install kubernetes-cli
 brew install kubernetes-helm
 brew update && brew install azure-cli
@@ -201,6 +202,7 @@ brew install wget
 brew install zsh # zshell
 brew install tmux
 brew install tree
+brew install neofetch 
 brew link curl --force
 brew install grep --with-default-names
 brew install trash  # move to osx trash instead of rm
@@ -218,37 +220,40 @@ brew install python
 
 ### Dev Editors 
 brew cask install visual-studio-code
-brew cask install pycharm
 
 ### Writing
 brew cask install evernote
-
+brew cask install notion
 
 ### Conferences, Blogging, Screencasts
 # brew cask install deckset
 brew cask install ImageOptim  # for optimizing images
 brew cask install screenflow
+brew cask install obs
+brew cask install krisp
+brew cask install postman
+brew cask install keycastr  # show key presses on screen (for gifs & screencasts)
+brew cask install skitch  # app to annotate screenshots
 
 ### Productivity
 brew cask install wavebox
 brew cask install google-chrome
-# brew cask install alfred
-brew cask install dropbox
-
-
-# brew cask install timing  # time and project tracker
-brew cask install keycastr  # show key presses on screen (for gifs & screencasts)
+brew cask install cleanmymac
+brew cask install clickup
 brew cask install betterzip
 brew cask install caffeine  # keep computer from sleeping
-brew cask install skitch  # app to annotate screenshots
 brew cask install muzzle  # silence notifications
 brew cask install flux    # red light
+brew cask install dropbox
 
 ### Chat / Video Conference
 brew cask install slack
 brew cask install microsoft-teams
 brew cask install zoomus
+brew cask install discord 
 
+# Developer 
+brew install gitkraken
 
 ## Music
 brew cask install spotify
@@ -271,7 +276,9 @@ brew cask install \
   brew cask install font-fira-code \
   font-pt-mono \
   font-fontawesome \
-  font-ibm-plex
+  font-ibm-plex \
+  font-iosevka \
+  font-iosevka-slab
 
 ### SourceCodePro + Powerline + Awesome Regular (for powerlevel 9k terminal icons)
 cd ~/Library/Fonts && { curl -O 'https://github.com/Falkor/dotfiles/blob/master/fonts/SourceCodePro+Powerline+Awesome+Regular.ttf?raw=true' ; cd -; }

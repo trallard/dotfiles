@@ -218,7 +218,7 @@ export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 # bat https://github.com/sharkdp/bat
-BAT_THEME="TwoDark"
+BAT_THEME="ansi-dark"
 
 alias lab="jupyter lab"
 
@@ -248,11 +248,28 @@ alias ch-gh='cd Documents/github'
 alias ch-gh-tr='cd Documents/github/trallard'
 alias ch-gh-az='cd Documents/github/azure'
 
+# microsoft specific
+alias idweb='/usr/bin/kdestroy -A; /usr/bin/kinit --keychain taallard@EUROPE.CORP.MICROSOFT.COM; open http://idweb -a Safari.app'
+
 # autocomplete kubectl
 source <(kubectl completion zsh)
 
 # cat is bat
 alias cat='bat'
+
+# gitkraken 
+alias kraken='open -na "GitKraken" --args -p $(git rev-parse --show-toplevel)'
+
+# Rstudio
+alias rstudio='open -na "Rstudio"'
+
+# code lazy
+alias codeh='code .'
+alias coder='code ~/.'
+alias cdco='cd "$1" && code .'
+
+# gitmoji
+alias gitm='gitmoji -c'
 
 # make sure to source bash (so that conda works)
 source ~/.bash_profile 
@@ -263,27 +280,14 @@ source ~/Documents/github/sources/git-subrepo/.rc
 # add openssl to the path -> needed for SQL
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 
-# microsoft specific
-alias idweb='/usr/bin/kdestroy -A; /usr/bin/kinit --keychain taallard@EUROPE.CORP.MICROSOFT.COM; open http://idweb -a Safari.app'
-
 # needed for ruby
 export PATH="/Users/tania/.rbenv/shims:${PATH}" 
 
 # terraform
 export PATH="$PATH:/Users/tania/Documents/github/sources"
 
-
-# gitkraken
-# 
-alias kraken='open -na "GitKraken" --args -p $(git rev-parse --show-toplevel)'
-
-# Rstudio
-alias rstudio='open -na "Rstudio"'
-
-
-# code lazy
-alias codeh='code .'
-alias coder='code ~/.'
-
 # poetry add to path
 export PATH="$PATH:$HOME/.poetry/env"
+
+# needed for pyenv 
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi'
