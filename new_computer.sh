@@ -335,3 +335,27 @@ git config --global user.email "taniar.allard@gmail.com"
 # need to install lfs
 git lfs install
 git lfs install --system
+
+
+###############
+# Pyenv       #
+###############
+
+brew install openssl readline sqlite3 xz zlib
+brew install pyenv
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
+
+
+###############
+# Anaconda    #
+###############
+
+wget --output-file=/tmp/Anaconda3-2020.02-MacOSX-x86_64.sh  https://repo.anaconda.com/archive/Anaconda3-2020.02-MacOSX-x86_64.sh
+shasum -a 256 /tmp/Anaconda3-2020.02-MacOSX-x86_64.sh
+
+bash ~/tmp/Anaconda3-2020.02-MacOSX-x86_64.sh -b -p $HOME/anaconda 
+
+# eval "$(/Users/tania/anaconda/bin/conda shell.YOUR_SHELL_NAME hook)"
+
+# conda init szh 
+# conda list 
