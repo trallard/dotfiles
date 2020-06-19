@@ -92,3 +92,12 @@ cask "font-ibm-plex"
 cask "font-iosevka"
 cask "font-iosevka-slab"
 cask "font-pt-mono"
+
+# Python
+brew "openssl"
+brew "readline"
+brew "sqlite3"
+brew "xz"
+brew "zlib"
+brew "pyenv"
+brew "pipx"

@@ -164,101 +164,16 @@ for ((i=0; i<retries; i++)); do
           break
       else
 			echo "😔 Something went wrong. Enter your credentials and try again..."
-     		echo -n "Status code returned: "
-     		echo $gh_status_code
+      echo -n "Status code returned: "
+      echo $gh_status_code
       fi
 done
 
 [[ $retries -eq i ]] && echo "Adding ssh-key to GitHub failed! Try again later."
 
-##############################
-# Install via Brew           #
-##############################
+# p10k  and oh-my-szh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-cecho "🍺 Starting brew app install..." $magenta
-cecho "this might take a while" $cyan
-
-# Todo: Try Divvy, sizeup and spectacles in the future
-
-### Developer Tools
-brew cask install iterm2
-brew cask install dash
-brew install ispell
-brew install httpie 
-brew install dive 
-brew install tokei
-
-### Development
-brew cask install docker
-brew install make autoconf automake
-brew install kubernetes-cli
-brew install kubernetes-helm
-brew update && brew install azure-cli
-
-### Command line tools - install new ones, update others to latest version
-brew install git  # upgrade to latest
-brew install git-lfs # track large files in git https://github.com/git-lfs/git-lfs
-brew install wget
-brew install zsh # zshell
-brew install tmux
-brew install tree
-brew install neofetch 
-brew link curl --force
-brew install grep --with-default-names
-brew install trash  # move to osx trash instead of rm
-brew install less
-brew install cat 
-brew install exa
-brew install bat
-brew install fd
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-brew install ctop
-brew install jq
-
-### Dev Editors 
-brew cask install visual-studio-code
-
-### Writing
-brew cask install evernote
-brew cask install notion
-
-### Conferences, Blogging, Screencasts
-# brew cask install deckset
-brew cask install ImageOptim  # for optimizing images
-brew cask install screenflow
-brew cask install obs
-brew cask install krisp
-brew cask install postman
-brew cask install keycastr  # show key presses on screen (for gifs & screencasts)
-brew cask install skitch  # app to annotate screenshots
-
-### Productivity
-brew cask install wavebox
-brew cask install google-chrome
-brew cask install cleanmymac
-brew cask install clickup
-brew cask install betterzip
-brew cask install caffeine  # keep computer from sleeping
-brew cask install muzzle  # silence notifications
-brew cask install flux    # red light
-brew cask install dropbox
-
-### Chat / Video Conference
-brew cask install slack
-brew cask install microsoft-teams
-brew cask install zoomus
-brew cask install discord 
-
-# Developer 
-brew install gitkraken
-
-## Music
-brew cask install spotify
-
-### Run Brew Cleanup
-brew cleanup
-
-# p10k  
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
 #############################################
@@ -267,24 +182,9 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~
 
 echo "Installing fonts..."
 
-brew tap caskroom/fonts
-
-### programming fonts
-brew cask install \
-  font-fira-mono-for-powerline \ 
-  font-fira-code \
-  font-pt-mono \
-  font-fontawesome \
-  font-ibm-plex \
-  font-iosevka \
-  font-iosevka-slab
-
-### SourceCodePro + Powerline + Awesome Regular (for powerlevel 9k terminal icons)
+### SourceCodePro + Powerline + Awesome Regular (for powerlevel 10k terminal icons)
 cd ~/Library/Fonts && { curl -O 'https://github.com/Falkor/dotfiles/blob/master/fonts/SourceCodePro+Powerline+Awesome+Regular.ttf?raw=true' ; cd -; }
 cd ~/Library/Fonts && { curl -O 'https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/FiraCode/Regular/complete/Fura%20Code%20Regular%20Nerd%20Font%20Complete.ttf?raw=true' ; cd -; }
-
-### Run Brew Cleanup
-brew cleanup
 
 
 #############################################
@@ -335,13 +235,10 @@ git config --global user.email "taniar.allard@gmail.com"
 git lfs install
 git lfs install --system
 
-
 ###############
 # Pyenv       #
 ###############
 
-brew install openssl readline sqlite3 xz zlib
-brew install pyenv
 echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
 
 
@@ -358,3 +255,18 @@ bash ~/tmp/Anaconda3-2020.02-MacOSX-x86_64.sh -b -p $HOME/anaconda
 
 # conda init szh 
 # conda list 
+
+
+###############
+# Pipx    #
+###############
+pipx ensurepath
+
+# make sure to run 
+# pipx completions
+pipx install black
+pipx install dvc 
+pipx install isort 
+pipx install jupyter-repo2docker 
+pipx install pipenv 
+pipx install poetry

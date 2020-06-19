@@ -22,7 +22,7 @@
   ~/.dive.yaml: dive/.dive.yaml
   ~/.tmux.config: tmux/.tmux.conf
 
-# folders to be created - ensure consistency throughout
+# folders to be created
 - create:
     - ~/Documents/github
     - ~/Documents/github/trallard
@@ -33,8 +33,17 @@
     - ~/Documents/presentations
     - ~/Documents/personal
 
+# commands to be run - this finalises the setup through brew and a bash scripts
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
     - [sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 , Install oh-my-szh]
+    - brew update 
     - [brew bundle install, Install via Homebrew]
+    - brew cleanup
+    - 
+      command: sh new_computer.sh
+      stdin: true
+      stdout: true 
+      description: Execute miscellaneous tasks and setup
+      quiet: false
