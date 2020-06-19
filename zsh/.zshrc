@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -13,52 +20,8 @@ export ZSH="/Users/tania/.oh-my-zsh"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
 # I am using Unicorn theme here - which is my own theme @trallard
-ZSH_THEME="unicorn-theme"
+ZSH_THEME="cute-theme"
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
-
-# prompt elements
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_tania dir vcs)
-# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time virtualenv anaconda)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv anaconda)
-
-# hide default username
-POWERLEVEL9K_CUSTOM_TANIA='echo 🦄'
-
-# multi line and empty lines
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-
-# virtual env details
-POWERLEVEL9K_ANACONDA_RIGHT_DELIMITER=''
-POWERLEVEL9K_ANACONDA_LEFT_DELIMITER=''
-POWERLEVEL9K_ANACONDA_BACKGROUND='211'
-POWERLEVEL9K_ANACONDA_FOREGROUND='black'
-POWERLEVEL9K_PYTHON_ICON='🐍'
-
-POWERLEVEL9K_VIRTUALENV_BACKGROUND='211'
-POWERLEVEL9K_VIRTUALENV_FOREGROUND='black'
-
-# change prompt
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%K{104}%F{black} $ %f%k%F{104}%f "
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-
-
-# vcs colours
-POWERLEVEL9K_STATUS_VERBOSE=false
-
-POWERLEVEL9K_VCS_CLEAN_FOREGROUND='white'
-POWERLEVEL9K_VCS_CLEAN_BACKGROUND='97'
-POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='white'
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='97'
-POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='white'
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='97'
-
-# dir colour
-POWERLEVEL9K_DIR_HOME_BACKGROUND="80"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="80"
-POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="80"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -175,12 +138,13 @@ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 # ensure I use 256 colours
 export TERM="xterm-256color"
 
-# My own icon
-BULLETTRAIN_PROMPT_CHAR="🦄"
-
 # make sure the locale is set
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
+
+###########################
+# Custom functions
+###########################
 
 # activate pipenv venv
 pv_activate(){
@@ -197,6 +161,40 @@ pv_activate(){
         fi
         return
     fi
+}
+
+# print all colours in 256 
+function colorgrid( )
+{
+    iter=16
+    while [ $iter -lt 52 ]
+    do
+        second=$[$iter+36]
+        third=$[$second+36]
+        four=$[$third+36]
+        five=$[$four+36]
+        six=$[$five+36]
+        seven=$[$six+36]
+        if [ $seven -gt 250 ];then seven=$[$seven-251]; fi
+
+        echo -en "\033[38;5;$(echo $iter)m█ "
+        printf "%03d" $iter
+        echo -en "   \033[38;5;$(echo $second)m█ "
+        printf "%03d" $second
+        echo -en "   \033[38;5;$(echo $third)m█ "
+        printf "%03d" $third
+        echo -en "   \033[38;5;$(echo $four)m█ "
+        printf "%03d" $four
+        echo -en "   \033[38;5;$(echo $five)m█ "
+        printf "%03d" $five
+        echo -en "   \033[38;5;$(echo $six)m█ "
+        printf "%03d" $six
+        echo -en "   \033[38;5;$(echo $seven)m█ "
+        printf "%03d" $seven
+
+        iter=$[$iter+1]
+        printf '\r\n'
+    done
 }
 
 # enable colours using the command ls, since using coreutils this is gls
@@ -222,7 +220,11 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 # bat https://github.com/sharkdp/bat
 BAT_THEME="ansi-dark"
 
-# jupyter
+###########################
+# Aliases
+###########################
+
+# jupyter alias
 alias lab="jupyter lab"
 
 # exa aliases
@@ -250,6 +252,7 @@ alias npm-list='npm install -g npm'
 alias ch-gh='cd Documents/github'
 alias ch-gh-tr='cd Documents/github/trallard'
 alias ch-gh-az='cd Documents/github/azure'
+
 # autocomplete kubectl
 source <(kubectl completion zsh)
 
@@ -269,6 +272,14 @@ alias cdco='cd "$1" && code .'
 
 # gitmoji
 alias gitm='gitmoji -c'
+
+# pyenv
+alias pyenv-env='ls ~/.pyenv/versions'
+
+
+###########################
+# Misc source and exports
+###########################
 
 # make sure to source bash (so that conda works)
 source ~/.bash_profile 
@@ -293,10 +304,11 @@ export PATH="$PATH:$HOME/.poetry/env"
 # Created by `userpath` on 2020-05-04 10:35:50
 export PATH="$PATH:/Users/tania/.local/bin"
 
-alias pyenv-env='ls ~/.pyenv/versions'
-
 # autocomplete pipx
 autoload -U bashcompinit
 bashcompinit
 
 eval "$(register-python-argcomplete pipx)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
