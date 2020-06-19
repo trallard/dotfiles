@@ -273,7 +273,7 @@ brew tap caskroom/fonts
 ### programming fonts
 brew cask install \
   font-fira-mono-for-powerline \ 
-  brew cask install font-fira-code \
+  font-fira-code \
   font-pt-mono \
   font-fontawesome \
   font-ibm-plex \

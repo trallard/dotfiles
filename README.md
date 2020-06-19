@@ -1,10 +1,9 @@
 # dotfiles
 
-Config files for:
+This repo contains config files for various things (mostly for a macOS setup). The idea is to help me customise a new computer in an easy and smooth way.
 
-- `terminal` (Mac)
-- `git`
-- `tmux`
+:warning: Since this is adapted to my own profile and usage **everything is super customised** use everything at your own risk :warning:.
+
 
 There is a `new_computer.sh` script that should help me with to set up a new Mac from scratch. 
 
