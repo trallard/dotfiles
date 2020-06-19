@@ -1,16 +1,16 @@
 [user]
 	name = Tania Allard
-	email = tania.allard@hellosoda.com
+	email = *****
 
 [alias]
 	# history: logs in different formats
 	# hash, date, comment, author
-	hist = log --pretty=format:\"%C(bold blue)%h%C(reset) %C(magenta)%ad%C(reset) | %s%C(yellow)%d%C(reset) [%an]\" --graph --date=short --decorate
-	hists = log --pretty=format:\"%C(bold blue)%h%C(reset) %C(magenta)%ad%C(reset) | %s%C(yellow)%d%C(reset)[%an]\" --abbrev-commit --graph --date=short
+	hist = log --pretty=format:\"%C(bold blue)%h%C(reset) %C(magenta)%ad%C(reset) | %s%C(yellow)%d%C(reset) - %C(dim white)[%an]\" --graph --date=short --decorate
+	hists = log --pretty=format:\"%C(bold blue)%h%C(reset) %C(magenta)%ad%C(reset) | %s%C(yellow)%d%C(reset) - %C(dim white)[%an]\" --abbrev-commit --graph --date=short
 	histt = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold magenta)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	tree = log --graph --pretty=oneline --abbrev-commit
-	oneline = git log --oneline --decorate=short
-	lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
+	oneline = log --oneline --decorate=short
+	lg = log --color --decorate --graph --pretty=format:'%C(magenta)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue) - [%an]%Creset' --abbrev-commit
 
 	# reset head to a given commit
 	unstage = reset HEAD --
@@ -24,7 +24,7 @@
 	s = status -s
 
 	# list commit HEAD 
-	ch = git rev-parse --short HEAD
+	ch = rev-parse --short HEAD
 	# List aliases
 	aliases = config --get-regexp alias
 	# Show verbose output about tags, branches or remotes
@@ -68,7 +68,7 @@
 	whitespace = fix
 
 [core]
-	editor = atom --wait
+	editor = /Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/bin/code
 	ignorecase = false
 
 [color]
@@ -92,7 +92,7 @@
 	changed = green
 	untracked = cyan
 
-# note this are added by nbdime
+# note these are added by nbdime
 [diff "jupyternotebook"]
 	command = git-nbdiffdriver diff
 [merge "jupyternotebook"]
