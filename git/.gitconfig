@@ -2,6 +2,9 @@
 	name = Tania Allard
 	email = *****
 
+[core]
+	excludesfile = ~/.gitignore_global
+
 [alias]
 	# history: logs in different formats
 	# hash, date, comment, author
