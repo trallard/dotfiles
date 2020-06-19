@@ -250,10 +250,6 @@ alias npm-list='npm install -g npm'
 alias ch-gh='cd Documents/github'
 alias ch-gh-tr='cd Documents/github/trallard'
 alias ch-gh-az='cd Documents/github/azure'
-
-# microsoft specific
-alias idweb='/usr/bin/kdestroy -A; /usr/bin/kinit --keychain taallard@EUROPE.CORP.MICROSOFT.COM; open http://idweb -a Safari.app'
-
 # autocomplete kubectl
 source <(kubectl completion zsh)
 
