@@ -11,8 +11,10 @@ export ZSH="/Users/tania/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+
+# I am using Unicorn theme here - which is my own theme @trallard
 ZSH_THEME="unicorn-theme"
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
 # prompt elements
@@ -180,7 +182,7 @@ BULLETTRAIN_PROMPT_CHAR="🦄"
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
 
-# activate pienv venv
+# activate pipenv venv
 pv_activate(){
     activate_file=$(pipenv --venv)/bin/activate
     if [ -e "$activate_file" ]; then
@@ -220,6 +222,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 # bat https://github.com/sharkdp/bat
 BAT_THEME="ansi-dark"
 
+# jupyter
 alias lab="jupyter lab"
 
 # exa aliases
@@ -290,4 +293,14 @@ export PATH="$PATH:/Users/tania/Documents/github/sources"
 export PATH="$PATH:$HOME/.poetry/env"
 
 # needed for pyenv 
-echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi'
+# echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi'
+# Created by `userpath` on 2020-05-04 10:35:50
+export PATH="$PATH:/Users/tania/.local/bin"
+
+alias pyenv-env='ls ~/.pyenv/versions'
+
+# autocomplete pipx
+autoload -U bashcompinit
+bashcompinit
+
+eval "$(register-python-argcomplete pipx)"
