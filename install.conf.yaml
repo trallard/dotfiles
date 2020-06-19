@@ -1,0 +1,40 @@
+- defaults:
+  link:
+    relink: true
+    create: true
+    force: false # replace files
+
+- clean: ["~"]
+
+- clean:
+    ~/:
+      force: true
+    ~/.config:
+      recursive: true
+
+- link:
+  ~/.gitconfig: git/.gitconfig
+  ~/.gitignore_global: git/.gitignore_global
+  ~/.zshrc: zsh/.zshrc
+  ~/.zprofile: zsh/.zprofile
+  ~/.oh-my-zsh/themes/unicorn-theme.zsh-theme: zsh/unicorn-theme.zsh-theme
+  ~/.p10k.szh: .p10k.szh
+  ~/.dive.yaml: dive/.dive.yaml
+  ~/.tmux.config: tmux/.tmux.conf
+
+# folders to be created - ensure consistency throughout
+- create:
+    - ~/Documents/github
+    - ~/Documents/github/trallard
+    - ~/Documents/github/patches
+    - ~/Documents/github/sources
+    - ~/Documents/design
+    - ~/Documents/demos
+    - ~/Documents/presentations
+    - ~/Documents/personal
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
+    - [sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+, Install oh-my-szh]
+    - [brew bundle install, Install via Homebrew]

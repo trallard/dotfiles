@@ -215,9 +215,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 brew install ctop
 brew install jq
 
-# Python
-brew install python
-
 ### Dev Editors 
 brew cask install visual-studio-code
 
@@ -261,6 +258,8 @@ brew cask install spotify
 ### Run Brew Cleanup
 brew cleanup
 
+# p10k  
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
 #############################################
 ### Fonts
