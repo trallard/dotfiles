@@ -20,7 +20,7 @@ export ZSH="/Users/tania/.oh-my-zsh"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
 # I am using Unicorn theme here - which is my own theme @trallard
-ZSH_THEME="cute-theme"
+ZSH_THEME="unicorn-theme"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
