@@ -250,16 +250,17 @@ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nf
 # Anaconda    #
 ###############
 
-wget --output-file=/tmp/Anaconda3-2020.02-MacOSX-x86_64.sh  https://repo.anaconda.com/archive/Anaconda3-2020.02-MacOSX-x86_64.sh
-shasum -a 256 /tmp/Anaconda3-2020.02-MacOSX-x86_64.sh
+wget --output-file=/tmp/Anaconda3-2020.07-MacOSX-x86_64.sh  https://repo.anaconda.com/archive/Anaconda3-2020.07-MacOSX-x86_64.pkg
+shasum -a 256 /tmp/Anaconda3-2020.07-MacOSX-x86_64.sh
 
-bash ~/tmp/Anaconda3-2020.02-MacOSX-x86_64.sh -b -p $HOME/anaconda 
+bash ~/tmp/Anaconda3-2020.07-MacOSX-x86_64.sh -b -p $HOME/anaconda 
 
 # eval "$(/Users/tania/anaconda/bin/conda shell.YOUR_SHELL_NAME hook)"
 
 # conda init szh 
 # conda list 
 
+# conda config --set auto_activate_base False
 
 ###############
 # Pipx    #
@@ -274,3 +275,8 @@ pipx install isort
 pipx install jupyter-repo2docker 
 pipx install pipenv 
 pipx install poetry
+
+############
+# Node 
+############
+npm install -g pa11y terminalizer gatsby-cli yo

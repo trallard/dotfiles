@@ -1,5 +1,8 @@
 cask_args appdir: "/Applications"
 
+# Apple store command line
+brew "mas"
+
 tap "aws/tap"
 tap "azure/functions"
 tap "caskroom/cask"
@@ -12,6 +15,7 @@ tap "homebrew/services"
 tap "wagoodman/dive"
 
 # Developer tools
+mas "Xcode", id: 497799835
 brew "gitkraken"
 cask "visual-studio-code"
 cask "iterm2"
@@ -20,6 +24,8 @@ brew "ispell"
 brew "httpie"
 brew "wagoodman/dive/dive"
 brew "tokei"
+brew "gitmoji"
+brew "diff-so-fancy"
 
 cask "docker"
 brew "make autoconf automake"
@@ -61,6 +67,13 @@ cask "krisp"
 cask "postman"
 cask "keycastr"
 cask "skitch"
+cask "grammarly"
+cask "asciicinema"
+cask "adobe-creative-cloud"
+cask "loopback"
+cask "logitech-presentation"
+cask 'soundsource"
+cask "razer-synapse"
 
 # Productivity
 cask "wavebox"
@@ -73,6 +86,7 @@ cask "muzzle"
 cask "flux"
 cask "dropbox"
 cask "alfred"
+cask "bitwarden"
 cask "bitwarden"
 
 # Chat / video conference
@@ -107,4 +121,18 @@ brew "pipx"
 brew "node"
 
 # Ruby
-bre "rbvenv"
+brew "rbvenv"
+brew "ruby-build"
+
+brew "sass/sass/sass"
+brew "azure-functions-core-tools@3"
+
+mas "Boxy SVG", id: 611658502
+mas "GIPHY CAPTURE", id: 668208984
+mas "HP Smart", id: 1474276998
+mas "Keynote", id: 409183694
+mas "Magnet", id: 441258766
+mas "Sim Daltonism", id: 693112260
+mas "Trello", id: 1278508951
+mas "TweetDeck", id: 485812721
+mas "WhatsApp", id: 1147396723

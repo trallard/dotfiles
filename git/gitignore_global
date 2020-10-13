@@ -10,6 +10,7 @@ Icon
 
 # Thumbnails
 ._*
+Thumbs.db
 
 # Files that might appear in the root of a volume
 .DocumentRevisions-V100
@@ -82,3 +83,7 @@ tags
 *.orig
 *.tmp
 
+### node
+venv
+node_modules
+.sass-cache
