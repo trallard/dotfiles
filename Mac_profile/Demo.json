@@ -1,6 +1,5 @@
-
-  {
-  "Transparency" : 0.12831138959390859,
+{
+  "Use Non-ASCII Font" : false,
   "Tags" : [
 
   ],
@@ -9,32 +8,31 @@
     "Red Component" : 0.46274509803921571,
     "Blue Component" : 1
   },
-  "Guid" : "8F6B4BDF-AA95-4A41-AC64-53D6667041B5",
-  "Normal Font" : "FiraCode-Regular 14",
+  "Ansi 0 Color" : {
+    "Green Component" : 0.098039215686274508,
+    "Red Component" : 0.098039215686274508,
+    "Blue Component" : 0.098039215686274508
+  },
+  "Normal Font" : "FiraCode-Regular 17",
   "Bold Color" : {
     "Green Component" : 0.70378700769969904,
     "Red Component" : 0.62377825081598537,
     "Blue Component" : 0.75576734293193715
   },
-  "Ansi 2 Color" : {
-    "Green Component" : 0.90980392156862744,
-    "Red Component" : 0.71764705882352942,
-    "Blue Component" : 0.46274509803921571
+  "Ansi 1 Color" : {
+    "Green Component" : 0.20784313725490197,
+    "Red Component" : 1,
+    "Blue Component" : 0.35686274509803922
   },
-  "Link Color" : {
-    "Red Component" : 0.98669129610061646,
-    "Color Space" : "sRGB",
-    "Blue Component" : 0.6022791862487793,
-    "Alpha Component" : 1,
-    "Green Component" : 0.72285276651382446
-  },
-  "Ansi 4 Color" : {
-    "Green Component" : 0.83137254901960789,
-    "Red Component" : 0.46274509803921571,
-    "Blue Component" : 1
+  "Horizontal Spacing" : 1,
+  "Ansi 3 Color" : {
+    "Green Component" : 0.76078431372549016,
+    "Red Component" : 1,
+    "Blue Component" : 0.31764705882352939
   },
   "Rows" : 25,
   "Default Bookmark" : "No",
+  "Blend" : 0.40472881610576927,
   "Cursor Guide Color" : {
     "Red Component" : 0.70213186740875244,
     "Color Space" : "sRGB",
@@ -66,21 +64,28 @@
     "Red Component" : 0.70196078431372544,
     "Blue Component" : 0.84313725490196079
   },
-  "Working Directory" : "\/Users\/tania.allard",
-  "Blinking Cursor" : true,
+  "Bound Hosts" : [
+
+  ],
+  "Working Directory" : "\/Users\/tania",
+  "Blinking Cursor" : false,
   "Disable Window Resizing" : true,
   "Sync Title" : false,
   "Prompt Before Closing 2" : false,
   "BM Growl" : true,
   "Command" : "",
   "Description" : "Default",
+  "Smart Cursor Color" : false,
   "Mouse Reporting" : true,
   "Screen" : -1,
   "Selection Color" : {
-    "Green Component" : 0.78823529411764703,
-    "Red Component" : 0.70196078431372544,
-    "Blue Component" : 0.84313725490196079
+    "Red Component" : 0.87999873570002185,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.92941176470588238,
+    "Alpha Component" : 1,
+    "Green Component" : 0.63597824994255514
   },
+  "Only The Default BG Color Uses Transparency" : false,
   "Columns" : 80,
   "Idle Code" : 0,
   "Ansi 13 Color" : {
@@ -275,6 +280,8 @@
     }
   },
   "Window Type" : 0,
+  "Blur Radius" : 2.0539518559644669,
+  "Cursor Boost" : 0,
   "Background Image Location" : "",
   "Blur" : false,
   "Badge Color" : {
@@ -291,14 +298,13 @@
   "Visual Bell" : true,
   "Flashing Bell" : false,
   "Silence Bell" : false,
-  "Unicode Normalization" : 0,
   "Ansi 14 Color" : {
     "Green Component" : 0.74901960784313726,
     "Red Component" : 0.42352941176470588,
     "Blue Component" : 0.70980392156862748
   },
   "ASCII Ligatures" : true,
-  "Name" : "Tania🦄",
+  "Name" : "Demo",
   "Cursor Text Color" : {
     "Green Component" : 0.15575926005840302,
     "Red Component" : 0,
@@ -306,31 +312,33 @@
   },
   "Shortcut" : "",
   "Cursor Color" : {
-    "Red Component" : 0.39233952760696411,
+    "Red Component" : 0.63917092121831942,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.85450464487075806,
+    "Blue Component" : 0.97330421209335327,
     "Alpha Component" : 1,
-    "Green Component" : 0.71056920289993286
+    "Green Component" : 0.32405850079157972
   },
-  "Ansi 0 Color" : {
-    "Green Component" : 0.098039215686274508,
-    "Red Component" : 0.098039215686274508,
-    "Blue Component" : 0.098039215686274508
+  "Transparency" : 0,
+  "Guid" : "DD684AD5-86BC-4175-99B1-14199CF70C24",
+  "Ansi 2 Color" : {
+    "Green Component" : 0.90980392156862744,
+    "Red Component" : 0.71764705882352942,
+    "Blue Component" : 0.46274509803921571
   },
-  "Ansi 1 Color" : {
-    "Green Component" : 0.20784313725490197,
-    "Red Component" : 1,
-    "Blue Component" : 0.35686274509803922
+  "Link Color" : {
+    "Red Component" : 0.37910426314556389,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.73423302173614502,
+    "Alpha Component" : 1,
+    "Green Component" : 0.7144651123224115
   },
-  "Horizontal Spacing" : 1,
-  "Ansi 3 Color" : {
-    "Green Component" : 0.76078431372549016,
-    "Red Component" : 1,
-    "Blue Component" : 0.31764705882352939
-  },
-  "Custom Directory" : "Recycle",
+  "Custom Directory" : "No",
   "Right Option Key Sends" : 0,
-  "Use Non-ASCII Font" : false,
+  "Ansi 6 Color" : {
+    "Green Component" : 0.74901960784313726,
+    "Red Component" : 0.42352941176470588,
+    "Blue Component" : 0.70980392156862748
+  },
   "Ansi 7 Color" : {
     "Green Component" : 0.78431372549019607,
     "Red Component" : 0.76078431372549016,
@@ -346,10 +354,10 @@
     "Red Component" : 1,
     "Blue Component" : 0.35686274509803922
   },
-  "Ansi 6 Color" : {
-    "Green Component" : 0.74901960784313726,
-    "Red Component" : 0.42352941176470588,
-    "Blue Component" : 0.70980392156862748
+  "Ansi 4 Color" : {
+    "Green Component" : 0.83137254901960789,
+    "Red Component" : 0.46274509803921571,
+    "Blue Component" : 1
   },
   "Ansi 5 Color" : {
     "Green Component" : 0.46274509803921571,
