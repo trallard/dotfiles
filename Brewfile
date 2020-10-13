@@ -14,7 +14,7 @@ tap "wagoodman/dive"
 # Developer tools
 brew "gitkraken"
 cask "visual-studio-code"
-cask "iterm"
+cask "iterm2"
 cask "dash"
 brew "ispell"
 brew "httpie"
@@ -47,7 +47,7 @@ brew "bat"
 brew "fd"
 brew "ctop"
 brew "jq"
-brew "github/gh/gh"
+brew "gh"
 brew "fzf"
 
 # Notes
@@ -79,7 +79,7 @@ cask "bitwarden"
 cask "slack"
 cask "microsoft-teams"
 cask "zoomus"
-cask "discord "
+cask "discord"
 
 # Music
 brew "spotify" 
@@ -92,6 +92,7 @@ cask "font-ibm-plex"
 cask "font-iosevka"
 cask "font-iosevka-slab"
 cask "font-pt-mono"
+cask "font-fantasque-sans-mono"
 
 # Python
 brew "openssl"
@@ -101,3 +102,9 @@ brew "xz"
 brew "zlib"
 brew "pyenv"
 brew "pipx"
+
+# node
+brew "node"
+
+# Ruby
+bre "rbvenv"

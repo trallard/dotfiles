@@ -11,7 +11,7 @@
 echo "Entering 🦄  mode "
 echo "Mac OS Install Setup Script"
 echo "By Tania Allard"
-echo "Note that this highly customised to fit my needs"
+echo "Note that this highly customised to fit my needs, do not follow this blindly"
 
 # Some configs reused from:
 # https://github.com/ruyadorno/installme-osx/
@@ -53,7 +53,7 @@ echo ""
 # Set continue to false by default.
 CONTINUE=false
 
-# prompts the user to confir the changes 
+# prompts the user to confirm the changes 
 echo ""
 cecho "⚠️ Have you read through the script you're about to run and " $red
 cecho "understood that it will make changes to your computer? (y/n)" $red
@@ -91,6 +91,8 @@ brew upgrade
 brew update
 brew tap caskroom/cask
 
+# install al brew related stuff 
+brew bundle install
 
 ###############################
 # Prerequisite: Install xcode #
@@ -171,6 +173,7 @@ done
 
 [[ $retries -eq i ]] && echo "Adding ssh-key to GitHub failed! Try again later."
 
+
 # p10k  and oh-my-szh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -187,9 +190,10 @@ cd ~/Library/Fonts && { curl -O 'https://github.com/Falkor/dotfiles/blob/master/
 cd ~/Library/Fonts && { curl -O 'https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/FiraCode/Regular/complete/Fura%20Code%20Regular%20Nerd%20Font%20Complete.ttf?raw=true' ; cd -; }
 
 
-#############################################
-### Set OSX Preferences - Borrowed from https://github.com/mathiasbynens/dotfiles/blob/master/.macos
-#############################################
+#############################################################################
+### Set OSX Preferences - Borrowed from 
+### https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+#############################################################################
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
