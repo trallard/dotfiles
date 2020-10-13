@@ -1,0 +1,4 @@
+env_prompt: "({default_env}) "
+channels:
+  - conda-forge
+  - defaults
