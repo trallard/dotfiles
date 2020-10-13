@@ -85,20 +85,6 @@ then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
 fi
 
-# Latest brew, install brew cask
-brew doctor
-brew upgrade
-brew update
-brew tap caskroom/cask
-
-# install al brew related stuff 
-brew bundle install
-
-###############################
-# Prerequisite: Install xcode #
-###############################
-xcode-select --install
-
 #############################################
 ### Select computer name
 #############################################
@@ -174,8 +160,7 @@ done
 [[ $retries -eq i ]] && echo "Adding ssh-key to GitHub failed! Try again later."
 
 
-# p10k  and oh-my-szh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# p10k 
 
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
@@ -280,3 +265,8 @@ pipx install poetry
 # Node 
 ############
 npm install -g pa11y terminalizer gatsby-cli yo
+
+############
+# Dotbot
+############
+
