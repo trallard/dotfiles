@@ -88,6 +88,7 @@ cask "dropbox"
 cask "alfred"
 cask "bitwarden"
 cask "bitwarden"
+cask "alfred"
 
 # Chat / video conference
 cask "slack"
