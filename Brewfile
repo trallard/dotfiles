@@ -77,6 +77,7 @@ cask "razer-synapse"
 
 # Productivity
 cask "wavebox"
+cask "brave-browser"
 cask "google-chrome"
 cask "cleanmymac"
 cask "clickup"
