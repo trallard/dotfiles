@@ -1,8 +1,8 @@
 - defaults:
-  link:
-    relink: true
-    create: true
-    force: false # replace files
+    link:
+      relink: true
+      create: true
+      force: false # replace files
 
 - clean: ["~"]
 
