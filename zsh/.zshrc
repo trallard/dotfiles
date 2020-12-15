@@ -220,7 +220,7 @@ alias npm-list='npm install -g npm'
 # shortcuts to some folders
 alias ch-gh='cd Documents/github'
 alias ch-gh-tr='cd Documents/github/trallard'
-alias ch-gh-az='cd Documents/github/azure'
+alias ch-gh-qs='cd Documents/github/quansight'
 
 # autocomplete kubectl
 source <(kubectl completion zsh)
@@ -276,11 +276,21 @@ export PATH="$PATH:$HOME/.poetry/env"
 # Created by `userpath` on 2020-05-04 10:35:50
 export PATH="$PATH:/Users/tania/.local/bin"
 
-# autocomplete pipx
-autoload -U bashcompinit
-bashcompinit
-
-eval "$(register-python-argcomplete pipx)"
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/tania/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/tania/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/tania/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/tania/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
