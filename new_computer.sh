@@ -267,6 +267,9 @@ pipx install poetry
 npm install -g pa11y terminalizer gatsby-cli yo
 
 ############
-# Dotbot
+# Homebrew
 ############
 
+brew upgrade
+brew bundle install
+brew cleanup

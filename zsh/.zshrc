@@ -20,7 +20,7 @@ export ZSH="/Users/tania/.oh-my-zsh"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
 # I am using Unicorn theme here - which is my own theme @trallard
-ZSH_THEME="cute-theme"
+ZSH_THEME="unicorn-theme"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # prompt elements
@@ -254,7 +254,7 @@ alias yoink='git checkout master && git fetch upstream master && git merge upstr
 ###########################
 
 # make sure to source bash (so that conda works)
-source ~/.bash_profile 
+# source ~/.bash_profile 
 
 # source subrepo
 source ~/Documents/github/sources/git-subrepo/.rc
