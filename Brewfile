@@ -118,6 +118,8 @@ brew 'pipx'
 # node
 brew 'node'
 
+brew 'yarn'
+
 # Ruby
 brew 'rbvenv'
 brew 'ruby-build'
