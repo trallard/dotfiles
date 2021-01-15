@@ -79,7 +79,7 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git docker tmux tmuxinator kubectl
+    git docker tmux tmuxinator kubectl colorize pip colored-man-pages
 )
 
 ZSH_DISABLE_COMPFIX="true"
@@ -247,6 +247,18 @@ alias pyenv-env='ls ~/.pyenv/versions'
 
 # because yoink! fetch and merge master
 alias yoink='git checkout master && git fetch upstream master && git merge upstream/master'
+
+# brew stuff
+alias brewu='brew update && brew upgrade && brew cleanup'
+
+# gcal
+alias gcal='gcalcli'
+alias gagenda='gcalcli --cal "🦄  Tania Allard" --lineart "fancy" agenda --nostarted'
+alias gwk='gcalcli --cal "🦄  Tania Allard" calw --monday --noweekend'
+alias g24='now=`date` && tomorrow=`date -v+1d` &&  gcalcli --cal "🦄  Tania Allard" --lineart "fancy" agenda --nostarted $now $tomorrow --details end --override-color'
+alias g24now='now=`date` && tomorrow=`date -v+1d` &&  gcalcli --cal "🦄  Tania Allard" --lineart "fancy" agenda $now $tomorrow --details end --color-now-marker brightblue'
+alias gurl='now=`date` && tomorrow=`date -v+1H` &&  gcalcli --cal "🦄  Tania Allard" --lineart "fancy" agenda --nostarted $now $tomorrow --details 'conference' --override-color --details end'
+alias gurld='now=`date` && tomorrow=`date -v+3H` &&  gcalcli --cal "🦄  Tania Allard" --lineart "fancy" agenda $now $tomorrow --details 'conference' --override-color --details end --details description'
 
 
 ###########################

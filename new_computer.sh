@@ -260,6 +260,7 @@ pipx install isort
 pipx install jupyter-repo2docker 
 pipx install pipenv 
 pipx install poetry
+pipx install gcalcli
 
 ############
 # Node 
