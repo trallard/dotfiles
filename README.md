@@ -9,7 +9,7 @@ to proceed run `./install` this will do all the magic and call `new_computer.sh`
 
 Also my current vs code settings are located in [https://snippets.cacher.io/snippet/fffb079d42863bd72d96](https://snippets.cacher.io/snippet/fffb079d42863bd72d96) which I sync using git-sync.
 
-Though I also have activated [Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync) now on VSCode as I also like having my settings synced for CodeSpaces, my Linux subsytems and pretty much everything.
+Though I also have activated [Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync?WT.mc_id=academic-0000-taallard) now on VSCode as I also like having my settings synced for CodeSpaces, my Linux subsytems and pretty much everything.
 
 ## Other apps to install manually
 
