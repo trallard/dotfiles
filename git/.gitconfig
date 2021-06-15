@@ -1,6 +1,7 @@
 [user]
 	name = Tania Allard
 	email = taniar.allard@gmail.com
+	signingKey = ""
 
 [alias]
 	# history: logs in different formats
@@ -62,7 +63,7 @@
 	sync = codereview sync
 
 	# refresh upstream
-	yoink="git checkout master && git fetch upstream master && git merge upstream/master"
+	yoink="git checkout master && git fetch upstream master && git merge upstream/master" 
 	
 [apply]
 	# Detect change in case
@@ -73,6 +74,7 @@
 [core]
 	editor = /Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/bin/code
 	ignorecase = false
+	excludesfile = /Users/tania/.gitignore_global
 
 [color]
     status = auto
@@ -118,3 +120,9 @@
 	clean = git-lfs clean -- %f
 [init]
 	defaultBranch = main
+[gpg]
+	program = gpg
+[commit]
+	gpgSign = false
+[tag]
+	forceSignAnnotated = false

@@ -87,6 +87,7 @@ cask 'flux'
 cask 'dropbox'
 cask 'alfred'
 cask 'bitwarden'
+brew "openconnect"
 
 # Chat / video conference
 cask 'slack'
@@ -117,7 +118,6 @@ brew 'pipx'
 
 # node
 brew 'node'
-
 brew 'yarn'
 
 # Ruby

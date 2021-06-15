@@ -19,7 +19,7 @@ export ZSH="/Users/tania/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
-# I am using Unicorn theme here - which is my own theme @trallard
+# I am using Unicorn theme here - which is my own theme @
 ZSH_THEME="unicorn-theme"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -213,9 +213,11 @@ alias dki='docker images'   # docker images
 alias dkr='docker rmi'      # docker rmi
 alias dk-clean-u='docker system prune --all --force --volumes'
 alias dk-clean-all='docker stop $(docker container ls -a -q) && docker system prune -a -f --volumes'
+alias dk-prune='docker system prune --all'
 
 # npm
-alias npm-list='npm install -g npm'
+alias npm-list='npm list -g --depth=0'
+alias npm-update='npm install -g npm'
 
 # shortcuts to some folders
 alias ch-gh='cd Documents/github'
@@ -247,6 +249,7 @@ alias pyenv-env='ls ~/.pyenv/versions'
 
 # because yoink! fetch and merge master
 alias yoink='git checkout master && git fetch upstream master && git merge upstream/master'
+alias yoinkk='git checkout main && git fetch upstream main && git merge upstream/main'
 
 # brew stuff
 alias brewu='brew update && brew upgrade && brew cleanup'
@@ -260,22 +263,16 @@ alias g24now='now=`date` && tomorrow=`date -v+1d` &&  gcalcli --cal "🦄  Tania
 alias gurl='now=`date` && tomorrow=`date -v+1H` &&  gcalcli --cal "🦄  Tania Allard" --lineart "fancy" agenda --nostarted $now $tomorrow --details 'conference' --override-color --details end'
 alias gurld='now=`date` && tomorrow=`date -v+3H` &&  gcalcli --cal "🦄  Tania Allard" --lineart "fancy" agenda $now $tomorrow --details 'conference' --override-color --details end --details description'
 
-
 ###########################
 # Misc source and exports
 ###########################
-
-# make sure to source bash (so that conda works)
-# source ~/.bash_profile 
-
-# source subrepo
-source ~/Documents/github/sources/git-subrepo/.rc
 
 # add openssl to the path -> needed for SQL
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 # needed for ruby
-export PATH="/Users/tania/.rbenv/shims:${PATH}" 
+export PATH="/Users/tania/.rbenv/bin:$PATH" 
+export PATH="/Users/tania/.rbenv/shims:$PATH" 
 
 # terraform
 export PATH="$PATH:/Users/tania/Documents/github/sources"
@@ -293,16 +290,24 @@ export PATH="$PATH:/Users/tania/.local/bin"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/tania/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/tania/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/tania/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/tania/opt/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/tania/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/tania/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/tania/opt/anaconda3/bin:$PATH"
+        export PATH="/Users/tania/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Ruby
+eval "$(rbenv init -)"
+export PATH="$HOME/.gem/ruby/2.7.2/bin:$PATH"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

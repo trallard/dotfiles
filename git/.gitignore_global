@@ -31,6 +31,7 @@ Temporary Items
 
 ### https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore
 .vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -87,3 +88,7 @@ tags
 venv
 node_modules
 .sass-cache
+
+# sphinx
+doc/source/_build/*
+docs/source/_build/*
