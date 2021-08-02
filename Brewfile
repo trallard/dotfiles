@@ -30,7 +30,11 @@ brew 'autoconf'
 brew 'automake'
 brew 'kubernetes-cli'
 brew 'kubernetes-helm'
+brew 'helm'
 brew 'azure-cli'
+brew 'vpn-slice'
+brew 'k9s'
+brew 'kops'
 
 # Command line tools - install new ones, update others to latest version
 brew 'git'  # upgrade to latest
@@ -88,6 +92,8 @@ cask 'dropbox'
 cask 'alfred'
 cask 'bitwarden'
 brew "openconnect"
+brew 'switchaudio-osx'
+cask 'brave-browser'
 
 # Chat / video conference
 cask 'slack'
@@ -124,7 +130,7 @@ brew 'yarn'
 brew 'rbvenv'
 brew 'ruby-build'
 
-brew 'azure-functions-core-tools@3'
+# sass
 brew 'sass/sass/sass'
 
 mas 'Boxy SVG', id: 611658502
