@@ -79,7 +79,7 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git docker tmux tmuxinator kubectl colorize pip colored-man-pages
+    git docker tmux tmuxinator kubectl colorize pip colored-man-pages alias-finder brew gatsby httpie kops
 )
 
 ZSH_DISABLE_COMPFIX="true"
@@ -223,6 +223,7 @@ alias npm-update='npm install -g npm'
 alias ch-gh='cd Documents/github'
 alias ch-gh-tr='cd Documents/github/trallard'
 alias ch-gh-qs='cd Documents/github/quansight'
+alias ch-gh-qsc='cd Documents/github/quansight-clients'
 
 # autocomplete kubectl
 source <(kubectl completion zsh)
