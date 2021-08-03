@@ -79,7 +79,7 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git docker tmux tmuxinator kubectl colorize pip colored-man-pages alias-finder brew gatsby httpie kops
+    git docker kubectl colorize pip colored-man-pages alias-finder brew gatsby httpie kops
 )
 
 ZSH_DISABLE_COMPFIX="true"

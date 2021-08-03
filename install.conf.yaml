@@ -20,7 +20,7 @@
     ~/.oh-my-zsh/themes/unicorn-theme.zsh-theme: zsh/unicorn-theme.zsh-theme
     ~/.p10k.szh: zsh/.p10k.zsh
     ~/.dive.yaml: dive/.dive.yaml
-    ~/.tmux.config: tmux/.tmux.conf
+    ~/.tmux.conf: tmux/.tmux.conf
     ~/.condarc: conda/.condarc
 
 # folders to be created
