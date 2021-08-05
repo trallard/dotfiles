@@ -18,9 +18,12 @@
     ~/.zshrc: zsh/.zshrc
     ~/.zprofile: zsh/.zprofile
     ~/.oh-my-zsh/themes/unicorn-theme.zsh-theme: zsh/unicorn-theme.zsh-theme
-    ~/.p10k.szh: zsh/.p10k.zsh
+    ~/.p10k.zsh: zsh/.p10k.zsh
+    # add personal aliases
+    $ZSH_CUSTOM/plugins/aliases.zsh: zsh/aliases.zsh
     ~/.dive.yaml: dive/.dive.yaml
-    ~/.tmux.conf: tmux/.tmux.conf
+    # note that it needs to be conf.local
+    ~/.tmux.conf.local: tmux/.tmux.conf
     ~/.condarc: conda/.condarc
 
 # folders to be created
