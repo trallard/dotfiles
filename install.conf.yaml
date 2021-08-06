@@ -14,7 +14,8 @@
 
 - link:
     ~/.gitconfig: git/.gitconfig
-    ~/.gitignore_global: git/.gitignore_global
+    ~/.gitignore_global: git/.gitignore
+    # zsh stuff
     ~/.zshrc: zsh/.zshrc
     ~/.zprofile: zsh/.zprofile
     ~/.oh-my-zsh/themes/unicorn-theme.zsh-theme: zsh/unicorn-theme.zsh-theme
@@ -22,7 +23,7 @@
     # add personal aliases
     $ZSH_CUSTOM/plugins/aliases.zsh: zsh/aliases.zsh
     ~/.dive.yaml: dive/.dive.yaml
-    # note that it needs to be conf.local
+    # note that it needs to be conf.local 
     ~/.tmux.conf.local: tmux/.tmux.conf
     ~/.condarc: conda/.condarc
 
