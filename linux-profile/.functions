@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+# start the ssh-agent
+SSH_ENV=$HOME/.ssh/environment
+function start_agent {
+    echo "Initializing new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' >"${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" >/dev/null
+    /usr/bin/ssh-add
+}
+
+# `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
+# the `.git` directory, listing directories first. The output gets piped into
+# `less` with options to preserve color and line numbers, unless the output is
+# small enough for one screen.
+function tre() {
+    tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX
+}
+
+# Set up fzf, if it's installed
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Set up autojump, if it's installed
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
+
+# Select a conda env to activate
+sa() {
+    local name=$(conda env list | grep -v "#" | fzf)
+    local env=$(echo $name | awk '{print $1}')
+    eval "source activate $env"
+}
+
+pv_activate() {
+    activate_file=$(pipenv --venv)/bin/activate
+    if [ -e "$activate_file" ]; then
+        . $activate_file
+
+        # the pipenv shell normally enables these as well
+        export PYTHONDONTWRITEBYTECODE=1
+        export PIPENV_ACTIVE=1
+
+        if [ -f "${VIRTUAL_ENV}/.project" ]; then
+            cd $(cat "${VIRTUAL_ENV}/.project")
+        fi
+        return
+    fi
+}
+
+# get git branch
+parse_git_branch() {
+    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}

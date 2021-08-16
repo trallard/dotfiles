@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+export PS1="\u@\h:\w\\$ "
+
+# vanilla mac
+if [[ $OSTYPE == darwin* ]]; then
+    export PS1="\u@\[$(tput sgr0)\]\[\033[32;5;214m\]\h\[$(tput sgr0)\]:\w\\$ "
+fi
+
+# get branch and username
+export PS1="\[\e[91m\]\[\033[01;36m\]\u\[\033[m\]\[\033[38;5;141m\] \[\e[00m\] \033[38;5;105m\]\w \033[38;5;219m\] \$(parse_git_branch)\[\e[00m\] $ "
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm* | rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*) ;;
+
+esac

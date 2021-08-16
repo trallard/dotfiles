@@ -1,4 +1,7 @@
-
 \.vscode/settings\.json
 
 .DS_Store
+
+.extra
+.path
+env

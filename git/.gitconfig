@@ -15,6 +15,7 @@
 
 	# reset head to a given commit
 	unstage = reset HEAD --
+	unmerge = git reset --hard HEAD
 	last = log -1 HEAD    # last commit
 	co = checkout		  # checkout
 	ci = commit
@@ -64,6 +65,8 @@
 
 	# refresh upstream
 	yoink="git checkout master && git fetch upstream master && git merge upstream/master" 
+	# like yoink but better
+	yoinkk="git checkout main && git fetch upstream main && git merge upstream/main" 
 	
 [apply]
 	# Detect change in case

@@ -1,0 +1,41 @@
+#!/usr/bin/env bashs
+alias grep='grep --color=auto'
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -l'
+alias ls='ls --color=auto'
+alias la='ls -A'
+alias ll='ls -lrth'
+alias la='ls -lrthA'
+alias l='ls -CF'
+alias tmux="tmux -u"
+
+# I prefer exa so replace ls here so that exa is the default
+alias ls="exal"
+alias exal='exa --long -h'                     # long with header
+alias exat='exa --long --tree'                 # long plus tree
+alias exaa='exa --all'                         # show all hidden files
+alias exag='exa --git-ignore'                  # ignore files in the gitignore
+alias exas='exa --long --git -h'               # show status
+alias exam='exa -m --long -h'                  # long with modified
+alias examods='exa --long --sort modified -r'  # sort by last modified
+alias exacrs='exa --long -U --sort created -r' # sort by last created
+alias exala='exa --long -h -a'
+
+# cat is bat
+alias cat='bat'
+
+# because yoink! fetch and merge master
+alias yoink='git checkout master && git fetch upstream master && git merge upstream/master'
+alias yoinkk='git checkout main && git fetch upstream main && git merge upstream/main'

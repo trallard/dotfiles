@@ -4,6 +4,7 @@ call plug#begin()
 " PLUGIN SETTINGS section.
 "
 Plug 'haishanh/night-owl.vim'    
+Plug 'arcticicestudio/nord-vim'
 Plug 'vim-scripts/vis'                    " Operations in visual block mode respect selection
 Plug 'scrooloose/nerdcommenter'           " Comment large blocks of text
 Plug 'scrooloose/nerdtree'                " File browser for vim <Leader>n
@@ -46,7 +47,7 @@ set expandtab     " <Tab> inserts spaces, not '\t'
 " ----------------------------------------------------------------------------
 " Visual display settings
 " ----------------------------------------------------------------------------
-colorscheme night-owl              " colorscheme to use
+colorscheme nord                 " colorscheme to use
 set scrolloff=3                  " keep some lines above and below the cursor to keep context visible
 set list                         " show non-printing chars
 set showmatch                    " show matching parentheses
@@ -227,7 +228,7 @@ let g:neoterm_auto_repl_cmd = 0
 " ----------------------------------------------------------------------------
 let g:airline#extensions#tabline#enabled = 2
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme = "powerlineish"
+let g:airline_theme = "night_owl"
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
@@ -241,7 +242,7 @@ let g:bufferline_echo = 0
 " let g:airline_left_alt_sep = '|'
 " let g:airline_right_sep = ' '
 " let g:airline_right_alt_sep = '|'
-" let g:airline_theme= 'gruvbox'
+" let g:airline_theme= 'night_owl'
 
 " ----------------------------------------------------------------------------
 " vim-pandoc and vim-pandoc-syntax

@@ -14,12 +14,8 @@ fi
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# ensure tmux is in path
-export PATH="$HOME/opt/homebrew/bin:$PATH"
-
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/tania/.oh-my-zsh"
-
 
 # add openssl to the path -> needed for SQL
 export PATH="/usr/local/opt/openssl/bin:$PATH"
@@ -46,7 +42,7 @@ if [ -d "$HOME/opt/homebrew" ]; then
     export MANPATH="$HOME/opt/homebrew/share/man:$MANPATH"
 fi
 
-
+# using coreutils
 if [ -d "$HOME/opt/homebrew/opt/coreutils" ]; then
     export PATH="$HOME/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
     export MANPATH="$HOME/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
@@ -55,6 +51,8 @@ fi
 # Add Visual Studio Code (code) to path
 export PATH="$PATH:/Users/tania/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
+# add fuzzy finder
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # ------------------------------------------------------------------------------
 # theme
@@ -157,7 +155,6 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 
 # autocomplete kubectl
 source <(kubectl completion zsh)
