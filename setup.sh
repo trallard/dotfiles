@@ -2,9 +2,7 @@
 
 # All-in-one bash script to perform various setup activities
 
-
 echo "Entering 🦄  mode "
-
 
 GREEN="\e[32m"
 YELLOW="\e[33m"
@@ -56,10 +54,10 @@ function showHelp() {
         # Concat all args but the first (${@:2}), format them to 60 spaces
         # using the built-in `fmt`, and then use awk to use pad1 for the first
         # line and pad2 for subsequent lines
-        desc=$(echo "${@:2}" \
-            | fmt -w 60 \
-            | awk -v pad1="$pad1" -v pad2="$pad2" \
-            'NR==1{print pad1$0} NR >1 {print pad2$0}')
+        desc=$(echo "${@:2}" |
+            fmt -w 60 |
+            awk -v pad1="$pad1" -v pad2="$pad2" \
+                'NR==1{print pad1$0} NR >1 {print pad2$0}')
         printf "$label$desc\n\n"
     }
 
@@ -71,7 +69,7 @@ function showHelp() {
     echo "     - Each command will prompt if you want to continue."
     echo "     - Set the env var DOTFILES_FORCE=true if you want always say yes."
     echo
-    printf "   ${BLUE}Documentation: https://daler.github.io/dotfiles/${UNSET}\n"
+    printf " Use with caution "
     echo
 
     header "dotfiles:"
@@ -112,11 +110,7 @@ function showHelp() {
 
     cmd "--install-miniconda" \
         "Install Miniconda." \
-        "Homepage: https://docs.conda.io/en/latest/miniconda.html" \
-
-    cmd "--set-up-bioconda" \
-        "Set up bioconda channel priorities." \
-        "Homepage: https://bioconda.github.io"
+        "Homepage: https://docs.conda.io/en/latest/miniconda.html"
 
     cmd "--conda-env" \
         "Install requirements.txt into root conda env." \
@@ -142,14 +136,6 @@ function showHelp() {
         "Installs docker and adds current user to new docker group." \
         "(Needs root, Linux only)"
 
-    cmd "--install-git-cola" \
-        "git-cola is a GUI for making incremental git commits" \
-        "Homepage: https://git-cola.github.io/"
-
-    cmd "--install-meld" \
-        "(Mac only). meld is a graphical diff tool, extremely useful" \
-        "for 3-way diffs"
-
     header "Installations for any host:"
 
     cmd "--install-bat" \
@@ -157,6 +143,14 @@ function showHelp() {
         "showing lines changed based on git, and showing non-printable" \
         "characters." \
         "Homepage: https://github.com/sharkdp/bat"
+
+    cmd "--install-pipx" \
+        "install and run python applications in isolated envs." \
+        "Homepage: https://github.com/pypa/pipx"
+
+    cmd "--install-pipx-deps" \
+        "install and run some common dependencies using pipx." \
+        "Homepage: https://github.com/pypa/pipx"
 
     cmd "--install-black" \
         "The self-described 'uncompromising' Python formatter." \
@@ -174,10 +168,9 @@ function showHelp() {
         "on-the-fly fuzzy searches on text" \
         "Homepage: https://github.com/junegunn/fzf"
 
-    cmd "--install-hub" \
-        "hub is a command-line wrapper for git, which allows" \
-        "you to do things with GitHub like easily check out PRs" \
-        "Homepage: https://github.com/github/hub"
+    cmd "--install-gc" \
+        "gh is GH on the CLI" \
+        "Homepage: https://github.com/cli/cli"
 
     cmd "--install-icdiff" \
         "icdiff shows colored diffs side-by-side in the terminal" \
@@ -194,11 +187,6 @@ function showHelp() {
         "the command line. Great as a calculator, but can also" \
         "manipulate piped-in text" \
         "Homepage: https://github.com/hauntsaninja/pyp"
-
-    cmd "--install-radian" \
-        "radian is a wrapper for the R interpreter, which adds" \
-        "syntax highlighting and tab-completion" \
-        "Homepage: https://github.com/randy3k/radian"
 
     cmd "--install-ripgrep" \
         "ripgrep (rg) is a very fast grep replacement, especially" \
@@ -239,10 +227,14 @@ mkdir -p $HOME/opt/bin
 # Depending on the system, we may have curl or wget but not both -- so try to
 # figure it out.
 try_curl() {
-    url=$1; dest=$2; command -v curl > /dev/null && curl -fL $url > $dest
+    url=$1
+    dest=$2
+    command -v curl >/dev/null && curl -fL $url >$dest
 }
 try_wget() {
-    url=$1; dest=$2; command -v wget > /dev/null && wget -O- $url > $dest
+    url=$1
+    dest=$2
+    command -v wget >/dev/null && wget -O- $url >$dest
 }
 
 # Generic download function
@@ -254,21 +246,19 @@ download() {
     fi
 }
 
-
 # Append a line to the end of a file, but only if the line isn't already there
-add_line_to_file () {
+add_line_to_file() {
     line=$1
     file=$2
     if [ ! -e "$file" ]; then
-        echo "$line" >> $file
+        echo "$line" >>$file
     elif grep -vq "$line" $file; then
-        echo "$line" >> $file
+        echo "$line" >>$file
     fi
 }
 
-
 # Only exits cleanly if the named conda env does not already exist
-can_make_conda_env () {
+can_make_conda_env() {
     check_for_conda
 
     # Newer versions of conda have some sort of catch on "conda env list"  if
@@ -285,11 +275,10 @@ can_make_conda_env () {
     fi
 }
 
-
 # Find the conda installation location
 CONDA_LOCATION=
-check_for_conda () {
-    if command -v conda > /dev/null; then
+check_for_conda() {
+    if command -v conda >/dev/null; then
 
         CONDA_LOCATION=$(conda info --base)
 
@@ -304,14 +293,14 @@ check_for_conda () {
 }
 
 # Prompt user for info ($1 is text to provide)
-ok () {
+ok() {
     # If the DOTFILES_FORCE=true env var was set, then no need to ask, we want
     # to always say yes
     if [ $DOTFILES_FORCE = "true" ]; then
         return 0
     fi
     printf "${GREEN}$1${UNSET}\n"
-    read -p "Continue? (y/[n]) " -n 1 REPLY;
+    read -p "Continue? (y/[n]) " -n 1 REPLY
     echo ""
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         return 0
@@ -321,12 +310,12 @@ ok () {
 }
 
 # Reminder to source the ~/.aliases file.
-remind_alias () {
+remind_alias() {
     printf "${YELLOW}Please run${UNSET} source ~/.aliases ${YELLOW}to make the new alias available${UNSET}\n"
 }
 
 # Checks to see if ~/opt/bin is in the path, and if not, prints a reminder
-check_opt_bin_in_path () {
+check_opt_bin_in_path() {
     if ! echo $PATH | grep -q "$HOME/opt/bin"; then
         printf "${YELLOW}Please add${UNSET} $HOME/opt/bin ${YELLOW} to your \$PATH${UNSET}\n"
     fi
@@ -341,7 +330,7 @@ check_opt_bin_in_path () {
 #
 # All of these may be the same, but there is flexibility to handle cases where
 # they are not
-install_env_and_symlink () {
+install_env_and_symlink() {
     ENVNAME=$1
     CONDAPKG=$2
     EXECUTABLE=$3
@@ -360,17 +349,19 @@ install_env_and_symlink () {
 
 if [ $task == "--apt-install" ]; then
     ok "Installs packages from the file apt-installs.txt"
-    sudo apt-get update && \
-    sudo apt-get install $(awk '{print $1}' apt-installs.txt | grep -v "^#")
+    sudo apt-get update &&
+        sudo apt-get install $(awk '{print $1}' apt-installs.txt | grep -v "^#")
 
-
-elif [ $task == "--apt-install-minimal" ]; then
+elif
+    [ $task == "--apt-install-minimal" ]
+then
     ok "Installs packages from the file apt-installs-minimal.txt"
-    sudo apt-get update && \
-    sudo apt-get install -y $(awk '{print $1}' apt-installs-minimal.txt | grep -v "^#")
+    sudo apt-get update &&
+        sudo apt-get install -y $(awk '{print $1}' apt-installs-minimal.txt | grep -v "^#")
 
-
-elif [ $task == "--install-docker" ]; then
+elif
+    [ $task == "--install-docker" ]
+then
     ok "Adds the docker repo, installs docker-ce, adds user to the docker group"
     sudo apt-get update
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -393,8 +384,9 @@ elif [ $task == "--install-docker" ]; then
     echo
     echo "Please log out and then log back in again to be able to use docker as $USER instead of root"
 
-
-elif [ $task == "--install-miniconda" ]; then
+elif
+    [ $task == "--install-miniconda" ]
+then
 
     # On Biowulf/Helix, if we install into $HOME then the installation might
     # larger than the quota for the home directory. Instead, install to user's
@@ -441,17 +433,9 @@ elif [ $task == "--install-miniconda" ]; then
     printf "${YELLOW}       export PATH=\"\$PATH:$MINICONDA_DIR/bin\"${UNSET}\n\n"
     printf "${YELLOW}Alternatively, you can manually \"source ~/.bashrc\" when you want to have conda available.${UNSET}\n"
 
-
-
-elif [ $task == "--set-up-bioconda" ]; then
-    ok "Sets up Bioconda by adding the dependent channels in the correct order"
-    conda config --add channels defaults
-    conda config --add channels bioconda
-    conda config --add channels conda-forge
-    printf "${YELLOW}Channels configured, see ~/.condarc${UNSET}\n"
-
-
-elif [ $task == "--conda-env" ]; then
+elif
+    [ $task == "--conda-env" ]
+then
     if [[ $OSTYPE == darwin* ]]; then
         ok "Installs dependencies in 'requirements.txt' and 'requirements-mac.txt' into the base conda environment"
         conda install --file requirements.txt --file requirements-mac.txt
@@ -460,8 +444,9 @@ elif [ $task == "--conda-env" ]; then
         conda install --file requirements.txt
     fi
 
-
-elif [ $task == "--install-neovim" ]; then
+elif
+    [ $task == "--install-neovim" ]
+then
     NVIM_VERSION=0.4.4
     ok "Downloads neovim tarball from https://github.com/neovim/neovim, install into $HOME/opt/bin/neovim"
     if [[ $OSTYPE == darwin* ]]; then
@@ -475,13 +460,14 @@ elif [ $task == "--install-neovim" ]; then
         mv nvim-linux64 "$HOME/opt/neovim"
         rm nvim-linux64.tar.gz
     fi
-        ln -sf ~/opt/neovim/bin/nvim ~/opt/bin/nvim
-        printf "${YELLOW}- installed neovim to $HOME/opt/neovim${UNSET}\n"
-        printf "${YELLOW}- created symlink $HOME/opt/bin/nvim${UNSET}\n"
-        check_opt_bin_in_path
+    ln -sf ~/opt/neovim/bin/nvim ~/opt/bin/nvim
+    printf "${YELLOW}- installed neovim to $HOME/opt/neovim${UNSET}\n"
+    printf "${YELLOW}- created symlink $HOME/opt/bin/nvim${UNSET}\n"
+    check_opt_bin_in_path
 
-
-elif [ $task == "--set-up-vim-plugins" ]; then
+elif
+    [ $task == "--set-up-vim-plugins" ]
+then
     ok "Downloads plug.vim into ~/.local/share/nvim/site/autoload/plug.vim. (for nvim) and ~/.vim/autoload/plug.vim (for vim). Read the instructions after this command when done."
     nvim_dest=~/.local/share/nvim/site/autoload/plug.vim
     vim_dest=~/.vim/autoload/plug.vim
@@ -491,8 +477,9 @@ elif [ $task == "--set-up-vim-plugins" ]; then
     printf "${YELLOW}Please open nvim and/or vim and run :PlugInstall${UNSET}\n"
     echo
 
-
-elif [ $task == "--powerline" ]; then
+elif
+    [ $task == "--powerline" ]
+then
     ok "Installs patched powerline fonts from https://github.com/powerline/fonts for use with vim-airline"
     git clone https://github.com/powerline/fonts.git --depth 1 /tmp/fonts
     (cd /tmp/fonts && ./install.sh)
@@ -501,38 +488,22 @@ elif [ $task == "--powerline" ]; then
     printf "${YELLOW}Change your terminal's config to use the new powerline patched fonts${UNSET}\n"
     echo
 
-
-
 # ----------------------------------------------------------------------------
 # Individual --install commands
 
-elif [ $task == "--install-meld" ]; then
-    ok "Downloads .dmg for meld, install into ~/opt/meld and then writes ~/opt/bin/meld wrapper"
-    if [[ $OSTYPE == darwin* ]]; then
-        download https://github.com/yousseb/meld/releases/download/osx-14/meldmerge.dmg /tmp/meldmerge.dmg
-        set -x
-        mounted=$(hdiutil attach /tmp/meldmerge.dmg | tail -1 | cut -f3)
-        cp -r "$mounted" ~/opt/meld
-        echo "~/opt/meld/Meld.app/Contents/MacOS/Meld \"\$@\"" > ~/opt/bin/meld
-        hdiutil detach "$mounted"
-        set +x
-    else
-        echo
-        printf "${RED}--install-meld currently only supported on Mac.\n"
-        printf "Use --apt-installs on Linux or '/usr/bin/python /usr/bin/meld' on Biowulf${UNSET}\n"
-    fi
-
-
-elif [ $task == "--install-fzf" ]; then
+elif
+    [ $task == "--install-fzf" ]
+then
     ok "Installs fzf (https://github.com/junegunn/fzf)"
     (
-      git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-      ~/.fzf/install --no-update-rc --completion --key-bindings
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        ~/.fzf/install --no-update-rc --completion --key-bindings
     )
     printf "${YELLOW}fzf installed; see ~/.fzf${UNSET}\n"
 
-
-elif [ $task == "--install-ripgrep" ]; then
+elif
+    [ $task == "--install-ripgrep" ]
+then
     ok "Installs ripgrep to $HOME/opt/bin"
     mkdir -p /tmp/rg
     RG_VERSION=12.1.1
@@ -550,22 +521,25 @@ elif [ $task == "--install-ripgrep" ]; then
     printf "${YELLOW}Installed to ~/opt/bin/rg${UNSET}\n"
     check_opt_bin_in_path
 
-
-elif [ $task == "--install-fd" ]; then
+elif
+    [ $task == "--install-fd" ]
+then
     ok "Install fd (https://github.com/sharkdp/fd) into a new conda env and symlink to ~/opt/bin/fd"
     install_env_and_symlink fd fd-find fd
     printf "${YELLOW}Installed to ~/opt/bin/fd${UNSET}\n"
     check_opt_bin_in_path
 
-
-elif [ $task == "--install-vd" ]; then
+elif
+    [ $task == "--install-vd" ]
+then
     ok "Install visidata (https://visidata.org/) into a new conda env and symlink to ~/opt/bin/vd"
     install_env_and_symlink visidata visidata vd
     printf "${YELLOW}Installed to ~/opt/bin/vd${UNSET}\n"
     check_opt_bin_in_path
 
-
-elif [ $task == "--install-hub" ]; then
+elif
+    [ $task == "--install-hub" ]
+then
     ok "Installs hub to $HOME/opt (https://github.com/github/hub)"
     HUB_VERSION=2.14.2
     if [[ $OSTYPE == darwin* ]]; then
@@ -588,53 +562,50 @@ elif [ $task == "--install-hub" ]; then
     printf "${YELLOW}Installed to ~/opt/bin/hub${UNSET}\n"
     check_opt_bin_in_path
 
+elif
+    [ $task == "--install-gh" ]
+then
+    ok "Installs gh CLI to $HOME/opt (https://github.com/cli/cli/blob/trunk/docs/install_linux.md)"
+    if [[ $OSTYPE == darwin* ]]; then
+        (
+            brew install gh
+        )
+    else
+        (
+            download https://cli.github.com/packages/githubcli-archive-keyring.gpg $(pwd) | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
+            sudo apt update
+            sudo apt install gh
+        )
+    fi
+    printf "${YELLOW}Installed gh CLI\n"
+    check_opt_bin_in_path
 
-elif [ $task == "--install-black" ]; then
+elif
+    [ $task == "--install-black" ]
+then
     ok "Install black (https://black.readthedocs.io) into a new conda env and symlink to ~/opt/bin/black"
     install_env_and_symlink black black black
     printf "${YELLOW}Installed to ~/opt/bin/black${UNSET}\n"
     check_opt_bin_in_path
 
+elif
+    [$task == "--install-pipx"]
+then
+    ok "Install pipx"
+    python 3 -m pip install --user pipx
+    python 3 -m pipx ensurepath
 
-elif [ $task == "--install-radian" ]; then
-    ok "Install radian (https://github.com/randy3k/radian) into a new conda env and symlink to ~/opt/bin/radian"
-    can_make_conda_env "radian"
-    set +u
-    # Note: radian needs R installed to compile the rchitect dependency. It
-    # is unclear whether radian is dependent on a particular R version.
-    conda create -y -n radian python r
-    conda activate radian
-    pip install radian
-    ln -sf $CONDA_LOCATION/envs/radian/bin/radian $HOME/opt/bin/radian
-    conda deactivate
-    set -u
-    printf "${YELLOW}Installed $HOME/opt/bin/radian${UNSET}\n"
-    check_opt_bin_in_path
+elif
+    [$task == "--install-pipx-deps"]
+then
+    ok "Installing pipx dependencies"
+    python3 -m pipx install black isort pre-commit
+    printf "${YELLOW}Installed pipx dependencies${UNSET}\n"
 
-
-elif [ $task == "--install-git-cola" ]; then
-    ok "Installs git-cola (https://git-cola.github.io/). Clone to ~/opt/git-cola, create a new conda env, and symlink the binary to ~/opt/bin"
-    # NOTE: git-cola has vendored-in PyQt. We may not actually need it in the
-    # conda env?
-    can_make_conda_env "git-cola"
-    if [ -e ~/opt/git-cola ]; then
-        printf "${RED}~/opt/git-cola already exists! Exiting.${UNSET}\n"
-        exit 1
-    fi
-    conda create -y -n git-cola python=3 pyqt
-    git clone git://github.com/git-cola/git-cola.git ~/opt/git-cola
-
-    # The following creates a script called "git-cola" that ensures we run it
-    # using the just-installed conda env
-    echo "#!/bin/bash" > ~/opt/bin/git-cola
-    echo "$CONDA_LOCATION/envs/git-cola/bin/python $HOME/opt/git-cola/bin/git-cola" >> ~/opt/bin/git-cola
-    chmod +x ~/opt/bin/git-cola
-
-    printf "${YELLOW}Installed to ~/opt/bin/git-cola${UNSET}\n"
-    check_opt_bin_in_path
-
-
-elif [ $task == "--install-bat" ]; then
+elif
+    [ $task == "--install-bat" ]
+then
     ok "Installs bat (https://github.com/sharkdp/bat). Extracts the binary to ~/opt/bin"
     BAT_VERSION=0.16.0
     BAT_TARBALL="/tmp/bat-${BAT_VERSION}.tar.gz"
@@ -644,7 +615,7 @@ elif [ $task == "--install-bat" ]; then
             $BAT_TARBALL
     else
         download \
-            "https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat-v${BAT_VERSION}-x86_64-unknown-linux-musl.tar.gz"\
+            "https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat-v${BAT_VERSION}-x86_64-unknown-linux-musl.tar.gz" \
             $BAT_TARBALL
     fi
     mkdir -p /tmp/bat
@@ -655,8 +626,9 @@ elif [ $task == "--install-bat" ]; then
     printf "${YELLOW}Installed to ~/opt/bin/bat${UNSET}\n"
     check_opt_bin_in_path
 
-
-elif [ $task == "--install-alacritty" ]; then
+elif
+    [ $task == "--install-alacritty" ]
+then
 
     if [[ $OSTYPE == darwin* ]]; then
         printf "${YELLOW}Please download the .dmg from https://github.com/alacritty/alacritty/releases "
@@ -674,8 +646,8 @@ elif [ $task == "--install-alacritty" ]; then
             # The Docker tests run in a non-interactive terminal, so we need to
             # detect and handle that.
             case "$-" in
-            *i*)  RUSTUP_Y="" ;;
-            *)    RUSTUP_Y=" -y " ;;
+            *i*) RUSTUP_Y="" ;;
+            *) RUSTUP_Y=" -y " ;;
             esac
 
             # Extra installations needed to compile alacritty
@@ -688,8 +660,8 @@ elif [ $task == "--install-alacritty" ]; then
                 python3
 
             # Install rust
-            if [ ! `test "cargo"` ]; then
-                curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > alacritty_install.sh
+            if [ ! $(test "cargo") ]; then
+                curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs >alacritty_install.sh
                 sh alacritty_install.sh $RUSTUP_Y
                 source ~/.cargo/env
                 rm alacritty_install.sh
@@ -698,15 +670,16 @@ elif [ $task == "--install-alacritty" ]; then
             rustup override set stable
             rustup update stable
             (
-                cd $SRC;
+                cd $SRC
                 cargo build --release
                 cp target/release/alacritty $HOME/opt/bin/alacritty
             )
         )
     fi
 
-
-elif [ $task == "--install-jq" ]; then
+elif
+    [ $task == "--install-jq" ]
+then
     JQ_VERSION=1.6
     ok "Installs jq to $HOME/opt/bin"
     if [[ $OSTYPE == darwin* ]]; then
@@ -718,16 +691,18 @@ elif [ $task == "--install-jq" ]; then
     printf "${YELLOW}Installed to ~/opt/bin/jq${UNSET}\n"
     check_opt_bin_in_path
 
-
-elif [ $task == "--install-icdiff" ]; then
+elif
+    [ $task == "--install-icdiff" ]
+then
     ok "Install icdiff (https://github.com/jeffkaufman/icdiff) into ~/opt/bin"
     download https://raw.githubusercontent.com/jeffkaufman/icdiff/release-1.9.2/icdiff ~/opt/bin/icdiff
     chmod +x ~/opt/bin/icdiff
     printf "${YELLOW}Installed to ~/opt/bin/icdiff${UNSET}\n"
     check_opt_bin_in_path
 
-
-elif [ $task == "--install-pyp" ]; then
+elif
+    [ $task == "--install-pyp" ]
+then
     ok "Install pyp (https://github.com/hauntsaninja/pyp) into ~/opt/bin"
     can_make_conda_env "pyp"
     conda create -y -n pyp python
@@ -738,8 +713,9 @@ elif [ $task == "--install-pyp" ]; then
     printf "${YELLOW}Installed to ~/opt/bin/pyp${UNSET}\n"
     check_opt_bin_in_path
 
-
-elif [ $task == "--install-zoxide" ]; then
+elif
+    [ $task == "--install-zoxide" ]
+then
     ok "Install zoxide (https://github.com/ajeetdsouza/zoxide/) into ~/opt/bin?"
     ZOXIDE_VERSION=0.7.0
     if [[ $OSTYPE == darwin* ]]; then
@@ -758,8 +734,9 @@ elif [ $task == "--install-zoxide" ]; then
     printf "${YELLOW}To start using, you need to add the following line to your .bash_profile or .bashrc:${UNSET}\n\n"
     printf "     ${YELLOW}eval \"\$(zoxide init bash)\"${UNSET}\n\n"
 
-
-elif [ $task == "--dotfiles" ]; then
+elif
+    [ $task == "--dotfiles" ]
+then
 
     # Unique backup directory based on the hash of the current time, all
     # lowercase
@@ -778,7 +755,7 @@ elif [ $task == "--dotfiles" ]; then
     - List of files that will be copied is in 'include.files'
     - Prompts again before actually running to make sure!"
 
-    cd "$(dirname "${BASH_SOURCE}")";
+    cd "$(dirname "${BASH_SOURCE}")"
 
     function doIt() {
         rsync --no-perms --backup --backup-dir="$BACKUP_DIR" -avh --files-from=include.file . $HOME
@@ -788,7 +765,7 @@ elif [ $task == "--dotfiles" ]; then
     if [ $DOTFILES_FORCE == "true" ]; then
         doIt
     else
-        read -p "This may overwrite existing files in your home directory. Backups will be put in $BACKUP_DIR. Are you sure? (y/n) " -n 1;
+        read -p "This may overwrite existing files in your home directory. Backups will be put in $BACKUP_DIR. Are you sure? (y/n) " -n 1
         echo ""
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             doIt
@@ -796,16 +773,14 @@ elif [ $task == "--dotfiles" ]; then
     fi
     unset doIt
 
-
-
 # ----------------------------------------------------------------------------
 # Diffs section
 
 elif [ $task == "--diffs" ]; then
     command -v ~/opt/bin/icdiff >/dev/null 2>&1 || {
         printf "${RED}Can't find icdiff. Did you run ./setup.sh --install-icdiff?, and is ~/opt/bin on your \$PATH?${UNSET}\n"
-            exit 1;
-        }
+        exit 1
+    }
     ok "Shows the diffs between this repo and what's in your home directory"
     cmd="$HOME/opt/bin/icdiff --recursive --line-numbers"
     $cmd ~ . | grep -v "Only in $HOME" | sed "s|$cmd||g"
