@@ -39,14 +39,6 @@
 # folders to be created
 - create:
     - ~/Documents/github
-    - ~/Documents/github/trallard
-    - ~/Documents/github/patches
-    - ~/Documents/github/sources
-    - ~/Documents/design
-    - ~/Documents/demos
-    - ~/Documents/presentations
-    - ~/Documents/presentations/templates
-    - ~/Documents/personal
 
 # commands to be run - this finalises the setup through brew and a bash scripts
 - shell:
@@ -55,9 +47,3 @@
 , Install oh-my-szh]
   - chsh -s $(which zsh)
   - [chsh -s $(which zsh), Making zsh the default shell]
-  - 
-    command: sh new_computer.sh
-    stdin: true
-    stdout: true 
-    description: Execute miscellaneous tasks and setup
-    quiet: false

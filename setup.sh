@@ -758,8 +758,13 @@ then
     cd "$(dirname "${BASH_SOURCE}")"
 
     function doIt() {
-        rsync --no-perms --backup --backup-dir="$BACKUP_DIR" -avh --files-from=include.file . $HOME
-        source ~/.bash_profile
+        if [[ $OSTYPE == darwin* ]]; then
+            rsync --no-perms --backup --backup-dir="$BACKUP_DIR" -avh --files-from=include.file . $HOME
+            source ~/.bash_profile
+        else
+            rsync --no-perms --backup --backup-dir="$BACKUP_DIR" -avh --files-from=linux-include.file . $HOME
+            source ~/.bash_profile
+        fi
     }
 
     if [ $DOTFILES_FORCE == "true" ]; then

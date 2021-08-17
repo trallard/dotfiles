@@ -1,0 +1,14 @@
+linux-profile/.aliases
+linux-profile/.bash_profile
+linux-profile/.bash_prompt
+linux-profile/.bashrc
+linux-profile/.config/nvim/
+linux-profile/.dircolors
+linux-profile/.exports
+linux-profile/.functions
+linux-profile/.gitconfig
+linux-profile/.git-completion.bash
+linux-profile/.path
+linux-profile/.tmux.conf
+linux-profile/.vim/
+linux-profile/.vimrc
