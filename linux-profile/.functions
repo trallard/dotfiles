@@ -52,3 +52,204 @@ pv_activate() {
 parse_git_branch() {
     git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
+
+# Create a new directory and enter it
+mkd() {
+    mkdir -p "$@"
+    cd "$@" || exit
+}
+
+# Make a temporary directory and enter it
+tmpd() {
+    local dir
+    if [ $# -eq 0 ]; then
+        dir=$(mktemp -d)
+    else
+        dir=$(mktemp -d -t "${1}.XXXXXXXXXX")
+    fi
+    cd "$dir" || exit
+}
+
+# Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
+targz() {
+    local tmpFile="${1%/}.tar"
+    tar -cvf "${tmpFile}" --exclude=".DS_Store" "${1}" || return 1
+
+    size=$(
+        stat -f"%z" "${tmpFile}" 2>/dev/null # OS X `stat`
+        stat -c"%s" "${tmpFile}" 2>/dev/null # GNU `stat`
+    )
+
+    local cmd=""
+    if ((size < 52428800)) && hash zopfli 2>/dev/null; then
+        # the .tar file is smaller than 50 MB and Zopfli is available; use it
+        cmd="zopfli"
+    else
+        if hash pigz 2>/dev/null; then
+            cmd="pigz"
+        else
+            cmd="gzip"
+        fi
+    fi
+
+    echo "Compressing .tar using \`${cmd}\`…"
+    "${cmd}" -v "${tmpFile}" || return 1
+    [ -f "${tmpFile}" ] && rm "${tmpFile}"
+    echo "${tmpFile}.gz created successfully."
+}
+
+# Determine size of a file or total size of a directory
+fs() {
+    if du -b /dev/null >/dev/null 2>&1; then
+        local arg=-sbh
+    else
+        local arg=-sh
+    fi
+    # shellcheck disable=SC2199
+    if [[ -n "$@" ]]; then
+        du $arg -- "$@"
+    else
+        du $arg -- .[^.]* *
+    fi
+}
+
+# Use Git’s colored diff when available
+if hash git &>/dev/null; then
+    diff() {
+        git diff --no-index --color-words "$@"
+    }
+fi
+
+# Create a git.io short URL
+gitio() {
+    if [ -z "${1}" ] || [ -z "${2}" ]; then
+        echo "Usage: \`gitio slug url\`"
+        return 1
+    fi
+    curl -i https://git.io/ -F "url=${2}" -F "code=${1}"
+}
+
+# Start an HTTP server from a directory, optionally specifying the port
+server() {
+    local port="${1:-8000}"
+    sleep 1 && open "http://localhost:${port}/" &
+    # Set the default Content-Type to `text/plain` instead of `application/octet-stream`
+    # And serve everything as UTF-8 (although not technically correct, this doesn’t break anything for binary files)
+    python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port"
+}
+
+# Compare original and gzipped file size
+gz() {
+    local origsize
+    origsize=$(wc -c <"$1")
+    local gzipsize
+    gzipsize=$(gzip -c "$1" | wc -c)
+    local ratio
+    ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l)
+    printf "orig: %d bytes\\n" "$origsize"
+    printf "gzip: %d bytes (%2.2f%%)\\n" "$gzipsize" "$ratio"
+}
+
+# Syntax-highlight JSON strings or files
+# Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
+json() {
+    if [ -t 0 ]; then # argument
+        python -mjson.tool <<<"$*" | pygmentize -l javascript
+    else # pipe
+        python -mjson.tool | pygmentize -l javascript
+    fi
+}
+
+# `v` with no arguments opens the current directory in Vim, otherwise opens the
+# given location
+v() {
+    if [ $# -eq 0 ]; then
+        vim .
+    else
+        vim "$@"
+    fi
+}
+
+# Call from a local repo to open the repository on github/bitbucket in browser
+# Modified version of https://github.com/zeke/ghwd
+repo() {
+    # Figure out github repo base URL
+    local base_url
+    base_url=$(git config --get remote.origin.url)
+    base_url=${base_url%\.git} # remove .git from end of string
+
+    # Fix git@github.com: URLs
+    base_url=${base_url//git@github\.com:/https:\/\/github\.com\/}
+
+    # Fix git://github.com URLS
+    base_url=${base_url//git:\/\/github\.com/https:\/\/github\.com\/}
+
+    # Fix git@bitbucket.org: URLs
+    base_url=${base_url//git@bitbucket.org:/https:\/\/bitbucket\.org\/}
+
+    # Fix git@gitlab.com: URLs
+    base_url=${base_url//git@gitlab\.com:/https:\/\/gitlab\.com\/}
+
+    # Validate that this folder is a git folder
+    if ! git branch 2>/dev/null 1>&2; then
+        echo "Not a git repo!"
+        exit $?
+    fi
+
+    # Find current directory relative to .git parent
+    full_path=$(pwd)
+    git_base_path=$(
+        cd "./$(git rev-parse --show-cdup)" || exit 1
+        pwd
+    )
+    relative_path=${full_path#$git_base_path} # remove leading git_base_path from working directory
+
+    # If filename argument is present, append it
+    if [ "$1" ]; then
+        relative_path="$relative_path/$1"
+    fi
+
+    # Figure out current git branch
+    # git_where=$(command git symbolic-ref -q HEAD || command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
+    git_where=$(command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
+
+    # Remove cruft from branchname
+    branch=${git_where#refs\/heads\/}
+    branch=${branch#remotes\/origin\/}
+
+    [[ $base_url == *bitbucket* ]] && tree="src" || tree="tree"
+    url="$base_url/$tree/$branch$relative_path"
+
+    echo "Calling $(type open) for $url"
+
+    open "$url" &>/dev/null || (echo "Using $(type open) to open URL failed." && exit 1)
+}
+
+# Get colors in manual pages
+man() {
+    env \
+        LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
+        LESS_TERMCAP_md="$(printf '\e[1;31m')" \
+        LESS_TERMCAP_me="$(printf '\e[0m')" \
+        LESS_TERMCAP_se="$(printf '\e[0m')" \
+        LESS_TERMCAP_so="$(printf '\e[1;44;33m')" \
+        LESS_TERMCAP_ue="$(printf '\e[0m')" \
+        LESS_TERMCAP_us="$(printf '\e[1;32m')" \
+        man "$@"
+}
+
+#  Print 256 cols
+
+pcol() {
+    for fgbg in 38 48; do         # Foreground / Background
+        for color in {0..255}; do # Colors
+            # Display the color
+            printf "\e[${fgbg};5;%sm  %3s  \e[0m" $color $color
+            # Display 6 colors per lines
+            if [ $((($color + 1) % 6)) == 4 ]; then
+                echo # New line
+            fi
+        done
+        echo # New line
+    done
+}

@@ -1,56 +1,40 @@
-#define S_base03        #002b36
-#define S_base02        #073642
-#define S_base01        #586e75
-#define S_base00        #657b83
-#define S_base0         #839496
-#define S_base1         #93a1a1
-#define S_base2         #eee8d5
-#define S_base3         #fdf6e3
+*.font: xft:Hack:style=Bold:size=16
+*.internalBorder: 15
+*.scrollBar: False
 
-*background:            S_base03
-*foreground:            S_base0
-*fadeColor:             S_base03
-*cursorColor:           S_base1
-*pointerColorBackground:S_base01
-*pointerColorForeground:S_base1
+! special
+*.foreground:   #d6deeb
+*.background:   #011627
+*.cursorColor:  #d6deeb
 
-#define S_yellow        #ffc15e
-#define S_orange        #cb4b16
-#define S_red           #c04bf2
-#define S_magenta       #c04bf2
-#define S_violet        #a56cf5
-#define S_blue          #94adf5
-#define S_cyan          #31cec0
-#define S_green         #859900
+! black
+*.color0:       #011627
+*.color8:       #575656
 
-!! black dark/light
-*color0:                S_base02
-*color8:                S_base03
+! red
+*.color1:       #ef5350
+*.color9:       #ef5350
 
-!! red dark/light
-*color1:                S_red
-*color9:                S_orange
+! green
+*.color2:       #22da6e
+*.color10:      #22da6e
 
-!! green dark/light
-*color2:                S_green
-*color10:               S_base01
+! yellow
+*.color3:       #addb67
+*.color11:      #ffeb95
 
-!! yellow dark/light
-*color3:                S_yellow
-*color11:               S_base00
+! blue
+*.color4:       #82aaff
+*.color12:      #82aaff
 
-!! blue dark/light
-*color4:                S_blue
-*color12:               S_base0
+! magenta
+*.color5:       #c792ea
+*.color13:      #c792ea
 
-!! magenta dark/light
-*color5:                S_magenta
-*color13:               S_violet
+! cyan
+*.color6:       #21c7a8
+*.color14:      #7fdbca
 
-!! cyan dark/light
-*color6:                S_cyan
-*color14:               S_base1
-
-!! white dark/light
-*color7:                S_base2
-*color15:               S_base3
+! white
+*.color7:       #ffffff
+*.color15:      #ffffff

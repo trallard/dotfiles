@@ -1,0 +1,63 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+      force: false # replace files
+
+- clean: ["~"]
+
+- clean:
+    ~/:
+      force: true
+    ~/.config:
+      recursive: true
+
+- link:
+    ~/.gitconfig: git/.gitconfig
+    ~/.gitignore_global: git/.gitignore
+    # zsh stuff
+    ~/.zshrc: zsh/.zshrc
+    ~/.zprofile: zsh/.zprofile
+    ~/.oh-my-zsh/themes/unicorn-theme.zsh-theme: zsh/unicorn-theme.zsh-theme
+    ~/.p10k.zsh: zsh/.p10k.zsh
+    # general config files
+    ~/.aliases: linux-profile/.aliases
+    ~/.bash_profile: linux-profile/.bash_profile
+    ~/.bash_prompt: linux-profile/.bash_prompt
+    ~/.bashrc: linux-profile/.bashrc
+    ~/.dircolors: linux-profile/.dircolors
+    ~/.exports: linux-profile/.exports
+    ~/.functions: linux-profile/.functions
+    ~/.path: linux-profile/.path
+    ~/.vimrc: linux-profile/.vimrc
+    ~/.Xresources: linux-profile/.Xdefaults
+
+    # note that it needs to be conf.local 
+    ~/.tmux.conf.local: tmux/.tmux.conf
+    ~/.condarc: conda/.condarc
+
+# folders to be created
+- create:
+    - ~/Documents/github
+    - ~/Documents/github/trallard
+    - ~/Documents/github/patches
+    - ~/Documents/github/sources
+    - ~/Documents/design
+    - ~/Documents/demos
+    - ~/Documents/presentations
+    - ~/Documents/presentations/templates
+    - ~/Documents/personal
+
+# commands to be run - this finalises the setup through brew and a bash scripts
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - [sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+, Install oh-my-szh]
+  - chsh -s $(which zsh)
+  - [chsh -s $(which zsh), Making zsh the default shell]
+  - 
+    command: sh new_computer.sh
+    stdin: true
+    stdout: true 
+    description: Execute miscellaneous tasks and setup
+    quiet: false

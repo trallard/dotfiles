@@ -21,6 +21,8 @@ Plug 'kassio/neoterm'                     " Provides a separate terminal in vim 
 Plug 'flazz/vim-colorschemes'             " Pile 'o colorschemes
 Plug 'felixhummel/setcolors.vim'          " Easily set colorschemes
 Plug 'tmhedberg/SimpylFold'               " Nice folding for Python
+Plug 'cespare/vim-toml'                   "Valid TOML syntax"
+
 call plug#end()
 
 " ============================================================================
