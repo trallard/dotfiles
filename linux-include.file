@@ -6,6 +6,5 @@
 .exports
 .functions
 .path
-.tmux.conf
 .vimrc
 .zshrc

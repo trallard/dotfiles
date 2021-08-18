@@ -144,13 +144,6 @@ noremap <silent> ,l :wincmd l<cr>
 noremap <silent> ,w :wincmd l<cr>
 noremap <silent> ,q :wincmd h<cr>
 
-" The above mppings for ,w and ,q to move between windows requires being in
-" Normal mode first. The following commands let you use Alt-w and Alt-q to
-" switch -- even while in Insert mode.
-noremap <M-w> <Esc>:wincmd l<CR>
-inoremap <M-w> <Esc>:wincmd l<CR>
-
-tnoremap <M-q> <C-\><C-n>:wincmd h<CR>
 
 " ============================================================================
 " RELATIVE NUMBERING

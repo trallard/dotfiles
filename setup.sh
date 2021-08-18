@@ -138,6 +138,9 @@ function showHelp() {
 
     header "Installations for any host:"
 
+    cmd "--install-exa" \
+        "Installs exa in Linux"
+
     cmd "--install-bat" \
         "bat is like cat, but adds things like syntax highlighting," \
         "showing lines changed based on git, and showing non-printable" \
@@ -244,6 +247,12 @@ download() {
     if ! (try_curl $1 $2 || try_wget $1 $2); then
         echo "Could not download $1"
     fi
+}
+
+# Sync files
+sync_files() {
+    echo "Syncing $1 to $2"
+    rsync --no-perms --backup --backup-dir="$BACKUP_DIR" -avh $1 $2
 }
 
 # Append a line to the end of a file, but only if the line isn't already there
@@ -358,6 +367,19 @@ then
     ok "Installs packages from the file apt-installs-minimal.txt"
     sudo apt-get update &&
         sudo apt-get install -y $(awk '{print $1}' apt-installs-minimal.txt | grep -v "^#")
+
+elif
+    [task =="--install-exa"]
+then
+    ok "Installs exa"
+    mkdir -p /tmp/exa
+    download https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-v0.10.1.zip /tmp/exa/exa.zip
+    unzip exa.zip -d /tmp/exa/exa
+    mkdir -p ~/opt/bin
+    cp /tmp/exa/exa ~/opt/bin/exa
+    rm -r "/tmp/exa"
+    printf "${YELLOW}Installed exa to ~/opt/bin/exa${UNSET}\n"
+    check_opt_bin_in_path
 
 elif
     [ $task == "--install-docker" ]
@@ -759,12 +781,15 @@ then
 
     function doIt() {
         if [[ $OSTYPE == darwin* ]]; then
-            rsync --no-perms --backup --backup-dir="$BACKUP_DIR" -avh --files-from=include.file ./linux-profile $HOME
+            rsync --no-perms --backup --backup-dir="$BACKUP_DIR" -avh --files-from=include.file . $HOME
             source ~/.bash_profile
         else
-            rsync --no-perms --backup --backup-dir="$BACKUP_DIR" -avh --files-from=linux-include.file . $HOME
+            rsync --no-perms --backup --backup-dir="$BACKUP_DIR" -avh --files-from=linux-include.file ./linux-profile $HOME
             source ~/.bash_profile
         fi
+        echo "Dotfiles copied to $HOME copying additional files"
+        sync_files zsh/unicorn-theme.zsh-theme $HOME/.oh-my-zsh/themes/unicorn-theme.zsh-theme
+        sync_files zsh/.p10k.zsh $HOME/.p10k.zsh
     }
 
     if [ $DOTFILES_FORCE == "true" ]; then
