@@ -369,19 +369,6 @@ then
         sudo apt-get install -y $(awk '{print $1}' apt-installs-minimal.txt | grep -v "^#")
 
 elif
-    [task =="--install-exa"]
-then
-    ok "Installs exa"
-    mkdir -p /tmp/exa
-    download https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-v0.10.1.zip /tmp/exa/exa.zip
-    unzip exa.zip -d /tmp/exa/exa
-    mkdir -p ~/opt/bin
-    cp /tmp/exa/exa ~/opt/bin/exa
-    rm -r "/tmp/exa"
-    printf "${YELLOW}Installed exa to ~/opt/bin/exa${UNSET}\n"
-    check_opt_bin_in_path
-
-elif
     [ $task == "--install-docker" ]
 then
     ok "Adds the docker repo, installs docker-ce, adds user to the docker group"
@@ -646,6 +633,19 @@ then
     cp /tmp/bat/bat*/bat ~/opt/bin
     rm -r "/tmp/bat-${BAT_VERSION}.tar.gz"
     printf "${YELLOW}Installed to ~/opt/bin/bat${UNSET}\n"
+    check_opt_bin_in_path
+
+elif
+    [ $task == "--install-exa" ]
+then
+    ok "Installs exa"
+    mkdir -p /tmp/exa
+    download https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-v0.10.1.zip /tmp/exa/exa.zip
+    unzip exa.zip -d /tmp/exa/exa
+    mkdir -p ~/opt/bin
+    cp /tmp/exa/exa ~/opt/bin/exa
+    rm -r "/tmp/exa"
+    printf "${YELLOW}Installed exa to ~/opt/bin/exa${UNSET}\n"
     check_opt_bin_in_path
 
 elif
