@@ -41,3 +41,6 @@ fi
 # unset http_proxy
 
 echo "Sourced bashrc"
+
+complete -C /usr/local/bin/terraform terraform
+. "$HOME/.cargo/env"

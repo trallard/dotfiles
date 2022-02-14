@@ -178,6 +178,7 @@
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
+  # lavender
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=90
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=189
   # Custom icon.
@@ -208,6 +209,7 @@
 
   ##################################[ dir: current directory ]##################################
   # Current directory background color.
+  # dark lavender
   typeset -g POWERLEVEL9K_DIR_BACKGROUND=61
   # Default current directory foreground color.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=189
@@ -311,11 +313,19 @@
   # Simply assigning classes to directories don't have any visible effects. It merely gives you an
   # option to define custom colors and icons for different directory classes.
   #
-  #   # Styling for WORK.
-  #   typeset -g POWERLEVEL9K_DIR_WORK_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  #   typeset -g POWERLEVEL9K_DIR_WORK_BACKGROUND=4
-  #   typeset -g POWERLEVEL9K_DIR_WORK_FOREGROUND=254
-  #   typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=250
+  #   # Styling for WORK aka clients.
+    typeset -g POWERLEVEL9K_DIR_WORK_VISUAL_IDENTIFIER_EXPANSION='🚧'
+    typeset -g POWERLEVEL9K_DIR_WORK_BACKGROUND=11
+    typeset -g POWERLEVEL9K_DIR_WORK_FOREGROUND=0
+    typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=0
+    # Styling for OSS
+    typeset -g POWERLEVEL9K_DIR_OSS_VISUAL_IDENTIFIER_EXPANSION='🤘🏽'
+    typeset -g POWERLEVEL9K_DIR_OSS_BACKGROUND=57
+    # Styling for LABS
+    typeset -g POWERLEVEL9K_DIR_LABS_VISUAL_IDENTIFIER_EXPANSION='🚀'
+    typeset -g POWERLEVEL9K_DIR_LABS_BACKGROUND=12
+    typeset -g POWERLEVEL9K_DIR_LABS_FOREGROUND=0
+    typeset -g POWERLEVEL9K_DIR_LABS_SHORTENED_FOREGROUND=0
   #   typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=255
   #
   #   # Styling for WORK_NOT_WRITABLE.
@@ -329,7 +339,12 @@
   # parameter. For example, if POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND is not set, it falls
   # back to POWERLEVEL9K_DIR_FOREGROUND.
   #
-  typeset -g POWERLEVEL9K_DIR_CLASSES=()
+  
+  # DEFINING TANIA'S DIRS
+    typeset -g POWERLEVEL9K_DIR_CLASSES=(
+      '~/Documents/github/quansight-clients(|/*)'  WORK     ''
+      '~/Documents/github(|/*)'  OSS     ''
+      '~/Documents/github/quansight(|/*)'  LABS     '')
 
   # Custom prefix.
   # typeset -g POWERLEVEL9K_DIR_PREFIX='in '
