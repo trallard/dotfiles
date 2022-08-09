@@ -89,3 +89,10 @@ alias gurld='now=`date` && tomorrow=`date -v+3H` &&  gcalcli --cal "🦄  Tania 
 
 # Tree view of current dir - might remove as can use exat
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+
+# show files
+alias show-all='defaults write com.apple.finder AppleShowAllFiles true && killall Finder'
+alias show-some='defaults write com.apple.Finder AppleShowAllFiles false && killall Finder'
+
+# open files in vscode
+alias -s {md, py, ipynb}=code

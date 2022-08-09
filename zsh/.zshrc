@@ -140,8 +140,8 @@ export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 # bat https://github.com/sharkdp/bat
-# BAT_THEME="ansi"
-BAT_THEME="Nord"
+# export BAT_THEME="ansi"
+export BAT_THEME="Nord"
 
 # Ruby
 eval "$(rbenv init -)"
@@ -151,6 +151,20 @@ export PATH="$HOME/.gem/ruby/2.7.2/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+# Ruby
+eval "$(rbenv init -)"
+export PATH="$HOME/.gem/ruby/2.7.2/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/tania/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/tania/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/tania/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/tania/google-cloud-sdk/completion.zsh.inc'; fi
+
 
 # ------------------------------------------------------------------------------
 # Custom functions
@@ -189,6 +203,31 @@ venv_activate(){
     echo -e "\x1b[38;5;2m📦 - Activated virtualenv at $envdir\x1b[0m"
     python --version
 }
+
+# lazy open dir in code 
+coded(){
+    cd $1 && code $1
+}
+
+# makedir and touch
+mktouch() {
+
+    if [ $# -lt 1 ]; then
+        echo "Missing argument";
+        return 1;
+    fi
+
+    for f in "$@"; do
+        mkdir -p -- "$(dirname -- "$f")"
+        touch -- "$f"
+    done
+}
+
+# direnv for zsh 
+eval "$(direnv hook zsh)"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
 
 # ------------------------------------------------------------------------------
 

@@ -333,8 +333,7 @@
     typeset -g POWERLEVEL9K_DIR_LABS_SHORTENED_FOREGROUND=0
     # Styling for nebari
     typeset -g POWERLEVEL9K_DIR_NEBARI_VISUAL_IDENTIFIER_EXPANSION='🪴'
-    typeset -g POWERLEVEL9K_DIR_NEBARI_BACKGROUND=239
-    typeset -g POWERLEVEL9K_DIR_NEBARI_FOREGROUND=0
+    typeset -g POWERLEVEL9K_DIR_NEBARI_BACKGROUND=57
 
   #   typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=255
   #
@@ -349,15 +348,14 @@
   # parameter. For example, if POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND is not set, it falls
   # back to POWERLEVEL9K_DIR_FOREGROUND.
   #
-  
+
   # DEFINING TANIA'S DIRS
     typeset -g POWERLEVEL9K_DIR_CLASSES=(
-      '~/Documents/github(|/*)'  OSS     ''
-      '~/Documents/github/nebari(|/*)'  NEBARI     ''
+      '~/Documents/github/quansight-clients(|/*)'  CLIENTS     ''
       '~/Documents/github/quansight(|/*)'  WORK     ''
-      '~/Documents/github/quansight-clients(|/*)'  CLIENTS   ''
-      '~/Documents/github/leadership(|/*)'  LABS     ''
-      '~/Documents/github/labs(|/*)'  LABS     '')
+      '~/Documents/github/nebari(|/*)'  NEBARI     ''
+      '~/Documents/github/labs(|/*)'  LABS     ''
+      '~/Documents/github(|/*)'  OSS     '')
 
   # Custom prefix.
   # typeset -g POWERLEVEL9K_DIR_PREFIX='in '
