@@ -34,6 +34,10 @@ else
     fi
 fi
 unset __conda_setup
+
+if [ -f "/Users/tania/anaconda3/etc/profile.d/mamba.sh" ]; then
+    . "/Users/tania/anaconda3/etc/profile.d/mamba.sh"
+fi
 # <<< conda initialize <<<
 
 # terraform autocomplete

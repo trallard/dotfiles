@@ -3,6 +3,10 @@
 	email = taniar.allard@gmail.com
 	signingKey = ""
 
+# Client work
+[includeIf "gitdir:~/Documents/github/quansight-clients/AES-GitLab"]
+	path= ~/dev/work/.gitconfig
+
 [alias]
 	# history: logs in different formats
 	# hash, date, comment, author
@@ -67,6 +71,9 @@
 	yoink="git checkout master && git fetch upstream master && git merge upstream/master" 
 	# like yoink but better
 	yoinkk="git checkout main && git fetch upstream main && git merge upstream/main" 
+
+	# trallard branch patter
+	newb="git checkout -b trallard/$1"
 	
 [apply]
 	# Detect change in case
