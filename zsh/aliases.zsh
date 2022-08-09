@@ -51,6 +51,9 @@ alias ch-gh-qsc='cd Documents/github/quansight-clients'
 # cat is bat
 alias cat='bat'
 
+# fd aliases
+alias fd='fd … -X bat'
+
 # gitkraken
 alias kraken='open -na "GitKraken" --args -p $(git rev-parse --show-toplevel)'
 

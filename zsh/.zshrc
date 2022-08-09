@@ -1,14 +1,12 @@
 # ------------------------------------------------------------------------------
 # Personal ZSH configuration.
-# ------------------------------------------------------------------------------
+# @trallard ------------------------------------------------------------------------------
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
 # ------------------------------------------------------------------------------
 # Adding stuff to PATH
 # ------------------------------------------------------------------------------
@@ -18,12 +16,15 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/tania/.oh-my-zsh"
 
+# ensure tmux is in path
+export PATH="$HOME/opt/homebrew/bin:$PATH"
+
 # add openssl to the path -> needed for SQL
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 # needed for ruby
-export PATH="/Users/tania/.rbenv/bin:$PATH" 
-export PATH="/Users/tania/.rbenv/shims:$PATH" 
+export PATH="/Users/tania/.rbenv/bin:$PATH"
+export PATH="/Users/tania/.rbenv/shims:$PATH"
 
 # terraform
 export PATH="$PATH:/Users/tania/Documents/github/sources"
@@ -31,7 +32,7 @@ export PATH="$PATH:/Users/tania/Documents/github/sources"
 # poetry add to path
 export PATH="$PATH:$HOME/.poetry/env"
 
-# needed for pyenv 
+# needed for pyenv
 # echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi'
 # Created by `userpath` on 2020-05-04 10:35:50
 export PATH="$PATH:/Users/tania/.local/bin"
@@ -56,7 +57,7 @@ export PATH="$PATH:/Users/tania/Applications/Visual Studio Code.app/Contents/Res
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # ------------------------------------------------------------------------------
-# theme
+# Zsh theme
 # ------------------------------------------------------------------------------
 
 # Set name of the theme to load --- if set to "random", it will
@@ -66,54 +67,12 @@ export PATH="$PATH:/Users/tania/Applications/Visual Studio Code.app/Contents/Res
 
 # I am using Unicorn theme here - which is my own theme
 ZSH_THEME="unicorn-theme"
+ZSH_THEME="cute-theme"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-
 # To customize prompt edit ~/.p10k.zsh.
+# This replaces the old setting in this file
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# ------------------------------------------------------------------------------
-# powerlevel10k prompt
-# ------------------------------------------------------------------------------
-
-# prompt elements
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # ------------------------------------------------------------------------------
 # user settings
@@ -181,7 +140,8 @@ export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 # bat https://github.com/sharkdp/bat
-BAT_THEME="ansi-dark"
+# BAT_THEME="ansi"
+BAT_THEME="Nord"
 
 # Ruby
 eval "$(rbenv init -)"
@@ -189,23 +149,23 @@ export PATH="$HOME/.gem/ruby/2.7.2/bin:$PATH"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # ------------------------------------------------------------------------------
 # Custom functions
 # ------------------------------------------------------------------------------
 
 # activate pipenv venv
-pv_activate(){
+pv_activate() {
     activate_file=$(pipenv --venv)/bin/activate
     if [ -e "$activate_file" ]; then
         . $activate_file
-        
+
         # the pipenv shell normally enables these as well
         export PYTHONDONTWRITEBYTECODE=1
         export PIPENV_ACTIVE=1
-        
+
         if [ -f "${VIRTUAL_ENV}/.project" ]; then
             cd $(cat "${VIRTUAL_ENV}/.project")
         fi
@@ -213,12 +173,28 @@ pv_activate(){
     fi
 }
 
-# ------------------------------------------------------------------------------
+# activate venv
+venv_activate(){    
+    default_venv_dir=".venv"
+    envdir=$(1:=$default_venv_dir)
 
+    if [! -d $envdir ]; then
+        echo "No venv found at $envdir - setting now 🧱"
+        python -m venev $envdir
+        echo -e "\x1b[38;5;2m📦 - Created virtualenv at $envdir\x1b[0m"
+        return
+    fi
+    source $envdir/bin/activate
+    export PYTHONPATH=`pwd`
+    echo -e "\x1b[38;5;2m📦 - Activated virtualenv at $envdir\x1b[0m"
+    python --version
+}
+
+# ------------------------------------------------------------------------------
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/tania/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/tania/anaconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -230,5 +206,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-

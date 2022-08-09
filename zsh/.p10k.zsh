@@ -313,19 +313,29 @@
   # Simply assigning classes to directories don't have any visible effects. It merely gives you an
   # option to define custom colors and icons for different directory classes.
   #
-  #   # Styling for WORK aka clients.
-    typeset -g POWERLEVEL9K_DIR_WORK_VISUAL_IDENTIFIER_EXPANSION='🚧'
+  #   # Styling for WORK aka clients - quansight-clients
+    typeset -g POWERLEVEL9K_DIR_CLIENTS_VISUAL_IDENTIFIER_EXPANSION='🚧'
+    typeset -g POWERLEVEL9K_DIR_CLIENTS_BACKGROUND=11
+    typeset -g POWERLEVEL9K_DIR_CLIENTS_FOREGROUND=0
+    typeset -g POWERLEVEL9K_DIR_CLIENTS_SHORTENED_FOREGROUND=0
+    # Styling for WORK - quansight
+    typeset -g POWERLEVEL9K_DIR_WORK_VISUAL_IDENTIFIER_EXPANSION='🚀'
     typeset -g POWERLEVEL9K_DIR_WORK_BACKGROUND=11
     typeset -g POWERLEVEL9K_DIR_WORK_FOREGROUND=0
     typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=0
     # Styling for OSS
-    typeset -g POWERLEVEL9K_DIR_OSS_VISUAL_IDENTIFIER_EXPANSION='🤘🏽'
+    typeset -g POWERLEVEL9K_DIR_OSS_VISUAL_IDENTIFIER_EXPANSION='🔮'
     typeset -g POWERLEVEL9K_DIR_OSS_BACKGROUND=57
     # Styling for LABS
-    typeset -g POWERLEVEL9K_DIR_LABS_VISUAL_IDENTIFIER_EXPANSION='🚀'
+    typeset -g POWERLEVEL9K_DIR_LABS_VISUAL_IDENTIFIER_EXPANSION='🔭'
     typeset -g POWERLEVEL9K_DIR_LABS_BACKGROUND=12
     typeset -g POWERLEVEL9K_DIR_LABS_FOREGROUND=0
     typeset -g POWERLEVEL9K_DIR_LABS_SHORTENED_FOREGROUND=0
+    # Styling for nebari
+    typeset -g POWERLEVEL9K_DIR_NEBARI_VISUAL_IDENTIFIER_EXPANSION='🪴'
+    typeset -g POWERLEVEL9K_DIR_NEBARI_BACKGROUND=239
+    typeset -g POWERLEVEL9K_DIR_NEBARI_FOREGROUND=0
+
   #   typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=255
   #
   #   # Styling for WORK_NOT_WRITABLE.
@@ -342,9 +352,12 @@
   
   # DEFINING TANIA'S DIRS
     typeset -g POWERLEVEL9K_DIR_CLASSES=(
-      '~/Documents/github/quansight-clients(|/*)'  WORK     ''
       '~/Documents/github(|/*)'  OSS     ''
-      '~/Documents/github/quansight(|/*)'  LABS     '')
+      '~/Documents/github/nebari(|/*)'  NEBARI     ''
+      '~/Documents/github/quansight(|/*)'  WORK     ''
+      '~/Documents/github/quansight-clients(|/*)'  CLIENTS   ''
+      '~/Documents/github/leadership(|/*)'  LABS     ''
+      '~/Documents/github/labs(|/*)'  LABS     '')
 
   # Custom prefix.
   # typeset -g POWERLEVEL9K_DIR_PREFIX='in '
@@ -550,7 +563,7 @@
   # typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=3
   # typeset -g POWERLEVEL9K_DIRENV_BACKGROUND=0
   # Custom icon.
-  # typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='🗃'
 
   ###############[ asdf: asdf version manager (https://github.com/asdf-vm/asdf) ]###############
   # Default asdf color. Only used to display tools for which there is no color override (see below).
@@ -1237,9 +1250,9 @@
       # '*prod*'  PROD    # These values are examples that are unlikely
       # '*test*'  TEST    # to match your needs. Customize them as needed.
       '*'       DEFAULT)
-  typeset -g POWERLEVEL9K_TERRAFORM_DEFAULT_FOREGROUND=4
-  typeset -g POWERLEVEL9K_TERRAFORM_DEFAULT_BACKGROUND=0
-  # typeset -g POWERLEVEL9K_TERRAFORM_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_TERRAFORM_DEFAULT_FOREGROUND=0
+  typeset -g POWERLEVEL9K_TERRAFORM_DEFAULT_BACKGROUND=116
+  typeset -g POWERLEVEL9K_TERRAFORM_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='🪨'
 
   #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
   # Show kubecontext only when the the command you are typing invokes one of these tools.
@@ -1277,9 +1290,9 @@
       # '*prod*'  PROD    # These values are examples that are unlikely
       # '*test*'  TEST    # to match your needs. Customize them as needed.
       '*'       DEFAULT)
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=7
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_BACKGROUND=5
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='○'
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=117
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_BACKGROUND=0
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⎈'
 
   # Use POWERLEVEL9K_KUBECONTEXT_CONTENT_EXPANSION to specify the content displayed by kubecontext
   # segment. Parameter expansions are very flexible and fast, too. See reference:
