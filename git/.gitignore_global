@@ -92,3 +92,6 @@ node_modules
 # sphinx
 doc/source/_build/*
 docs/source/_build/*
+
+
+.venv/

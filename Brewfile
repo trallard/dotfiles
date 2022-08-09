@@ -23,6 +23,7 @@ brew 'wagoodman/dive/dive' 
 brew 'tokei'
 brew 'gitmoji'
 brew 'diff-so-fancy'
+cask 'qmk-toolbox'
 
 cask 'docker'
 brew 'make'
@@ -35,6 +36,7 @@ brew 'azure-cli'
 brew 'vpn-slice'
 brew 'k9s'
 brew 'kops'
+brew 'terraform'
 
 # Command line tools - install new ones, update others to latest version
 brew 'git'  # upgrade to latest
@@ -91,9 +93,9 @@ cask 'flux'
 cask 'dropbox'
 cask 'alfred'
 cask 'bitwarden'
+brew 'bitwarden-cli'
 brew "openconnect"
 brew 'switchaudio-osx'
-cask 'brave-browser'
 
 # Chat / video conference
 cask 'slack'

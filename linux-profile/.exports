@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+export EDITOR="vim"
+export TERM="screen-256color"
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+
+export HISTSIZE='2000'
+export HISTFILESIZE="${HISTSIZE}"
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+export HISTCONTROL='ignoreboth'
+
+# Don’t clear the screen after quitting a manual page.
+export MANPAGER='less -X'
+
+# By default, Mac uses /bin/sh as the shell
+if [[ $OSTYPE == darwin* ]]; then
+    export SHELL=/bin/bash
+fi
+
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Set preferred pager...
+export PAGER='less'
+
+# Set colors for less. Borrowed from https://wiki.archlinux.org/index.php/Color_output_in_console#less .
+export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
+export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
+export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+# in tmux, highlight rather than italicize
+export LESS_TERMCAP_so=$'\E[30;43m'
+export LESS_TERMCAP_se=$'\E[39;49m'
+
+# bat https://github.com/sharkdp/bat
+BAT_THEME="base16-256"

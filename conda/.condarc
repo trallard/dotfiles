@@ -1,5 +1,6 @@
 env_prompt: '({default_env}) '
 channels:
-  - defaults
   - conda-forge
+  - defaults
 ssl_verify: true
+channel_priority: strict
