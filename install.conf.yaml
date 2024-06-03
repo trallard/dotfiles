@@ -55,5 +55,5 @@
     command: sh new_computer.sh
     stdin: true
     stdout: true 
-    description: Execute miscellaneous tasks and setup
+    description: Execute miscellaneous tasks and setup interactive mode
     quiet: false

@@ -16,6 +16,7 @@ This setup includes:
 ## Table of contents
 
 - [dotfiles](#dotfiles)
+  - [Table of contents](#table-of-contents)
   - [MacOS](#macos)
   - [VSCode](#vscode)
   - [Apps that need manual install](#apps-that-need-manual-install)
@@ -27,21 +28,16 @@ to proceed run `./install` this will do all the magic and call `new_computer.sh`
 
 ## VSCode
 
-I tend to use VSCOde as my default IDE. My current vs code settings are located in [https://snippets.cacher.io/snippet/fffb079d42863bd72d96](https://snippets.cacher.io/snippet/fffb079d42863bd72d96) which I sync using git-sync.
-
-Though I also have activated [Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync) now on VSCode as I also like having my settings synced for CodeSpaces, my Linux subsytems and pretty much everything.
+I tend to use VSCode as my default IDE. I automatically sync all my extensions with [Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync) now on VSCode as I also like having my settings synced for CodeSpaces, my Linux subsytems and pretty much everything.
 
 ## Apps that need manual install
 
 Though I would love to automate all my installs I have not managed to do it so far. Some applications that need to be manually installed are:
 
-- Descript
-- Audacity
-- Camtasia
 - ElGato Control Center
 - Logitech G hub
 - Logitech presentation (install from cask download)
 - Logi Capture
-- Moom
-- Wally  (and CLI see ergodox)
+- Wally (and CLI see ergodox)
 - R and Rstudio
+- RightFont

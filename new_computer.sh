@@ -403,7 +403,6 @@ pipx install interrogate
 # Node
 ############
 npm install -g pa11y terminalizer gatsby-cli yo
-curl -fsSL https://bun.sh/install | bash
 
 ############
 # Homebrew
