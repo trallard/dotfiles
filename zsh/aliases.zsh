@@ -37,6 +37,7 @@ alias dkr='docker rmi'    # docker rmi
 alias dk-clean-u='docker system prune --all --force --volumes'
 alias dk-clean-all='docker stop $(docker container ls -a -q) && docker system prune -a -f --volumes'
 alias dk-prune='docker system prune --all'
+alias dk-ca='docker container ls --all | jq -C'
 
 # npm
 alias npm-list='npm list -g --depth=0'
@@ -47,6 +48,7 @@ alias ch-gh='cd Documents/github'
 alias ch-gh-tr='cd Documents/github/trallard'
 alias ch-gh-qs='cd Documents/github/quansight'
 alias ch-gh-qsc='cd Documents/github/quansight-clients'
+
 
 # cat is bat
 alias cat='bat'
@@ -96,3 +98,20 @@ alias show-some='defaults write com.apple.Finder AppleShowAllFiles false && kill
 
 # open files in vscode
 alias -s {md, py, ipynb}=code
+
+# pnpm
+alias pn=pnpm
+
+# lakefs lakeclt
+alias lkc='lakectl'
+alias lkc-nb='lakectl branch create'
+alias lkc-ch='lakectl local checkout'
+alias lkc-cim='lakectl local commit . -m'
+
+# fancy readme
+alias fancyrm='pipx run hatch-fancy-pypi-readme | pipx run rich-cli --markdown --hyperlinks -'
+
+# colima 
+alias colima-s='colima start'
+
+alias colima-sb='colima start --cpu 4 --memory 8'

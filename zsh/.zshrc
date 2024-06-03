@@ -53,6 +53,9 @@ fi
 # Add Visual Studio Code (code) to path
 export PATH="$PATH:/Users/tania/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
+# ensure we can find the docker host
+export DOCKER_HOST="unix:///Users/tania/.colima/default/docker.sock"
+
 # add fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -102,6 +105,7 @@ ZSH_DISABLE_COMPFIX="true"
 source $ZSH/oh-my-zsh.sh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /Users/tania/aliases.zsh
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -159,12 +163,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/tania/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/tania/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/tania/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/tania/google-cloud-sdk/completion.zsh.inc'; fi
-
 
 # ------------------------------------------------------------------------------
 # Custom functions
@@ -198,7 +196,7 @@ venv_activate(){
         echo -e "\x1b[38;5;2m📦 - Created virtualenv at $envdir\x1b[0m"
         return
     fi
-    source $envdir/bin/activate
+# source $envdir/bin/activate  # commented out by conda initialize
     export PYTHONPATH=`pwd`
     echo -e "\x1b[38;5;2m📦 - Activated virtualenv at $envdir\x1b[0m"
     python --version
@@ -233,15 +231,19 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/tania/anaconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+__conda_setup="$('/Users/tania/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/tania/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/tania/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/tania/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "/Users/tania/mambaforge/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/tania/anaconda3/bin:$PATH"
+        export PATH="/Users/tania/mambaforge/bin:$PATH"
     fi
 fi
 unset __conda_setup
+
+if [ -f "/Users/tania/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "/Users/tania/mambaforge/etc/profile.d/mamba.sh"
+fi
 # <<< conda initialize <<<
