@@ -4,6 +4,7 @@ call plug#begin()
 " PLUGIN SETTINGS section.
 "
 Plug 'haishanh/night-owl.vim'    
+Plug 'arcticicestudio/nord-vim'
 Plug 'vim-scripts/vis'                    " Operations in visual block mode respect selection
 Plug 'scrooloose/nerdcommenter'           " Comment large blocks of text
 Plug 'scrooloose/nerdtree'                " File browser for vim <Leader>n
@@ -20,6 +21,8 @@ Plug 'kassio/neoterm'                     " Provides a separate terminal in vim 
 Plug 'flazz/vim-colorschemes'             " Pile 'o colorschemes
 Plug 'felixhummel/setcolors.vim'          " Easily set colorschemes
 Plug 'tmhedberg/SimpylFold'               " Nice folding for Python
+Plug 'cespare/vim-toml'                   "Valid TOML syntax"
+
 call plug#end()
 
 " ============================================================================
@@ -46,7 +49,7 @@ set expandtab     " <Tab> inserts spaces, not '\t'
 " ----------------------------------------------------------------------------
 " Visual display settings
 " ----------------------------------------------------------------------------
-colorscheme night-owl              " colorscheme to use
+colorscheme nord                 " colorscheme to use
 set scrolloff=3                  " keep some lines above and below the cursor to keep context visible
 set list                         " show non-printing chars
 set showmatch                    " show matching parentheses
@@ -141,13 +144,6 @@ noremap <silent> ,l :wincmd l<cr>
 noremap <silent> ,w :wincmd l<cr>
 noremap <silent> ,q :wincmd h<cr>
 
-" The above mppings for ,w and ,q to move between windows requires being in
-" Normal mode first. The following commands let you use Alt-w and Alt-q to
-" switch -- even while in Insert mode.
-noremap <M-w> <Esc>:wincmd l<CR>
-inoremap <M-w> <Esc>:wincmd l<CR>
-
-tnoremap <M-q> <C-\><C-n>:wincmd h<CR>
 
 " ============================================================================
 " RELATIVE NUMBERING
@@ -227,7 +223,7 @@ let g:neoterm_auto_repl_cmd = 0
 " ----------------------------------------------------------------------------
 let g:airline#extensions#tabline#enabled = 2
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme = "powerlineish"
+let g:airline_theme = "night_owl"
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
@@ -241,7 +237,7 @@ let g:bufferline_echo = 0
 " let g:airline_left_alt_sep = '|'
 " let g:airline_right_sep = ' '
 " let g:airline_right_alt_sep = '|'
-" let g:airline_theme= 'gruvbox'
+" let g:airline_theme= 'night_owl'
 
 " ----------------------------------------------------------------------------
 " vim-pandoc and vim-pandoc-syntax

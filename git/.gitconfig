@@ -3,6 +3,10 @@
 	email = taniar.allard@gmail.com
 	signingKey = ""
 
+# Client work
+# [includeIf "gitdir:~/Documents/github/.../.."]
+# 	path= ~/dev/work/.gitconfig
+
 [alias]
 	# history: logs in different formats
 	# hash, date, comment, author
@@ -15,6 +19,7 @@
 
 	# reset head to a given commit
 	unstage = reset HEAD --
+	unmerge = git reset --hard HEAD
 	last = log -1 HEAD    # last commit
 	co = checkout		  # checkout
 	ci = commit
@@ -44,7 +49,7 @@
 	# Find commits by commit message
 	fm = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
-	# Remove branches that have already been merged with master
+	# Remove branches that have already been merged with main
 	# a.k.a. ‘delete merged’
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
 
@@ -64,6 +69,15 @@
 
 	# refresh upstream
 	yoink="git checkout master && git fetch upstream master && git merge upstream/master" 
+	# like yoink but better
+	yoinkk="git checkout main && git fetch upstream main && git merge upstream/main" 
+
+	# trallard branch pattern
+	newb="git checkout -b trallard/$1"
+
+	# sort branches by taggig date
+	brd ="git branch --sort=-committerdate"
+
 	
 [apply]
 	# Detect change in case
@@ -122,7 +136,15 @@
 	defaultBranch = main
 [gpg]
 	program = gpg
+	format = openpgp
 [commit]
 	gpgSign = false
 [tag]
 	forceSignAnnotated = false
+[gpg "ssh"]
+	program = ssh-keygen
+	allowedSignersFile = ""
+
+[branch]
+# sort more recent branches first
+	sort = -committerdate

@@ -1,4 +1,13 @@
-
+# vscode stuff
 \.vscode/settings\.json
+.vscode/*
 
+# Mac stuff
 .DS_Store
+
+# random things I do not want to commit accidentally
+.extra
+.path
+env
+.envrc
+.env

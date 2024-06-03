@@ -54,39 +54,21 @@
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     anaconda                # conda environment (https://conda.io/)
     pyenv                   # python environment (https://github.com/pyenv/pyenv)
-    # goenv                   # go environment (https://github.com/syndbg/goenv)
     # nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
-    nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
-    nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
+    # nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
     # node_version          # node.js version
-    # go_version            # go version (https://golang.org)
     # rust_version          # rustc version (https://www.rust-lang.org)
-    # dotnet_version        # .NET version (https://dotnet.microsoft.com)
-    # php_version           # php version (https://www.php.net/)
-    # laravel_version       # laravel php framework version (https://laravel.com/)
-    # java_version          # java version (https://www.java.com/)
-    # package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
-    rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
-    rvm                     # ruby version from rvm (https://rvm.io)
-    # fvm                     # flutter version management (https://github.com/leoafarias/fvm)
-    # luaenv                  # lua version from luaenv (https://github.com/cehoffman/luaenv)
-    # jenv                    # java version from jenv (https://github.com/jenv/jenv)
-    # plenv                   # perl version from plenv (https://github.com/tokuhirom/plenv)
-    # phpenv                  # php version from phpenv (https://github.com/phpenv/phpenv)
-    # haskell_stack           # haskell version from stack (https://haskellstack.org/)
+    # rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
+    # rvm                     # ruby version from rvm (https://rvm.io)
     kubecontext             # current kubernetes context (https://kubernetes.io/)
     terraform               # terraform workspace (https://www.terraform.io)
-    aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
-    # aws_eb_env              # aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/)
-    azure                   # azure account name (https://docs.microsoft.com/en-us/cli/azure)
+    # aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
+    # azure                   # azure account name (https://docs.microsoft.com/en-us/cli/azure)
     gcloud                  # google cloud cli account and project (https://cloud.google.com/)
-    # google_app_cred         # google application credentials (https://cloud.google.com/docs/authentication/production)
+    google_app_cred         # google application credentials (https://cloud.google.com/docs/authentication/production)
     context                 # user@hostname
-    # nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
     # ranger                  # ranger shell (https://github.com/ranger/ranger)
-    # nnn                     # nnn shell (https://github.com/jarun/nnn)
     # vim_shell               # vim shell indicator (:sh)
-    # midnight_commander      # midnight commander shell (https://midnight-commander.org/)
     # nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
     # vi_mode               # vi mode (you don't need this if you've enabled prompt_char)
     # vpn_ip                # virtual private network indicator
@@ -95,8 +77,6 @@
     # ram                   # free RAM
     # swap                  # used swap
     # todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
-    # timewarrior             # timewarrior tracking status (https://timewarrior.net/)
-    # taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     # time                  # current time
     # =========================[ Line #2 ]=========================
     newline
@@ -109,7 +89,7 @@
   )
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
-  typeset -g POWERLEVEL9K_MODE=powerline
+  typeset -g POWERLEVEL9K_MODE=compatible
   # When set to `moderate`, some icons will have an extra space after them. This is meant to avoid
   # icon overlap when using non-monospace fonts. When set to `none`, spaces are not added.
   typeset -g POWERLEVEL9K_ICON_PADDING=none
@@ -125,7 +105,7 @@
   # Or for a specific segment in specific state:
   #
   #   POWERLEVEL9K_DIR_NOT_WRITABLE_ICON_BEFORE_CONTENT=false
-  typeset -g POWERLEVEL9K_ICON_BEFORE_CONTENT=
+  typeset -g POWERLEVEL9K_ICON_BEFORE_CONTENT=true
 
   # Add an empty line before each prompt.
   typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
@@ -144,7 +124,7 @@
   # '─'. The last two make it easier to see the alignment between left and right prompt and to
   # separate prompt from command output. You might want to set POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
   # for more compact prompt if using using this option.
-  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR='.'
+  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR='·'
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_BACKGROUND=
   typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_GAP_BACKGROUND=
   if [[ $POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR != ' ' ]]; then
@@ -178,11 +158,10 @@
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
-  # lavender
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=90
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=189
   # Custom icon.
-  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='🦄'
+  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='👩🏼‍🎤'
 
   ################################[ prompt_char: prompt symbol ]################################
   # Transparent background.
@@ -209,7 +188,6 @@
 
   ##################################[ dir: current directory ]##################################
   # Current directory background color.
-  # dark lavender
   typeset -g POWERLEVEL9K_DIR_BACKGROUND=61
   # Default current directory foreground color.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=189
@@ -217,7 +195,7 @@
   # prefix. The shortened directory can be tab-completed to the original.
   # typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
   #  resetting to default - https://github.com/Powerlevel9k/powerlevel9k
-  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=
+  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
   # Replace removed segment suffixes with this symbol.
   typeset -g POWERLEVEL9K_SHORTEN_DELIMITER='..'
   # Color of the shortened directory segments.
@@ -313,28 +291,11 @@
   # Simply assigning classes to directories don't have any visible effects. It merely gives you an
   # option to define custom colors and icons for different directory classes.
   #
-  #   # Styling for WORK aka clients - quansight-clients
-    typeset -g POWERLEVEL9K_DIR_CLIENTS_VISUAL_IDENTIFIER_EXPANSION='🚧'
-    typeset -g POWERLEVEL9K_DIR_CLIENTS_BACKGROUND=11
-    typeset -g POWERLEVEL9K_DIR_CLIENTS_FOREGROUND=0
-    typeset -g POWERLEVEL9K_DIR_CLIENTS_SHORTENED_FOREGROUND=0
-    # Styling for WORK - quansight
-    typeset -g POWERLEVEL9K_DIR_WORK_VISUAL_IDENTIFIER_EXPANSION='🚀'
-    typeset -g POWERLEVEL9K_DIR_WORK_BACKGROUND=11
-    typeset -g POWERLEVEL9K_DIR_WORK_FOREGROUND=0
-    typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=0
-    # Styling for OSS
-    typeset -g POWERLEVEL9K_DIR_OSS_VISUAL_IDENTIFIER_EXPANSION='🔮'
-    typeset -g POWERLEVEL9K_DIR_OSS_BACKGROUND=57
-    # Styling for LABS
-    typeset -g POWERLEVEL9K_DIR_LABS_VISUAL_IDENTIFIER_EXPANSION='🔭'
-    typeset -g POWERLEVEL9K_DIR_LABS_BACKGROUND=12
-    typeset -g POWERLEVEL9K_DIR_LABS_FOREGROUND=0
-    typeset -g POWERLEVEL9K_DIR_LABS_SHORTENED_FOREGROUND=0
-    # Styling for nebari
-    typeset -g POWERLEVEL9K_DIR_NEBARI_VISUAL_IDENTIFIER_EXPANSION='🪴'
-    typeset -g POWERLEVEL9K_DIR_NEBARI_BACKGROUND=57
-
+  #   # Styling for WORK.
+  #   typeset -g POWERLEVEL9K_DIR_WORK_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  #   typeset -g POWERLEVEL9K_DIR_WORK_BACKGROUND=4
+  #   typeset -g POWERLEVEL9K_DIR_WORK_FOREGROUND=254
+  #   typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=250
   #   typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=255
   #
   #   # Styling for WORK_NOT_WRITABLE.
@@ -348,14 +309,7 @@
   # parameter. For example, if POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND is not set, it falls
   # back to POWERLEVEL9K_DIR_FOREGROUND.
   #
-
-  # DEFINING TANIA'S DIRS
-    typeset -g POWERLEVEL9K_DIR_CLASSES=(
-      '~/Documents/github/quansight-clients(|/*)'  CLIENTS     ''
-      '~/Documents/github/quansight(|/*)'  WORK     ''
-      '~/Documents/github/nebari(|/*)'  NEBARI     ''
-      '~/Documents/github/labs(|/*)'  LABS     ''
-      '~/Documents/github(|/*)'  OSS     '')
+  typeset -g POWERLEVEL9K_DIR_CLASSES=()
 
   # Custom prefix.
   # typeset -g POWERLEVEL9K_DIR_PREFIX='in '
@@ -369,11 +323,11 @@
   typeset -g POWERLEVEL9K_VCS_LOADING_BACKGROUND=5
 
   # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
-  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=
+  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='🌱'
 
   # Untracked files icon. It's really a question mark, your font isn't broken.
   # Change the value of this parameter to show a different icon.
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
+  typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='⛔️'
 
   # Formatter for Git status.
   #
@@ -561,7 +515,7 @@
   # typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=3
   # typeset -g POWERLEVEL9K_DIRENV_BACKGROUND=0
   # Custom icon.
-  typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='🗃'
+  # typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   ###############[ asdf: asdf version manager (https://github.com/asdf-vm/asdf) ]###############
   # Default asdf color. Only used to display tools for which there is no color override (see below).
@@ -1014,7 +968,7 @@
   typeset -g POWERLEVEL9K_NODENV_SOURCES=(shell local global)
   # If set to false, hide node version if it's the same as global:
   # $(nodenv version-name) == $(nodenv global).
-  typeset -g POWERLEVEL9K_NODENV_PROMPT_ALWAYS_SHOW=true
+  typeset -g POWERLEVEL9K_NODENV_PROMPT_ALWAYS_SHOW=false
   # If set to false, hide node version if it's equal to "system".
   typeset -g POWERLEVEL9K_NODENV_SHOW_SYSTEM=true
   # Custom icon.
@@ -1248,9 +1202,9 @@
       # '*prod*'  PROD    # These values are examples that are unlikely
       # '*test*'  TEST    # to match your needs. Customize them as needed.
       '*'       DEFAULT)
-  typeset -g POWERLEVEL9K_TERRAFORM_DEFAULT_FOREGROUND=0
-  typeset -g POWERLEVEL9K_TERRAFORM_DEFAULT_BACKGROUND=116
-  typeset -g POWERLEVEL9K_TERRAFORM_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='🪨'
+  typeset -g POWERLEVEL9K_TERRAFORM_DEFAULT_FOREGROUND=4
+  typeset -g POWERLEVEL9K_TERRAFORM_DEFAULT_BACKGROUND=0
+  # typeset -g POWERLEVEL9K_TERRAFORM_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
   # Show kubecontext only when the the command you are typing invokes one of these tools.
@@ -1288,9 +1242,9 @@
       # '*prod*'  PROD    # These values are examples that are unlikely
       # '*test*'  TEST    # to match your needs. Customize them as needed.
       '*'       DEFAULT)
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=117
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_BACKGROUND=0
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⎈'
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=7
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_BACKGROUND=5
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='○'
 
   # Use POWERLEVEL9K_KUBECONTEXT_CONTENT_EXPANSION to specify the content displayed by kubecontext
   # segment. Parameter expansions are very flexible and fast, too. See reference:
@@ -1556,37 +1510,6 @@
   # Don't show the remaining time to charge/discharge.
   typeset -g POWERLEVEL9K_BATTERY_VERBOSE=false
   # typeset -g POWERLEVEL9K_BATTERY_BACKGROUND=0
-
-  #####################################[ wifi: wifi speed ]#####################################
-  # WiFi color.
-  # typeset -g POWERLEVEL9K_WIFI_FOREGROUND=0
-  # typeset -g POWERLEVEL9K_WIFI_BACKGROUND=4
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_WIFI_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-  # Use different colors and icons depending on signal strength ($P9K_WIFI_BARS).
-  #
-  #   # Wifi colors and icons for different signal strength levels (low to high).
-  #   typeset -g my_wifi_fg=(0 0 0 0 0)                                # <-- change these values
-  #   typeset -g my_wifi_icon=('WiFi' 'WiFi' 'WiFi' 'WiFi' 'WiFi')     # <-- change these values
-  #
-  #   typeset -g POWERLEVEL9K_WIFI_CONTENT_EXPANSION='%F{${my_wifi_fg[P9K_WIFI_BARS+1]}}$P9K_WIFI_LAST_TX_RATE Mbps'
-  #   typeset -g POWERLEVEL9K_WIFI_VISUAL_IDENTIFIER_EXPANSION='%F{${my_wifi_fg[P9K_WIFI_BARS+1]}}${my_wifi_icon[P9K_WIFI_BARS+1]}'
-  #
-  # The following parameters are accessible within the expansions:
-  #
-  #   Parameter             | Meaning
-  #   ----------------------+---------------
-  #   P9K_WIFI_SSID         | service set identifier, a.k.a. network name
-  #   P9K_WIFI_LINK_AUTH    | authentication protocol such as "wpa2-psk" or "none"
-  #   P9K_WIFI_LAST_TX_RATE | wireless transmit rate in megabits per second
-  #   P9K_WIFI_RSSI         | signal strength in dBm, from -120 to 0
-  #   P9K_WIFI_NOISE        | noise in dBm, from -120 to 0
-  #   P9K_WIFI_BARS         | signal strength in bars, from 0 to 4 (derived from P9K_WIFI_RSSI and P9K_WIFI_NOISE)
-  #
-  # All parameters except P9K_WIFI_BARS are extracted from the output of the following command:
-  #
-  #   /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
 
   ####################################[ time: current time ]####################################
   # Current time color.
