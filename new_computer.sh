@@ -12,7 +12,7 @@
 echo "Entering 🦄  mode "
 echo "Mac OS Install Setup Script"
 echo "By Tania Allard"
-echo "Note that this highly customised to fit my needs, do not follow this blindly"
+echo "Note that this highly customised to fit my needs, do not follow this as is"
 
 # Some configs reused from:
 # https://github.com/ruyadorno/installme-osx/
@@ -85,18 +85,23 @@ cecho "🍻 Installing brew..." $magenta
 
 if test ! $(which brew); then
   ## Don't prompt for confirmation when installing homebrew
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </dev/null
 fi
 
 #############################################
 ### Select computer name
 #############################################
-cecho "🧜🏼‍♀️ Setting the computer name... beware" $magentac
-read -p "How are we calling this brand new babe?:" thisname
-scutil --set HostName "$thisname"
-scutil --set LocalHostName "$thisname"
-scutil --set ComputerName "$thisname"
-dscacheutil -flushcache
+echo ""
+echo "🦄 Would you like to set your computer name (as done via System Preferences >> Sharing)?  (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  echo "What are we naming this babe?"
+  read COMPUTER_NAME
+  sudo scutil --set ComputerName $COMPUTER_NAME
+  sudo scutil --set HostName $COMPUTER_NAME
+  sudo scutil --set LocalHostName $COMPUTER_NAME
+  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
+fi
 
 ####################################################################################################
 ### Generate ssh keys & add to ssh-agent
@@ -107,7 +112,7 @@ cecho "🔑 Generating ssh keys, adding to ssh-agent..." $magenta
 read -p 'Input email for ssh key: ' useremail
 
 cecho "Use default ssh file location, enter a passphrase: " $magenta
-ssh-keygen -t rsa -b 4096 -C "$useremail" # will prompt for password
+ssh-keygen -t ed25519 -C "$useremail" # will prompt for password
 eval "$(ssh-agent -s)"
 
 # Now that sshconfig is synced add key to ssh-agent and
@@ -189,7 +194,8 @@ cd ~/Library/Fonts && {
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
-# Save to disk (not to iCloud) by default
+echo ""
+echo "Save to Disk not to iCloud by default"
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Finder: show all filename extensions
@@ -205,12 +211,68 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 # Disable the “Are you sure you want to open this application?” dialog
 # defaults write com.apple.LaunchServices LSQuarantine -bool false
 
+echo ""
+echo "Disable Spotlight indexing for any volume that gets mounted and has not yet been indexed before? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  echo 'Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.'
+  sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
+fi
+
+echo ""
+echo "Automatically quit printer app once the print jobs complete"
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+echo ""
+echo "Removing duplicates in the 'Open With' menu"
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+
+################################################################################
+# Trackpad, mouse, keyboard, Bluetooth accessories, and input
+###############################################################################
+
+echo ""
+echo "Increasing sound quality for Bluetooth headphones/headsets"
+defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+echo ""
+echo "Enabling full keyboard access for all controls (enable Tab in modal dialogs, menu windows, etc.)"
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+echo ""
+echo "Turn off keyboard illumination when computer is not used for 5 minutes"
+defaults write com.apple.BezelServices kDimTime -int 300
+
+echo ""
+echo "Disable keyboard from automatically adjusting backlight brightness in low light? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool false
+fi
+
+
 ###############################################################################
 # Screenshots / Screen                                                        #
 ###############################################################################
 
-# Save screenshots to the desktop
-defaults write com.apple.screencapture location -string "$HOME/Desktop"
+echo ""
+echo "Where do you want screenshots to be stored? (hit ENTER if you want ~/Desktop as default)"
+read screenshot_location
+echo ""
+if [ -z "${screenshot_location}" ]
+then
+  # If nothing specified, we default to ~/Desktop
+  screenshot_location="${HOME}/Desktop"
+else
+  # Otherwise we use input
+  if [[ "${screenshot_location:0:1}" != "/" ]]
+  then
+    # If input doesn't start with /, assume it's relative to home
+    screenshot_location="${HOME}/${screenshot_location}"
+  fi
+fi
+echo "Setting location to ${screenshot_location}"
+defaults write com.apple.screencapture location -string "${screenshot_location}"
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
@@ -218,11 +280,82 @@ defaults write com.apple.screencapture type -string "png"
 # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
+###############################################################################
+# Finder
+###############################################################################
+
+echo ""
+echo "Show icons for hard drives, servers, and removable media on the desktop? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+fi
+
+echo ""
+echo "Show hidden files in Finder by default? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  defaults write com.apple.Finder AppleShowAllFiles -bool true
+fi
+
+echo ""
+echo "Show dotfiles in Finder by default? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  defaults write com.apple.finder AppleShowAllFiles TRUE
+fi
+
+echo ""
+echo "Show all filename extensions in Finder by default? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+fi
+
+echo ""
+echo "Display full POSIX path as Finder window title? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+fi
+
+
+###############################################################################
+# Dock & Mission Control
+###############################################################################
+
+echo "Wipe all (default) app icons from the Dock? (y/n)"
+echo "(This is only really useful when setting up a new Mac, or if you don't use the Dock to launch apps.)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  defaults write com.apple.dock persistent-apps -array
+fi
+
+
+###############################################################################
+# Time Machine
+###############################################################################
+
+echo ""
+echo "Prevent Time Machine from prompting to use new hard drives as backup volume? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+fi
+
+echo ""
+echo "Disable local Time Machine backups? (This can take up a ton of SSD space on <128GB SSDs) (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  hash tmutil &> /dev/null && sudo tmutil disablelocal
+fi
+
 ###############
 # Config git  #
 ###############
 git config --global user.name "Tania Allard"
 git config --global user.email "taniar.allard@gmail.com"
+git config --global github.user "trallard"
 
 # need to install lfs
 git lfs install
@@ -235,20 +368,13 @@ git lfs install --system
 echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >>~/.zshrc
 
 ###############
-# Anaconda    #
+# conda/mamba    #
 ###############
 
-wget --output-file=/tmp/Anaconda3-2020.07-MacOSX-x86_64.sh https://repo.anaconda.com/archive/Anaconda3-2020.07-MacOSX-x86_64.pkg
-shasum -a 256 /tmp/Anaconda3-2020.07-MacOSX-x86_64.sh
+# install miniforge
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+bash Miniforge3-$(uname)-$(uname -m).sh
 
-bash ~/tmp/Anaconda3-2020.07-MacOSX-x86_64.sh -b -p $HOME/anaconda
-
-# eval "$(/Users/tania/anaconda/bin/conda shell.YOUR_SHELL_NAME hook)"
-
-# conda init szh
-# conda list
-
-# conda config --set auto_activate_base False
 
 ###############
 # Pipx    #
@@ -260,15 +386,24 @@ pipx ensurepath
 pipx install black
 pipx install dvc
 pipx install isort
-pipx install jupyter-repo2docker
-pipx install pipenv
-pipx install poetry
 pipx install gcalcli
+pipx install hatch
+pipx install pdm
+pipx install pre-commit
+pipx install nox
+pipx install tox
+pipx install github-activity
+pipx install ruff
+pipx install twine
+pipx install blast-radius
+pipx install deptree
+pipx install interrogate
 
 ############
 # Node
 ############
 npm install -g pa11y terminalizer gatsby-cli yo
+curl -fsSL https://bun.sh/install | bash
 
 ############
 # Homebrew
