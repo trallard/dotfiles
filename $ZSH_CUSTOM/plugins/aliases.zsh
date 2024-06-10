@@ -1,0 +1,1 @@
+/Users/trallard/Documents/dotfiles/dotfiles/zsh/aliases.zsh
