@@ -12,7 +12,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="$HOME/opt/homebrew/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/tania/.oh-my-zsh"
+export ZSH="/Users/trallard/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -292,22 +292,3 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 # fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/tania/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/tania/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/tania/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/tania/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "/Users/tania/anaconda3/etc/profile.d/mamba.sh" ]; then
-    . "/Users/tania/anaconda3/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
