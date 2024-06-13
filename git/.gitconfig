@@ -73,9 +73,9 @@
 	yoinkk="git checkout main && git fetch upstream main && git merge upstream/main" 
 
 	# trallard branch pattern
-	newb="git checkout -b trallard/$1"
+	newb = "!f() { git checkout -b trallard/$1; }; f"
 
-	# sort branches by taggig date
+	# sort branches by commit date
 	brd ="git branch --sort=-committerdate"
 
 	
@@ -88,7 +88,7 @@
 [core]
 	editor = /Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/bin/code
 	ignorecase = false
-	excludesfile = /Users/tania/.gitignore_global
+	excludesfile = $HOME/.gitignore_global
 
 [color]
     status = auto
@@ -148,3 +148,5 @@
 [branch]
 # sort more recent branches first
 	sort = -committerdate
+[github]
+	user = trallard

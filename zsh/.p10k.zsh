@@ -334,6 +334,12 @@
     # Styling for nebari
     typeset -g POWERLEVEL9K_DIR_NEBARI_VISUAL_IDENTIFIER_EXPANSION='🪴'
     typeset -g POWERLEVEL9K_DIR_NEBARI_BACKGROUND=57
+    # Styling for trallard repos
+    typeset -g POWERLEVEL9K_DIR_TRALLARD_VISUAL_IDENTIFIER_EXPANSION='👩🏼‍🎤'
+    typeset -g POWERLEVEL9K_DIR_TRALLARD_BACKGROUND=57
+    # Styling for PATCHES
+    typeset -g POWERLEVEL9K_DIR_PATCHES_VISUAL_IDENTIFIER_EXPANSION='🔫'
+    typeset -g POWERLEVEL9K_DIR_PATCHES_BACKGROUND=57
 
   #   typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=255
   #
@@ -355,6 +361,8 @@
       '~/Documents/github/quansight(|/*)'  WORK     ''
       '~/Documents/github/nebari(|/*)'  NEBARI     ''
       '~/Documents/github/labs(|/*)'  LABS     ''
+      '~/Documents/github/trallard(|/*)'  TRALLARD     ''
+      '~/Documents/github/patches(|/*)'  PATCHES     ''
       '~/Documents/github(|/*)'  OSS     '')
 
   # Custom prefix.

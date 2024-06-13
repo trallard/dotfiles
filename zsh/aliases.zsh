@@ -10,8 +10,8 @@
 # enable colours using the command ls, since using coreutils this is gls
 alias lss="gls --color=always"
 
-# I prefer exa so replace ls here so that exa is the default
-alias ls="exal"
+# I prefer eza so replace ls here so that eza is the default
+alias ls="ezal"
 
 # Enable coloured output
 alias grep='grep --color=auto'
@@ -19,16 +19,16 @@ alias grep='grep --color=auto'
 # jupyter alias
 alias lab="jupyter lab"
 
-# exa aliases
-alias exal='exa --long -h'                     # long with header
-alias exat='exa --long --tree'                 # long plus tree
-alias exaa='exa --all'                         # show all hidden files
-alias exag='exa --git-ignore'                  # ignore files in the gitignore
-alias exas='exa --long --git -h'               # show status
-alias exam='exa -m --long -h'                  # long with modified
-alias examods='exa --long --sort modified -r'  # sort by last modified
-alias exacrs='exa --long -U --sort created -r' # sort by last created
-alias exala='exa --long -h -a'                 # show long and . files
+# eza aliases
+alias ezal='eza --long -h'                     # long with header
+alias ezat='eza --long --tree'                 # long plus tree
+alias ezaa='eza --all'                         # show all hidden files
+alias ezag='eza --git-ignore'                  # ignore files in the gitignore
+alias ezas='eza --long --git -h'               # show status
+alias ezam='eza -m --long -h'                  # long with modified
+alias ezamods='eza --long --sort modified -r'  # sort by last modified
+alias ezacrs='eza --long -U --sort created -r' # sort by last created
+alias ezala='eza --long -h -a'                 # show long and . files
 
 # docker aliases
 alias dk='docker'         # default docker command
@@ -49,7 +49,6 @@ alias ch-gh-tr='cd Documents/github/trallard'
 alias ch-gh-qs='cd Documents/github/quansight'
 alias ch-gh-qsc='cd Documents/github/quansight-clients'
 
-
 # cat is bat
 alias cat='bat'
 
@@ -62,10 +61,9 @@ alias kraken='open -na "GitKraken" --args -p $(git rev-parse --show-toplevel)'
 # Rstudio
 alias rstudio='open -na "Rstudio"'
 
-# code lazy
+# code lazy aliases
 alias codeh='code .'
 alias coder='code ~/.'
-alias cdco='cd "$1" && code .'
 
 # gitmoji
 alias gitm='gitmoji -c'
@@ -89,7 +87,7 @@ alias g24now='now=`date` && tomorrow=`date -v+1d` &&  gcalcli --cal "🦄  Tania
 alias gurl='now=`date` && tomorrow=`date -v+1H` &&  gcalcli --cal "🦄  Tania Allard" --lineart "fancy" agenda --nostarted $now $tomorrow --details 'conference' --override-color --details end'
 alias gurld='now=`date` && tomorrow=`date -v+3H` &&  gcalcli --cal "🦄  Tania Allard" --lineart "fancy" agenda $now $tomorrow --details 'conference' --override-color --details end --details description'
 
-# Tree view of current dir - might remove as can use exat
+# Tree view of current dir - might remove as can use ezat
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
 # show files
@@ -111,7 +109,6 @@ alias lkc-cim='lakectl local commit . -m'
 # fancy readme
 alias fancyrm='pipx run hatch-fancy-pypi-readme | pipx run rich-cli --markdown --hyperlinks -'
 
-# colima 
+# colima
 alias colima-s='colima start'
-
 alias colima-sb='colima start --cpu 4 --memory 8'

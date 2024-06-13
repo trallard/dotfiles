@@ -14,7 +14,7 @@ fi
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/tania/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # ensure tmux is in path
 export PATH="$HOME/opt/homebrew/bin:$PATH"
@@ -23,11 +23,11 @@ export PATH="$HOME/opt/homebrew/bin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 # needed for ruby
-export PATH="/Users/tania/.rbenv/bin:$PATH"
-export PATH="/Users/tania/.rbenv/shims:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/shims:$PATH"
 
 # terraform
-export PATH="$PATH:/Users/tania/Documents/github/sources"
+export PATH="$PATH:$HOME/Documents/github/sources"
 
 # poetry add to path
 export PATH="$PATH:$HOME/.poetry/env"
@@ -35,7 +35,7 @@ export PATH="$PATH:$HOME/.poetry/env"
 # needed for pyenv
 # echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi'
 # Created by `userpath` on 2020-05-04 10:35:50
-export PATH="$PATH:/Users/tania/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # add homebrew to path
 
@@ -51,10 +51,10 @@ if [ -d "$HOME/opt/homebrew/opt/coreutils" ]; then
 fi
 
 # Add Visual Studio Code (code) to path
-export PATH="$PATH:/Users/tania/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$PATH:$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # ensure we can find the docker host
-export DOCKER_HOST="unix:///Users/tania/.colima/default/docker.sock"
+export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
 
 # add fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -105,7 +105,7 @@ ZSH_DISABLE_COMPFIX="true"
 source $ZSH/oh-my-zsh.sh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /Users/tania/aliases.zsh
+source $HOME/aliases.zsh
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -231,19 +231,19 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/tania/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('$HOME/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/tania/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/Users/tania/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "$HOME/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "$HOME/mambaforge/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/tania/mambaforge/bin:$PATH"
+        export PATH="$HOME/mambaforge/bin:$PATH"
     fi
 fi
 unset __conda_setup
 
-if [ -f "/Users/tania/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/Users/tania/mambaforge/etc/profile.d/mamba.sh"
+if [ -f "$HOME/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "$HOME/mambaforge/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
