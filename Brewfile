@@ -43,13 +43,13 @@ brew 'zoxide'        # better cd
 brew 'zsh'          # zshell
 brew 'zsh-autosuggestions'
 brew 'zsh-syntax-highlighting'
-brew 'autoconf' 
-brew 'automake'
-brew 'diff-so-fancy'
+brew 'autoconf'
+brew 'automake'     # autogeneration of makefiles
+brew 'diff-so-fancy'# better diffs
 brew 'dive'         # container checks
-brew 'direnv'
+brew 'direnv'       # env files management
 brew 'gitmoji'
-brew 'hadolint'
+brew 'hadolint'     # dockerfile linting
 brew 'httpie'       # HTTP / API testing testing client
 brew 'ispell'       # spell check
 brew 'k9s'
@@ -67,11 +67,12 @@ cask 'qmk-toolbox'      # keyboard prog
 cask 'dash'             # documentation
 brew 'docker'           # containerization
 brew 'docker-compose'   # container orchestration
-brew 'kubectx'          # kubernetes context switcher
 brew 'colima'           # containerization
-brew 'kubernetes-cli'   # kubernetes command line
-brew 'helm'             # kubernetes package manager
 brew 'hashicorp/tap/terraform' # infrastructure as code
+brew 'helm'             # kubernetes package manager
+brew 'kubectx'          # kubernetes context switcher
+brew 'kubernetes-cli'   # kubernetes command line
+brew 'minikube'         # kubernetes local cluster
 cask 'postman'          # API testing
 
 # Notes
@@ -80,13 +81,13 @@ cask 'notion-calendar'
 
 # Development utils
 brew 'act'              # github actions locally
-brew 'gh'
+brew 'gh'               # github cli
 brew 'git-extras'       # git utilities
 brew 'gitkraken'        # git gui
 cask 'iterm2'           # terminal
 brew 'pandoc'           # document converter
 brew 'secretive'        # safer ssh keys management
-cask 'visual-studio-code'  
+cask 'visual-studio-code'
 
 # Security Utilities and Data Encryption
 cask 'gpg-suite'      # PGP encryption for emails and files
@@ -98,21 +99,20 @@ brew 'rkhunter'       # Search / detect potential root kits
 # Desktop Applications                                      #
 #############################################################
 
-# Content related
-cask 'ImageOptim'
-cask 'screenflow'
-cask 'obs'
-cask 'keycastr'
-cask 'skitch'
+# Creative and content creation
 brew 'asciicinema'
+cask 'ImageOptim'
 cask 'adobe-creative-cloud'
-cask 'loopback'
+cask 'figma'
+cask 'fontbase'
+cask 'keycastr'
 cask 'logitech-presentation'
 cask 'logitech-options'
+cask 'loopback'
+cask 'obs'
+cask 'screenflow'
+cask 'skitch'
 cask 'soundsource'
-cask 'razer-synapse'
-cask 'fontbase'
-cask 'figma'
 
 # Browsers
 cask 'brave-browser'
@@ -127,10 +127,9 @@ brew 'bitwarden-cli'
 cask 'cleanmymac'
 cask 'clickup'
 cask 'dropbox'
-cask 'element'
 cask 'flux'
+cask 'element'
 cask 'muzzle'
-brew "openconnect"
 cask 'polypane'
 
 # Chat / video conference
@@ -138,6 +137,7 @@ cask 'slack'
 cask 'discord'
 
 # Media
+cask 'razer-synapse'
 brew 'spotify' , args: { require_sha: false }
 cask 'spotmenu'
 cask 'vlc'
@@ -178,7 +178,7 @@ brew 'sass/sass/sass'
 brew 'mas'
 mas 'Xcode', id: 497799835
 
-brew 'm-cli'        # macOS specific CLI    
+brew 'm-cli'        # macOS specific CLI
 cask 'openinterminal' # open terminal from finder
 brew 'switchaudio-osx' # switch audio input/output
 cask 'raycast', args: { require_sha: false }  # Spotlight alternative
