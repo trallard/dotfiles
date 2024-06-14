@@ -104,7 +104,7 @@ source $ZSH/oh-my-zsh.sh
 #
 for file in ~/.{exports,aliases}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file"
-done 
+done
 unset file
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -112,5 +112,3 @@ unset file
 
 
 source <(kubectl completion zsh)
-
-

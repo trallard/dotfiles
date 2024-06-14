@@ -108,7 +108,7 @@ fi
 ### See: https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
 ####################################################################################################
 
-cecho "🔑 Generating ssh keys, adding to ssh-agent..." $magenta
+cecho "🔑 Generating ssh keys, adding to ssh-agent. Type the email you want to use:" $magenta
 read -p 'Input email for ssh key: ' useremail
 
 cecho "Use default ssh file location, enter a passphrase: " $magenta
@@ -130,13 +130,13 @@ else
 	Host *
 		AddKeysToAgent yes
 		UseKeychain yes
-		IdentityFile ~/.ssh/id_rsa
+		IdentityFile ~/.ssh/id_ed25519
 EOT
 fi
 
-#############################################
-### Add ssh-key to GitHub via api
-#############################################
+# #############################################
+# ### Add ssh-key to GitHub via api
+# #############################################
 
 cecho "🔑 Adding ssh-key to GitHub (via api)..." $magenta
 cecho "Important! For this step, use a github personal token with the admin:public_key permission." $red
@@ -144,7 +144,7 @@ cecho "If you don't have one, create it here: https://github.com/settings/tokens
 cecho "make sure to never store your PATs in Github" $magenta
 
 retries=3
-SSH_KEY=$(cat ~/.ssh/id_rsa.pub)
+SSH_KEY=$(cat ~/.ssh/id_ed25519.pub)
 
 for ((i = 0; i < retries; i++)); do
   read -p 'GitHub username: ' ghusername
@@ -166,7 +166,6 @@ done
 [[ $retries -eq i ]] && echo "Adding ssh-key to GitHub failed! Try again later."
 
 # p10k
-
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
 #############################################
@@ -250,7 +249,6 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
   sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool false
 fi
 
-
 ###############################################################################
 # Screenshots / Screen                                                        #
 ###############################################################################
@@ -259,14 +257,12 @@ echo ""
 echo "Where do you want screenshots to be stored? (hit ENTER if you want ~/Desktop as default)"
 read screenshot_location
 echo ""
-if [ -z "${screenshot_location}" ]
-then
+if [ -z "${screenshot_location}" ]; then
   # If nothing specified, we default to ~/Desktop
   screenshot_location="${HOME}/Desktop"
 else
   # Otherwise we use input
-  if [[ "${screenshot_location:0:1}" != "/" ]]
-  then
+  if [[ "${screenshot_location:0:1}" != "/" ]]; then
     # If input doesn't start with /, assume it's relative to home
     screenshot_location="${HOME}/${screenshot_location}"
   fi
@@ -319,7 +315,6 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
   defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 fi
 
-
 ###############################################################################
 # Dock & Mission Control
 ###############################################################################
@@ -330,7 +325,6 @@ read -r response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
   defaults write com.apple.dock persistent-apps -array
 fi
-
 
 ###############################################################################
 # Time Machine
@@ -347,7 +341,7 @@ echo ""
 echo "Disable local Time Machine backups? (This can take up a ton of SSD space on <128GB SSDs) (y/n)"
 read -r response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  hash tmutil &> /dev/null && sudo tmutil disablelocal
+  hash tmutil &>/dev/null && sudo tmutil disablelocal
 fi
 
 ###############
@@ -362,19 +356,12 @@ git lfs install
 git lfs install --system
 
 ###############
-# Pyenv       #
-###############
-
-echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >>~/.zshrc
-
-###############
 # conda/mamba    #
 ###############
 
 # install miniforge
 curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 bash Miniforge3-$(uname)-$(uname -m).sh
-
 
 ###############
 # Pipx    #
@@ -384,18 +371,18 @@ pipx ensurepath
 # make sure to run
 # pipx completions
 pipx install black
+pipx install blast-radius
 pipx install dvc
-pipx install isort
 pipx install gcalcli
+pipx install github-activity
 pipx install hatch
+pipx install isort
+pipx install nox
 pipx install pdm
 pipx install pre-commit
-pipx install nox
-pipx install tox
-pipx install github-activity
 pipx install ruff
+pipx install tox
 pipx install twine
-pipx install blast-radius
 pipx install deptree
 pipx install interrogate
 
@@ -415,6 +402,7 @@ brew cleanup
 # ------------------------------------------------------------------------------
 # Miscellaneous
 # ------------------------------------------------------------------------------
-
 git clone "https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv.git" "$ZSH_CUSTOM/plugins/autoswitch_virtualenv"
 
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc

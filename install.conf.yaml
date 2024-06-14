@@ -62,7 +62,6 @@
 # commands to be run - this finalises the setup through brew and a bash scripts
 - shell:
         - [git submodule update --init --recursive, Installing submodules]
-        - [brew install szh]
         - [chsh -s $(which zsh), Making zsh the default shell]
         - command: sh new_computer.sh
           stdin: true
