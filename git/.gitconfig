@@ -29,7 +29,7 @@
 	new = log master..upstream/master
 	s = status -s
 
-	# list commit HEAD 
+	# list commit HEAD
 	ch = rev-parse --short HEAD
 	# List aliases
 	aliases = config --get-regexp alias
@@ -68,9 +68,9 @@
 	sync = codereview sync
 
 	# refresh upstream
-	yoink="git checkout master && git fetch upstream master && git merge upstream/master" 
+	yoink="git checkout master && git fetch upstream master && git merge upstream/master"
 	# like yoink but better
-	yoinkk="git checkout main && git fetch upstream main && git merge upstream/main" 
+	yoinkk="git checkout main && git fetch upstream main && git merge upstream/main"
 
 	# trallard branch pattern
 	newb = "!f() { git checkout -b trallard/$1; }; f"
@@ -78,7 +78,7 @@
 	# sort branches by commit date
 	brd ="git branch --sort=-committerdate"
 
-	
+
 [apply]
 	# Detect change in case
 	ignorecase = false

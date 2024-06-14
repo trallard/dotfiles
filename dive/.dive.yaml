@@ -11,7 +11,7 @@ keybinding:
   toggle-view: tab
   filter-files: ctrl+f, ctrl+slash
 
-  # Layer view specific bindings  
+  # Layer view specific bindings
   compare-all: ctrl+a
   compare-layer: ctrl+l
 
@@ -25,7 +25,7 @@ keybinding:
   toggle-filetree-attributes: ctrl+b
   page-up: pgup
   page-down: pgdn
-  
+
 
 filetree:
   # The default directory-collapse state
@@ -33,7 +33,7 @@ filetree:
 
   # The percentage of screen width the filetree should take on the screen (must be >0 and <1)
   pane-width: 0.5
-  
+
   # Show the file attributes next to the filetree
   show-attributes: true
 

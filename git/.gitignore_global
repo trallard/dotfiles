@@ -28,7 +28,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-
 ### https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore
 .vscode/*
 .vscode/
@@ -38,11 +37,10 @@ Temporary Items
 !.vscode/extensions.json
 *.code-workspace
 
-
 ### https://github.com/github/gitignore/blob/master/Global/Vim.gitignore
 # Swap
 [._]*.s[a-v][a-z]
-!*.svg  # comment out if you don't need vector files
+!*.svg # comment out if you don't need vector files
 [._]*.sw[a-p]
 [._]s[a-rt-v][a-z]
 [._]ss[a-gi-z]
@@ -60,7 +58,6 @@ tags
 # Persistent undo
 [._]*.un~
 
-
 ### https://github.com/github/gitignore/blob/master/Global/Linux.gitignore
 *~
 
@@ -75,7 +72,6 @@ tags
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
-
 
 ### https://github.com/github/gitignore/blob/master/Global/Backup.gitignore
 *.bak
@@ -93,5 +89,9 @@ node_modules
 doc/source/_build/*
 docs/source/_build/*
 
-
+# Python virtual environment
 .venv/
+
+# Env files
+.env
+.envrc
