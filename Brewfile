@@ -13,78 +13,80 @@ tap 'hashicorp/tap'
 #############################################################
 # Command Line                                              #
 #############################################################
-# Install new ones, update others to latest version
+#  Basic command line tools
+brew 'bat'          # cat replacement
+brew 'ctop'         # Container metrics and monitoring
+brew 'curl --force' # transfer data with urls
+brew 'broot'        # interactive dir navigation
+brew 'eza'          # ls replacement
+brew 'fd'           # find replacement
+brew 'fzf'          # fuzzy finder
 brew 'git'          # version control
 brew 'git-lfs'      # track large files in git https://github.com/git-lfs/git-lfs
+brew 'grep --with-default-names' # search text
+brew 'jdupes'       # find duplicate files
+brew 'jq'           # JSON parser, output and query files
+brew 'less'         # pagination
+brew 'most'         # better less
+brew 'procs'        # Advanced process viewer (better ps)
+brew 'ranger'       # Directory browser
+brew 'ripgrep'      # Searching within files (better grep)
+brew 'rsync'        # fast incremental file transfer
+brew 'sd'           # better sed
+brew 'thefuck'      # auto correct mistyped commands
+brew 'trash'        # move to osx trash instead of rm
+brew 'tree'        # list directory trees
+brew 'tmux'        # terminal multiplexer
 brew 'wget'         # download files from the web
+brew 'xsel'         # Copy paste access to the X clipboard
+brew 'zoxide'        # better cd
 brew 'zsh'          # zshell
 brew 'zsh-autosuggestions'
 brew 'zsh-syntax-highlighting'
-brew 'tmux'        # terminal multiplexer
-brew 'tree'        # list directory trees
-brew 'curl --force' # transfer data with urls
-brew 'grep --with-default-names' # search text
-brew 'trash'        # move to osx trash instead of rm
-brew 'less'         # pagination
-brew 'eza'          # ls replacement
-brew 'bat'          # cat replacement
-brew 'fd'           # find replacement
-brew 'broot'        # interactive dir navigation
-brew 'fzf'          # fuzzy finder
-brew 'jdupes'       # find duplicate files
-brew 'most'         # better less
-brew 'thefuck'      # auto correct mistyped commands
-brew 'rsync'        # fast incremental file transfer
-brew 'sd'           # better sed
-brew 'zoxide'        # better cd
-brew 'ctop'         # Container metrics and monitoring
-brew 'jq'
-brew 'ranger'
-
-# CLI productivity
-brew 'ispell'       # spell check
-brew 'httpie'       # HTTP / API testing testing client
-brew 'dive'         # container checks
-brew 'tokei'
-brew 'gitmoji'
-brew 'diff-so-fancy'
-brew 'direnv'
-brew 'make'
 brew 'autoconf' 
 brew 'automake'
+brew 'diff-so-fancy'
+brew 'dive'         # container checks
+brew 'direnv'
+brew 'gitmoji'
+brew 'hadolint'
+brew 'httpie'       # HTTP / API testing testing client
+brew 'ispell'       # spell check
 brew 'k9s'
 brew 'kops'
-brew 'hadolint'
-brew 'pandoc'
+brew 'make'
 brew 'navi'         # cheatsheet
+brew 'tokei'        # better counter
 
 
 #############################################################
 # Software Development                                      #
 #############################################################
 
-cask 'qmk-toolbox'  # keyboard prog
-cask 'dash'         # documentation
-brew 'docker'       # containerization
-brew 'docker-compose' # container orchestration
-brew 'kubectx'      # kubernetes context switcher
-brew 'colima'       # containerization
+cask 'qmk-toolbox'      # keyboard prog
+cask 'dash'             # documentation
+brew 'docker'           # containerization
+brew 'docker-compose'   # container orchestration
+brew 'kubectx'          # kubernetes context switcher
+brew 'colima'           # containerization
 brew 'kubernetes-cli'   # kubernetes command line
-brew 'helm'         # kubernetes package manager
+brew 'helm'             # kubernetes package manager
 brew 'hashicorp/tap/terraform' # infrastructure as code
-cask 'postman'      # API testing
+cask 'postman'          # API testing
 
 # Notes
 cask 'notion'
 cask 'notion-calendar'
 
 # Development utils
+brew 'act'              # github actions locally
 brew 'gh'
-brew 'git-extras'  # git utilities
-brew 'gitkraken'    # git gui
-brew 'act'          # github actions locally
+brew 'git-extras'       # git utilities
+brew 'gitkraken'        # git gui
+cask 'iterm2'           # terminal
+brew 'pandoc'           # document converter
+brew 'secretive'        # safer ssh keys management
 cask 'visual-studio-code'  
-cask 'iterm2'
 
 # Security Utilities and Data Encryption
 cask 'gpg-suite'      # PGP encryption for emails and files
@@ -118,17 +120,17 @@ cask 'google-chrome'
 cask 'wavebox'
 
 # Personal applications
-cask 'cleanmymac'
-cask 'clickup'
-cask 'betterzip'
-cask 'muzzle'
-cask 'flux'
-cask 'dropbox'
 cask 'alfred'
+cask 'betterzip'
 cask 'bitwarden'
 brew 'bitwarden-cli'
-brew "openconnect"
+cask 'cleanmymac'
+cask 'clickup'
+cask 'dropbox'
 cask 'element'
+cask 'flux'
+cask 'muzzle'
+brew "openconnect"
 cask 'polypane'
 
 # Chat / video conference
@@ -168,7 +170,6 @@ brew 'node-sass'
 
 # sass
 brew 'sass/sass/sass'
-
 
 #############################################################
 # MacOS-Specific Stuff                                      #
