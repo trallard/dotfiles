@@ -12,7 +12,7 @@ fi
 # Adding stuff to PATH
 # ------------------------------------------------------------------------------
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -24,7 +24,7 @@ export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="$PATH:$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # ensure we can find the docker host
-export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
+export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 
 # ------------------------------------------------------------------------------
 # Zsh theme
@@ -127,8 +127,7 @@ coded(){
 }
 
 # makedir and touch
-mktouch() {
-
+mtouch() {
     if [ $# -lt 1 ]; then
         echo "Missing argument";
         return 1;
@@ -138,6 +137,15 @@ mktouch() {
         mkdir -p -- "$(dirname -- "$f")"
         touch -- "$f"
     done
+}
+
+killproc() {
+    if [ -z "$1" ]; then
+        echo "Usage: killproc <pid>"
+        return 1
+    fi
+    kill -9 $1
+    echo "Process $1 has been killed."
 }
 
 # ------------------------------------------------------------------------------
@@ -156,6 +164,8 @@ source <(fzf --zsh)
 eval "$(zoxide init zsh)"
 # autocomplete kubectl
 source <(kubectl completion zsh)
+# mcfly command
+eval "$(mcfly init zsh)"
 
 # Ensure we can find sockets for secretive
 export SSH_AUTH_SOCK=/Users/trallard/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
@@ -181,3 +191,7 @@ if [ -f "/Users/trallard/miniforge3/etc/profile.d/mamba.sh" ]; then
     . "/Users/trallard/miniforge3/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
+
+
+# add pixi completions
+eval "$(pixi completion --shell zsh)"

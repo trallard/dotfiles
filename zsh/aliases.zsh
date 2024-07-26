@@ -112,3 +112,12 @@ alias fancyrm='pipx run hatch-fancy-pypi-readme | pipx run rich-cli --markdown -
 # colima
 alias colima-s='colima start'
 alias colima-sb='colima start --cpu 4 --memory 8'
+
+# watch_gha_runs
+alias wa='watch_gha_runs'
+
+# process management
+alias proc-dk='procs growi'
+alias proc-cpu='procs --sortd cpu'
+alias proc-s='procs --sortd state'
+alias prc='procs'
