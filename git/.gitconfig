@@ -78,6 +78,13 @@
 	# sort branches by commit date
 	brd ="git branch --sort=-committerdate"
 
+	# check runs with watch_gha_runs
+	runs = "!f() { \
+        watch_gha_runs $@ \
+            \"$(git remote get-url origin)\" \
+            \"$(git rev-parse --abbrev-ref HEAD)\"; \
+    }; f"
+
 
 [apply]
 	# Detect change in case
@@ -89,6 +96,7 @@
 	editor = /Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/bin/code
 	ignorecase = false
 	excludesfile = $HOME/.gitignore_global
+	pager = diff-so-fancy | less --tabs=4 -RFX
 
 [color]
     status = auto
@@ -150,3 +158,5 @@
 	sort = -committerdate
 [github]
 	user = trallard
+[interactive]
+	diffFilter = diff-so-fancy --patch
