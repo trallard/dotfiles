@@ -1,6 +1,7 @@
 # ------------------------------------------------------------------------------
 # Personal ZSH configuration.
-# @trallard ------------------------------------------------------------------------------
+# @trallard
+# ------------------------------------------------------------------------------
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -11,53 +12,19 @@ fi
 # Adding stuff to PATH
 # ------------------------------------------------------------------------------
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/tania/.oh-my-zsh"
-
-# ensure tmux is in path
-export PATH="$HOME/opt/homebrew/bin:$PATH"
+export ZSH="$HOME/.oh-my-zsh"
 
 # add openssl to the path -> needed for SQL
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 
-# needed for ruby
-export PATH="/Users/tania/.rbenv/bin:$PATH"
-export PATH="/Users/tania/.rbenv/shims:$PATH"
-
-# terraform
-export PATH="$PATH:/Users/tania/Documents/github/sources"
-
-# poetry add to path
-export PATH="$PATH:$HOME/.poetry/env"
-
-# needed for pyenv
-# echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi'
-# Created by `userpath` on 2020-05-04 10:35:50
-export PATH="$PATH:/Users/tania/.local/bin"
-
-# add homebrew to path
-
-if [ -d "$HOME/opt/homebrew" ]; then
-    export PATH="$HOME/opt/homebrew/bin:$PATH"
-    export MANPATH="$HOME/opt/homebrew/share/man:$MANPATH"
-fi
-
-# using coreutils
-if [ -d "$HOME/opt/homebrew/opt/coreutils" ]; then
-    export PATH="$HOME/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-    export MANPATH="$HOME/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
-fi
-
 # Add Visual Studio Code (code) to path
-export PATH="$PATH:/Users/tania/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$PATH:$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # ensure we can find the docker host
-export DOCKER_HOST="unix:///Users/tania/.colima/default/docker.sock"
-
-# add fuzzy finder
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 
 # ------------------------------------------------------------------------------
 # Zsh theme
@@ -68,17 +35,14 @@ export DOCKER_HOST="unix:///Users/tania/.colima/default/docker.sock"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
-# I am using Unicorn theme here - which is my own theme
-ZSH_THEME="unicorn-theme"
-ZSH_THEME="cute-theme"
+# Use powerlevel10K
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# To customize prompt edit ~/.p10k.zsh.
-# This replaces the old setting in this file
+# This is trallard's customised powerlevel10k theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # ------------------------------------------------------------------------------
-# user settings
+# User settings
 # ------------------------------------------------------------------------------
 
 # Uncomment the following line if you want to change the command execution time
@@ -96,32 +60,15 @@ HIST_STAMPS="dd.mm.yyyy"
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(
-    git docker kubectl colorize pip colored-man-pages alias-finder brew gatsby httpie kops tmux tmuxinator autoswitch_virtualenv
+    git docker kubectl colorize pip colored-man-pages alias-finder brew gatsby httpie kops tmux tmuxinator copypath gh
 )
 
 ZSH_DISABLE_COMPFIX="true"
 
 # sourcing ZSH stuff
 source $ZSH/oh-my-zsh.sh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /Users/tania/aliases.zsh
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# autocomplete kubectl
-source <(kubectl completion zsh)
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # ensure I use 256 colours
 export TERM="xterm-256color"
@@ -132,6 +79,7 @@ export LC_ALL=en_GB.UTF-8
 
 # Set preferred pager...
 export PAGER='less'
+
 # ... and enable colour output (output ANSI "color" escape sequences)
 
 # Set colors for less. Borrowed from https://wiki.archlinux.org/index.php/Color_output_in_console#less .
@@ -144,49 +92,20 @@ export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 # bat https://github.com/sharkdp/bat
-# export BAT_THEME="ansi"
-export BAT_THEME="Nord"
-
-# Ruby
-eval "$(rbenv init -)"
-export PATH="$HOME/.gem/ruby/2.7.2/bin:$PATH"
+export BAT_THEME="ansi"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-# Ruby
-eval "$(rbenv init -)"
-export PATH="$HOME/.gem/ruby/2.7.2/bin:$PATH"
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 
 # ------------------------------------------------------------------------------
 # Custom functions
 # ------------------------------------------------------------------------------
 
-# activate pipenv venv
-pv_activate() {
-    activate_file=$(pipenv --venv)/bin/activate
-    if [ -e "$activate_file" ]; then
-        . $activate_file
-
-        # the pipenv shell normally enables these as well
-        export PYTHONDONTWRITEBYTECODE=1
-        export PIPENV_ACTIVE=1
-
-        if [ -f "${VIRTUAL_ENV}/.project" ]; then
-            cd $(cat "${VIRTUAL_ENV}/.project")
-        fi
-        return
-    fi
-}
-
 # activate venv
-venv_activate(){    
+venv_activate(){
     default_venv_dir=".venv"
     envdir=$(1:=$default_venv_dir)
 
@@ -202,14 +121,13 @@ venv_activate(){
     python --version
 }
 
-# lazy open dir in code 
+# lazy open dir in code
 coded(){
-    cd $1 && code $1
+    cd "$1" && code .
 }
 
 # makedir and touch
-mktouch() {
-
+mtouch() {
     if [ $# -lt 1 ]; then
         echo "Missing argument";
         return 1;
@@ -221,29 +139,59 @@ mktouch() {
     done
 }
 
-# direnv for zsh 
-eval "$(direnv hook zsh)"
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+killproc() {
+    if [ -z "$1" ]; then
+        echo "Usage: killproc <pid>"
+        return 1
+    fi
+    kill -9 $1
+    echo "Process $1 has been killed."
+}
 
 # ------------------------------------------------------------------------------
+# Initialisations and misc loads
+# ------------------------------------------------------------------------------
+
+autoload -U +X bashcompinit && bashcompinit
+
+# For compilers to find zlib
+export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
+
+# add fuzzy finder
+source <(fzf --zsh)
+# add zoxide
+eval "$(zoxide init zsh)"
+# autocomplete kubectl
+source <(kubectl completion zsh)
+# mcfly command
+eval "$(mcfly init zsh)"
+
+# Ensure we can find sockets for secretive
+export SSH_AUTH_SOCK=/Users/trallard/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+
+# Add broot
+source /Users/trallard/.config/broot/launcher/bash/br
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/tania/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/trallard/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/tania/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/Users/tania/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "/Users/trallard/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/Users/trallard/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/tania/mambaforge/bin:$PATH"
+        export PATH="/Users/trallard/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 
-if [ -f "/Users/tania/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/Users/tania/mambaforge/etc/profile.d/mamba.sh"
+if [ -f "/Users/trallard/miniforge3/etc/profile.d/mamba.sh" ]; then
+    . "/Users/trallard/miniforge3/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
+
+
+# add pixi completions
+eval "$(pixi completion --shell zsh)"

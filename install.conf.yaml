@@ -1,59 +1,70 @@
 # https://github.com/anishathalye/dotbot
 - defaults:
-    link:
-      relink: true
-      create: true
-      force: false # replace files
+        link:
+              relink: true
+              create: true
+              force: false # replace files
 
 - clean: ["~"]
 
 - clean:
-    ~/:
-      force: true
-    ~/.config:
-      recursive: true
+        ~/:
+              force: true
+        ~/.config:
+              recursive: true
 
 # set symlinks for dotfiles
 - link:
-    ~/.gitconfig: git/.gitconfig
-    ~/.gitignore_global: git/.gitignore
-    # zsh stuff
-    ~/.zshrc: zsh/.zshrc
-    ~/.zprofile: zsh/.zprofile
-    ~/.oh-my-zsh/themes/unicorn-theme.zsh-theme: zsh/unicorn-theme.zsh-theme
-    ~/.p10k.zsh: zsh/.p10k.zsh
-    # add personal aliases
-    $ZSH_CUSTOM/plugins/aliases.zsh: zsh/aliases.zsh
-    ~/.dive.yaml: dive/.dive.yaml
-    # note that it needs to be conf.local 
-    ~/.tmux.conf.local: tmux/.tmux.conf
-    ~/.condarc: conda/.condarc
+        ~/.gitconfig: git/.gitconfig
+        ~/.gitignore_global: git/.gitignore_global
+        # zsh stuff
+        ~/.zshrc: zsh/.zshrc
+        ~/.zprofile: zsh/.zprofile
+        ~/.oh-my-zsh/themes/unicorn-theme.zsh-theme: zsh/unicorn-theme.zsh-theme
+        ~/.p10k.zsh: zsh/.p10k.zsh
+        # add personal aliases
+        $ZSH_CUSTOM/plugins/aliases.zsh: zsh/aliases.zsh
+        ~/.dive.yaml: dive/.dive.yaml
+        # note that it needs to be conf.local
+        ~/.tmux.conf.local: tmux/.tmux.conf
+        ~/.condarc: conda/.condarc
 
 # folders to be created
 - create:
-    - ~/Documents/github
-    - ~/Documents/github/trallard
-    - ~/Documents/github/patches
-    - ~/Documents/github/sources
-    - ~/Documents/github/experiments
-    - ~/Documents/github/labs
-    - ~/Documents/github/quansight
-    - ~/Documents/github/clients
-    - "~/Documents/🎨 design"
-    - ~/Documents/demos
-    - "~/Documents/📝 Resources"
-    - "~/Documents/🦄 Personal"
-    - "~/Documents/📣 Presentations"
+        - ~/Documents/github
+        - ~/Documents/github/trallard
+        - ~/Documents/github/patches
+        - ~/Documents/github/sources
+        - ~/Documents/github/experiments
+        - ~/Documents/github/labs
+        - ~/Documents/github/quansight
+        - ~/Documents/github/clients
+        - "~/Documents/🎨 design"
+        - "~/Documents/⚡️ Demos"
+        - "~/Documents/📝 Resources"
+        - "~/Documents/🦄 Personal"
+        - "~/Documents/📣 Presentations"
+
+# https://github.com/wren/dotbot-brew
+# Sets default config for certain directives
+- defaults:
+        - brewfile:
+                - stdout: true,
+        - brew:
+                - stderr: False,
+                - stdout: False,
+# Installs brew if missing
+- install-brew: true
+# Reads brewfile for packages to install
+- brewfile:
+        - Brewfile
 
 # commands to be run - this finalises the setup through brew and a bash scripts
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
-#   - [sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# , Install oh-my-szh]
-  - [chsh -s $(which zsh), Making zsh the default shell]
-  - 
-    command: sh new_computer.sh
-    stdin: true
-    stdout: true 
-    description: Execute miscellaneous tasks and setup interactive mode
-    quiet: false
+        - [git submodule update --init --recursive, Installing submodules]
+        - [chsh -s $(which zsh), Making zsh the default shell]
+        - command: sh new_computer.sh
+          stdin: true
+          stdout: true
+          description: Execute miscellaneous tasks and setup interactive mode
+          quiet: false

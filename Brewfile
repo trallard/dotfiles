@@ -1,126 +1,149 @@
-cask_args appdir: '/Applications'
+# Options
+cask_args appdir: '/Applications', require_sha: true
 
-# Apple store command line
-brew 'mas'
-
-tap 'github/gh'
-tap 'homebrew/bundle'
+# Fonts
+tap 'homebrew/dle'
 tap 'homebrew/cask'
 tap 'homebrew/cask-fonts'
 tap 'homebrew/core'
 tap 'homebrew/services'
-tap 'wagoodman/dive'
+tap 'hashicorp/tap'
 
-# Developer tools - brew
-mas 'Xcode', id: 497799835
-brew 'gitkraken'
-brew 'ispell'
-brew 'httpie'
-brew 'wagoodman/dive/dive'
-brew 'tokei'
-brew 'gitmoji'
-brew 'diff-so-fancy'
-brew 'act'
-brew 'bun' 
-brew 'direnv'
-brew 'make'
-brew 'autoconf' 
-brew 'automake'
-brew 'kubernetes-cli'
-brew 'kubernetes-helm'
-brew 'helm'
-brew 'azure-cli'
-brew 'vpn-slice'
-brew 'k9s'
-brew 'kops'
-brew 'terraform'
-brew 'hadolint'
-brew 'lakefs'
-brew 'pandoc'
 
-cask 'qmk-toolbox'
-cask 'visual-studio-code'
-cask 'iterm2'
-cask 'dash'
-brew 'docker'
-brew 'docker-compose'
-brew 'kubectx'
-brew 'colima'
-
-# Command line tools - install new ones, update others to latest version
-brew 'git'  # upgrade to latest
-brew 'git-lfs' # track large files in git https://github.com/git-lfs/git-lfs
-brew 'wget'
-brew 'zsh' # zshell
+#############################################################
+# Command Line                                              #
+#############################################################
+#  Basic command line tools
+brew 'bat'          # cat replacement
+brew 'ctop'         # Container metrics and monitoring
+brew 'curl --force' # transfer data with urls
+brew 'broot'        # interactive dir navigation
+brew 'eza'          # ls replacement
+brew 'fd'           # find replacement
+brew 'fzf'          # fuzzy finder
+brew 'git'          # version control
+brew 'git-lfs'      # track large files in git https://github.com/git-lfs/git-lfs
+brew 'grep --with-default-names' # search text
+brew 'jdupes'       # find duplicate files
+brew 'jq'           # JSON parser, output and query files
+brew 'less'         # pagination
+brew 'mcfly'        # better history
+brew 'most'         # better less
+brew 'procs'        # Advanced process viewer (better ps)
+brew 'ranger'       # Directory browser
+brew 'ripgrep'      # Searching within files (better grep)
+brew 'rsync'        # fast incremental file transfer
+brew 'sd'           # better sed
+brew 'thefuck'      # auto correct mistyped commands
+brew 'trash'        # move to osx trash instead of rm
+brew 'tree'         # list directory trees
+brew 'tmux'         # terminal multiplexer
+brew 'wget'         # download files from the web
+brew 'xsel'         # Copy paste access to the X clipboard
+brew 'zoxide'       # better cd
+brew 'zsh'          # zshell
 brew 'zsh-autosuggestions'
 brew 'zsh-syntax-highlighting'
-brew 'tmux'
-brew 'tree'
-brew 'neofetch' 
-brew 'curl --force'
-brew 'grep --with-default-names'
-brew 'trash'  # move to osx trash instead of rm
-brew 'less'
-brew 'cat'
-brew 'exa'
-brew 'bat'
-brew 'fd'
-brew 'ctop'
-brew 'jq'
-brew 'gh'
-brew 'fzf'
+brew 'autoconf'
+brew 'automake'     # autogeneration of makefiles
+brew 'diff-so-fancy'# better diffs
+brew 'dive'         # container checks
+brew 'direnv'       # env files management
+brew 'gitmoji'
+brew 'hadolint'     # dockerfile linting
+brew 'httpie'       # HTTP / API testing testing client
+brew 'ispell'       # spell check
+brew 'k9s'
+brew 'kops'
+brew 'make'
+brew 'navi'         # cheatsheet
+brew 'tokei'        # better counter
+
+
+#############################################################
+# Software Development                                      #
+#############################################################
+
+cask 'qmk-toolbox'      # keyboard prog
+cask 'dash'             # documentation
+brew 'docker'           # containerization
+brew 'docker-compose'   # container orchestration
+brew 'colima'           # containerization
+brew 'hashicorp/tap/terraform' # infrastructure as code
+brew 'helm'             # kubernetes package manager
+brew 'kubectx'          # kubernetes context switcher
+brew 'kubernetes-cli'   # kubernetes command line
+brew 'minikube'         # kubernetes local cluster
+cask 'postman'          # API testing
 
 # Notes
 cask 'notion'
 cask 'notion-calendar'
 
-# Content related
-cask 'ImageOptim'
-cask 'screenflow'
-cask 'obs'
-cask 'postman'
-cask 'keycastr'
-cask 'skitch'
+# Development utils
+brew 'act'              # github actions locally
+brew 'gh'               # github cli
+brew 'git-extras'       # git utilities
+brew 'gitkraken'        # git gui
+cask 'iterm2'           # terminal
+brew 'pandoc'           # document converter
+brew 'secretive'        # safer ssh keys management
+cask 'visual-studio-code'
+
+# Security Utilities and Data Encryption
+cask 'gpg-suite'      # PGP encryption for emails and files
+brew 'git-crypt'      # Transparent encryption for git repos
+brew 'openssl'        # Cryptography and SSL/TLS Toolkit
+brew 'rkhunter'       # Search / detect potential root kits
+
+#############################################################
+# Desktop Applications                                      #
+#############################################################
+
+# Creative and content creation
 brew 'asciicinema'
+cask 'ImageOptim'
 cask 'adobe-creative-cloud'
-cask 'loopback'
-cask 'logitech-presentation'
-cask 'soundsource'
-cask 'razer-synapse'
-cask 'fontbase'
 cask 'figma'
+cask 'fontbase'
+cask 'keycastr'
+cask 'logitech-presentation'
+cask 'logitech-options'
+cask 'loopback'
+cask 'obs'
+cask 'screenflow'
+cask 'skitch'
+cask 'soundsource'
 
-
-# Productivity
-cask 'wavebox'
+# Browsers
 cask 'brave-browser'
 cask 'google-chrome'
-cask 'cleanmymac'
-cask 'clickup'
-cask 'betterzip'
-cask 'caffeine '
-cask 'muzzle'
-cask 'flux'
-cask 'dropbox'
+cask 'wavebox'
+
+# Personal applications
 cask 'alfred'
+cask 'betterzip'
 cask 'bitwarden'
 brew 'bitwarden-cli'
-brew "openconnect"
-brew 'switchaudio-osx'
-cask 'raycast'
+cask 'cleanmymac'
+cask 'clickup'
+cask 'dropbox'
+cask 'flux'
 cask 'element'
+cask 'muzzle'
 cask 'polypane'
 
 # Chat / video conference
 cask 'slack'
-cask 'zoom'
 cask 'discord'
 
-# Music
-brew 'spotify' 
+# Media
+cask 'razer-synapse'
+brew 'spotify' , args: { require_sha: false }
 cask 'spotmenu'
+cask 'vlc'
 
-# Coding fonts - for IDEs and terminal usage
+# Fonts
 cask 'font-fira-code'
 cask 'font-fontawesome'
 cask 'font-ibm-plex'
@@ -139,6 +162,7 @@ brew 'zlib'
 brew 'pyenv'
 brew 'pipx'
 brew 'pygments'
+brew 'pixi'
 
 # node
 brew 'node'
@@ -146,19 +170,29 @@ brew 'yarn'
 brew 'oven-sh/bun/bun'
 brew 'node-sass'
 
-# Ruby
-brew 'rbvenv'
-brew 'ruby-build'
-
 # sass
 brew 'sass/sass/sass'
+
+#############################################################
+# MacOS-Specific Stuff                                      #
+#############################################################
+# Apple store command line and apps
+brew 'mas'
+mas 'Xcode', id: 497799835
+
+brew 'm-cli'        # macOS specific CLI
+cask 'openinterminal' # open terminal from finder
+brew 'switchaudio-osx' # switch audio input/output
+cask 'raycast', args: { require_sha: false }  # Spotlight alternative
 
 mas 'Boxy SVG', id: 611658502
 mas 'GIPHY CAPTURE', id: 668208984
 mas 'HP Smart', id: 1474276998
-mas 'Keynote', id: 409183694
 mas 'Magnet', id: 441258766
 mas 'Sim Daltonism', id: 693112260
-mas 'Trello', id: 1278508951
-mas 'TweetDeck', id: 485812721
 mas 'WhatsApp', id: 1147396723
+mas 'Slack', id: 803453959
+mas 'Bitwarden', id: 1352778147
+mas 'Harvest', id: 506189836
+
+# EOF

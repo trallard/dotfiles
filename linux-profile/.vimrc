@@ -3,7 +3,7 @@ call plug#begin()
 " Note: where shortcuts are indicated, they're probably set below in the
 " PLUGIN SETTINGS section.
 "
-Plug 'haishanh/night-owl.vim'    
+Plug 'haishanh/night-owl.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'vim-scripts/vis'                    " Operations in visual block mode respect selection
 Plug 'scrooloose/nerdcommenter'           " Comment large blocks of text

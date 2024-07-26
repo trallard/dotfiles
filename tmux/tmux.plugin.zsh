@@ -26,7 +26,7 @@ bind -n M-Up select-pane -U
 bind -n M-Down select-pane -D
 
 
-# Mouse support ---------------------------------------------------------- 
+# Mouse support ----------------------------------------------------------
 set -g mouse on
 set -g mouse on
 bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
@@ -43,7 +43,7 @@ unbind '"'
 unbind %
 
 
-# Status bar ------------------------------------------------------------- 
+# Status bar -------------------------------------------------------------
 # set-option -g status on
 set-option -g set-titles on
 set -g status-interval 1

@@ -29,7 +29,7 @@
 	new = log master..upstream/master
 	s = status -s
 
-	# list commit HEAD 
+	# list commit HEAD
 	ch = rev-parse --short HEAD
 	# List aliases
 	aliases = config --get-regexp alias
@@ -68,17 +68,24 @@
 	sync = codereview sync
 
 	# refresh upstream
-	yoink="git checkout master && git fetch upstream master && git merge upstream/master" 
+	yoink="git checkout master && git fetch upstream master && git merge upstream/master"
 	# like yoink but better
-	yoinkk="git checkout main && git fetch upstream main && git merge upstream/main" 
+	yoinkk="git checkout main && git fetch upstream main && git merge upstream/main"
 
 	# trallard branch pattern
-	newb="git checkout -b trallard/$1"
+	newb = "!f() { git checkout -b trallard/$1; }; f"
 
-	# sort branches by taggig date
+	# sort branches by commit date
 	brd ="git branch --sort=-committerdate"
 
-	
+	# check runs with watch_gha_runs
+	runs = "!f() { \
+        watch_gha_runs $@ \
+            \"$(git remote get-url origin)\" \
+            \"$(git rev-parse --abbrev-ref HEAD)\"; \
+    }; f"
+
+
 [apply]
 	# Detect change in case
 	ignorecase = false
@@ -88,7 +95,8 @@
 [core]
 	editor = /Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/bin/code
 	ignorecase = false
-	excludesfile = /Users/tania/.gitignore_global
+	excludesfile = $HOME/.gitignore_global
+	pager = diff-so-fancy | less --tabs=4 -RFX
 
 [color]
     status = auto
@@ -148,3 +156,7 @@
 [branch]
 # sort more recent branches first
 	sort = -committerdate
+[github]
+	user = trallard
+[interactive]
+	diffFilter = diff-so-fancy --patch
