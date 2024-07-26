@@ -27,6 +27,7 @@ brew 'grep --with-default-names' # search text
 brew 'jdupes'       # find duplicate files
 brew 'jq'           # JSON parser, output and query files
 brew 'less'         # pagination
+brew 'mcfly'        # better history
 brew 'most'         # better less
 brew 'procs'        # Advanced process viewer (better ps)
 brew 'ranger'       # Directory browser
@@ -35,11 +36,11 @@ brew 'rsync'        # fast incremental file transfer
 brew 'sd'           # better sed
 brew 'thefuck'      # auto correct mistyped commands
 brew 'trash'        # move to osx trash instead of rm
-brew 'tree'        # list directory trees
-brew 'tmux'        # terminal multiplexer
+brew 'tree'         # list directory trees
+brew 'tmux'         # terminal multiplexer
 brew 'wget'         # download files from the web
 brew 'xsel'         # Copy paste access to the X clipboard
-brew 'zoxide'        # better cd
+brew 'zoxide'       # better cd
 brew 'zsh'          # zshell
 brew 'zsh-autosuggestions'
 brew 'zsh-syntax-highlighting'
@@ -161,6 +162,7 @@ brew 'zlib'
 brew 'pyenv'
 brew 'pipx'
 brew 'pygments'
+brew 'pixi'
 
 # node
 brew 'node'

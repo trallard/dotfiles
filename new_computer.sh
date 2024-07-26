@@ -385,6 +385,7 @@ pipx install tox
 pipx install twine
 pipx install deptree
 pipx install interrogate
+pipx install uv
 
 ############
 # Node
