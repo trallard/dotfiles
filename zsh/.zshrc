@@ -139,6 +139,7 @@ mtouch() {
     done
 }
 
+# kill a given process
 killproc() {
     if [ -z "$1" ]; then
         echo "Usage: killproc <pid>"
@@ -191,7 +192,6 @@ if [ -f "/Users/trallard/miniforge3/etc/profile.d/mamba.sh" ]; then
     . "/Users/trallard/miniforge3/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
-
 
 # add pixi completions
 eval "$(pixi completion --shell zsh)"
