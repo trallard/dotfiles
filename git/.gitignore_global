@@ -95,3 +95,6 @@ docs/source/_build/*
 # Env files
 .env
 .envrc
+
+# bun files
+bun.lockb

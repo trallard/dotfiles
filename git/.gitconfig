@@ -1,13 +1,15 @@
 [user]
 	name = Tania Allard
 	email = taniar.allard@gmail.com
-	signingKey = ""
+	signingKey =
 
 # Client work
 # [includeIf "gitdir:~/Documents/github/.../.."]
 # 	path= ~/dev/work/.gitconfig
 
 [alias]
+	# ------------------------------------------------------------------------------
+	# Logging and displaying information about the repository
 	# history: logs in different formats
 	# hash, date, comment, author
 	hist = log --pretty=format:\"%C(bold blue)%h%C(reset) %C(magenta)%ad%C(reset) | %s%C(yellow)%d%C(reset) - %C(dim white)[%an]\" --graph --date=short --decorate
@@ -16,27 +18,52 @@
 	tree = log --graph --pretty=oneline --abbrev-commit
 	oneline = log --oneline --decorate=short
 	lg = log --color --decorate --graph --pretty=format:'%C(magenta)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue) - [%an]%Creset' --abbrev-commit
-
-	# reset head to a given commit
-	unstage = reset HEAD --
-	unmerge = git reset --hard HEAD
 	last = log -1 HEAD    # last commit
-	co = checkout		  # checkout
-	ci = commit
-	cim = commit -m       # commit with message
-	fpa = fetch --prune --all --tags
-	mffo = merge --ff-only
-	new = log master..upstream/master
-	s = status -s
 
-	# list commit HEAD
-	ch = rev-parse --short HEAD
-	# List aliases
-	aliases = config --get-regexp alias
 	# Show verbose output about tags, branches or remotes
 	tags = tag -l
 	branches = branch -a
 	remotes = remote -v
+
+	# ------------------------------------------------------------------------------
+	# Miscellaneous actions (quick daily stuff)
+	unstage = reset HEAD --  			# reset head to a given commit
+	unmerge = git reset --hard HEAD
+	marty = unmerge
+	sw = git switch
+	fpa = fetch --prune --all --tags
+	mffo = merge --ff-only
+	new = log master..upstream/master
+	s = status -s  						# short status
+	ss = status -s -b --show-stash 		# short status including stash
+
+	# Check runs with watch_gha_runs
+	runs = "!f() { \
+        watch_gha_runs $@ \
+            \"$(git remote get-url origin)\" \
+            \"$(git rev-parse --abbrev-ref HEAD)\"; \
+    }; f"
+
+	# ------------------------------------------------------------------------------
+	# Commiting changes
+	ci = commit
+	cim = commit -m       				# commit with message
+	ch = rev-parse --short HEAD 		# list commit HEAD
+	amend = commit --amend --no-edit 	# update the last commit with latest changes to file
+    edit = commit --amend --only 		# update the commit message on latest commit
+	amends = commit --amend --reuse-message=HEAD # amend the currently staged files to the latest commit
+
+	# List aliases
+	aliases = config --get-regexp alias
+	alias=!git config -l | grep ^alias | cut -c 7- | sort
+
+	flict = "!f(){ git ls-files -u | awk '{print $4}' | sort -u; }; f" # list conflicted files
+
+	# Get a plain-text diff, for making patches.
+    patch = "!f() { git --no-pager diff $@; }; f"
+
+	# ------------------------------------------------------------------------------
+	# Finding stuff in a repository
 	# Find branches containing commit
 	fb = "!f() { git branch -a --contains $1; }; f"
 
@@ -49,41 +76,80 @@
 	# Find commits by commit message
 	fm = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
-	# Remove branches that have already been merged with main
+	# ------------------------------------------------------------------------------
+	# Dealing with branches in a repository
+	# Remove branches that have already been merged into the primary branch
 	# a.k.a. ‘delete merged’
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
 
-	# Credit an author on the latest commit
+	# Check branches merged into the primary branch
+	merged = "!f() {\
+        git branch --merged $(git primary); \
+        }; f"
+
+	# trallard branch pattern
+	newb = "!f() { git checkout -b trallard/$1; }; f"
+
+	# Identify the primary branch for the repository
+	primary = "!f() { \
+        git branch -a | \
+        sed -n -E -e '/remotes.origin.ma(in|ster)$/s@remotes/origin/@@p'; \
+    }; f"
+
+	# Switch to the primary branch and update it
+	pu = "!f() { \
+        git checkout $(git primary) && \
+        git pull; \
+    }; f"
+
+	# Pull the upstream primary branch and update my fork
+	yoinkf = "!f() { \
+        git pu && \
+        git pull upstream $(git primary) --ff-only && \
+        git push; \
+    }; f"
+
+	# refresh upstream primary branch
+	# like yoink but better
+	yoinkk="git checkout main && git fetch upstream main && git merge upstream/main"
+	yoink="!f() { \
+        git pu && \
+        git pull upstream $(git primary) --ff-only; \
+    }; f"
+
+	# Show branches, verbosely, sorted by last touch, with commit messages
+    br = "!f() { \
+        local date='%(color:reset)%(creatordate:short)'; \
+        local upstream='%(color:bold)%(color:white)%(align:2,right)%(upstream:trackshort)%(end)%(color:nobold)'; \
+        local refname='%(align:40,left)%(color:yellow)%(refname:short)%(end)%(color:reset)'; \
+        local subject='%(contents:subject)'; \
+        git branch --sort=-creatordate --color=always --format=$date' '$upstream' '$refname' '$subject; \
+    }; f"
+
+	# Merge a branch and delete it here and in the origin (needs branch name)
+	brmerge = "!f() { \
+        : git show; \
+        git merge $1 && \
+        git branch -d $1 && \
+        git push origin --delete $1; \
+    }; f"
+
+	# Delete a branch here and on the origin.
+    # The switch $1 is to get an entry in the reflog now, in case we need to recover the branch.
+    brdel = "!f() { : git show; git switch $1 && git switch - && git branch -D $1 && git push ${2:-origin} --delete $1; }; f"
+
+	# ------------------------------------------------------------------------------
+	# Code review and collaboration
+	# Credit an author on the latest commit (Name, email)
 	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 
 	# List contributors with number of commits
 	contributors = shortlog --summary --numbered
 
-	# Codereview aliases
-	change = codereview change
-	gofmt = codereview gofmt
-	mail = codereview mail
-	pending = codereview pending
-	submit = codereview submit
-	sync = codereview sync
-
-	# refresh upstream
-	yoink="git checkout master && git fetch upstream master && git merge upstream/master"
-	# like yoink but better
-	yoinkk="git checkout main && git fetch upstream main && git merge upstream/main"
-
-	# trallard branch pattern
-	newb = "!f() { git checkout -b trallard/$1; }; f"
-
-	# sort branches by commit date
-	brd ="git branch --sort=-committerdate"
-
-	# check runs with watch_gha_runs
-	runs = "!f() { \
-        watch_gha_runs $@ \
-            \"$(git remote get-url origin)\" \
-            \"$(git rev-parse --abbrev-ref HEAD)\"; \
-    }; f"
+	# Code review
+	change = codereview change			# create a new pending change from the staged changes in the current branch or, if there is already a pending change, amends that change
+	pending = codereview pending	   # show the pending change
+	sync = codereview sync			   # sync local repo
 
 
 [apply]
@@ -95,8 +161,13 @@
 [core]
 	editor = /Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/bin/code
 	ignorecase = false
-	excludesfile = $HOME/.gitignore_global
+	# Use custom `.gitignore`
+	excludesfile = ~/.gitignore_global
 	pager = diff-so-fancy | less --tabs=4 -RFX
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
 [color]
     status = auto
@@ -110,14 +181,18 @@
 
 [color "diff"]
 	meta = yellow bold
-	frag = magenta bold # line info
-	old = red # deletions
-	new = green # additions
+	frag = magenta bold 		# line info
+	old = red 				    # deletions
+	new = green 				# additions
 
 [color "status"]
 	added = yellow
 	changed = green
 	untracked = cyan
+
+[diff]
+	# Detect copies as well as renames
+	renames = copies
 
 # note these are added by nbdime
 [diff "jupyternotebook"]
@@ -151,7 +226,7 @@
 	forceSignAnnotated = false
 [gpg "ssh"]
 	program = ssh-keygen
-	allowedSignersFile = ""
+	allowedSignersFile =
 
 [branch]
 # sort more recent branches first
