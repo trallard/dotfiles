@@ -89,6 +89,7 @@ cask 'iterm2'           # terminal
 brew 'pandoc'           # document converter
 brew 'secretive'        # safer ssh keys management
 cask 'visual-studio-code'
+brew 'git-codereview'   # code review
 
 # Security Utilities and Data Encryption
 cask 'gpg-suite'      # PGP encryption for emails and files
